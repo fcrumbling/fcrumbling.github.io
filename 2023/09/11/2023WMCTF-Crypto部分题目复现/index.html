@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="false" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>crumbling&#39;s secret room</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="2023WMCTF部分题目复现 by crumbling总感觉先贴参考有点乱，这次我把参考的博客啥的都扔最后面。 badprime涉及了一个漏洞 干脆单独拿出来了。 目录  signin  signin源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crumbling&#39;s secret room">
+<meta property="og:url" content="http://example.com/2023/09/11/2023WMCTF-Crypto%E9%83%A8%E5%88%86%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="crumbling&#39;s secret room">
+<meta property="og:description" content="2023WMCTF部分题目复现 by crumbling总感觉先贴参考有点乱，这次我把参考的博客啥的都扔最后面。 badprime涉及了一个漏洞 干脆单独拿出来了。 目录  signin  signin源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-11T05:40:07.083Z">
+<meta property="article:modified_time" content="2023-09-02T06:25:25.487Z">
+<meta property="article:author" content="crumbling">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>crumbling's secret room </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">crumbling </div>
+      <div class="dot"></div>
+      <div class="subtitle">This is the subtitle </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561199334949091/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/fcrumbling" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Crypto/" rel="tag">-Crypto</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">-自我介绍</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">4 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2023/09/11/2023WMCTF-Crypto%E9%83%A8%E5%88%86%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" title="" >
+            <div class="recent-link-text">
+              (no title)
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/09/06/Hello/" title="Hello!" >
+            <div class="recent-link-text">
+              Hello!
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/09/06/ROCA%E6%94%BB%E5%87%BB%E2%80%94%E2%80%94CVE-2017-15361/" title="ROCA攻击——CVE-2017-15361" >
+            <div class="recent-link-text">
+              ROCA攻击——CVE-2017-15361
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/09/06/2023DSACTF-Crypto%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" title="2023DSACTF——Crypto题目复现" >
+            <div class="recent-link-text">
+              2023DSACTF——Crypto题目复现
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-2023WMCTF-Crypto部分题目复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        无标题
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-09-11T05:40:07.083Z" itemprop="datePublished">2023-09-11</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.2k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="2023WMCTF部分题目复现-by-crumbling"><a href="#2023WMCTF部分题目复现-by-crumbling" class="headerlink" title="2023WMCTF部分题目复现 by crumbling"></a>2023WMCTF部分题目复现 by crumbling</h1><p>总感觉先贴参考有点乱，这次我把参考的博客啥的都扔最后面。</p>
+<p>badprime涉及了一个漏洞 干脆单独拿出来了。</p>
+<p><strong>目录</strong></p>
+<ul>
+<li><a href="#1">signin</a></li>
+</ul>
+<h2 id="signin"><a href="#signin" class="headerlink" title="signin"></a><h3 id="1">signin</h2></h2><p>源码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randrange</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pr</span>(<span class="params">msg</span>):</span><br><span class="line">    <span class="built_in">print</span>(msg)</span><br><span class="line"> </span><br><span class="line">pr(<span class="string">br&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                        ....&#x27;&#x27;&#x27;&#x27;&#x27;&#x27;....                        </span></span><br><span class="line"><span class="string">                     .`&quot;,:;;II;II;;;;:,&quot;^&#x27;.                    </span></span><br><span class="line"><span class="string">                  &#x27;&quot;IlllI;;;;;;;;;;;;;Il!!l;^.                 </span></span><br><span class="line"><span class="string">                `l&gt;&lt;&gt;!!!!!!!!iiiii!!!!!!!!i&gt;&lt;!&quot;.               </span></span><br><span class="line"><span class="string">             &#x27;:&gt;?]__++~~~~~&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;~~+__i&quot;.            </span></span><br><span class="line"><span class="string">           .:i+&#125;&#123;]?-__+++~~~~~~&lt;&lt;&lt;&lt;&lt;~~~~~~+_-?[\1_!^           </span></span><br><span class="line"><span class="string">          .;&lt;_&#125;\&#123;]-_++~&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;~+-?]\|]+&lt;^          </span></span><br><span class="line"><span class="string">          .!-&#123;t|[?-&#125;(|(()&#123;_&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;_&#125;1)))1&#125;??]&#123;t|]_&quot;          </span></span><br><span class="line"><span class="string">           !)nf&#125;]-?/\)&#123;]]]_&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;_]]&#125;&#125;&#123;\/?-][)vf?`          </span></span><br><span class="line"><span class="string">          &#x27;!tX/&#125;]--&lt;]&#123;\Un[~~&lt;&lt;&lt;&lt;&lt;~~&lt;~-11Yz)&lt;--?[&#123;vv[&quot;.         </span></span><br><span class="line"><span class="string">         .&lt;&#123;xJt&#125;]?!ibm0%&amp;Ci&gt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;!0kJW%w+:-?[&#123;uu)&#125;,         </span></span><br><span class="line"><span class="string">          !1fLf&#125;]_::xmqQj[&quot;I~&lt;&lt;&lt;&lt;&lt;&lt;&gt;&quot;(ZqOu&#123;I^&lt;?[&#123;cc)[`         </span></span><br><span class="line"><span class="string">          `&#125;|x\&#125;]_+&lt;!&lt;+~&lt;&lt;__~&lt;&lt;&lt;&lt;&lt;&lt;+_&lt;&lt;_+&lt;&gt;&lt;++-[1j/(&gt;          </span></span><br><span class="line"><span class="string">           !\j/&#123;]-++___--_+~~&lt;i;I&gt;~~~__-______?&#125;(jf&#125;`          </span></span><br><span class="line"><span class="string">            ;~(|&#125;?_++++~~++~+]-++]?+++~~~~+++-[1/]&gt;^           </span></span><br><span class="line"><span class="string">              ;\([?__+_-?]?-_-----__-]?-_+++-]&#123;/].             </span></span><br><span class="line"><span class="string">               l||&#125;?__/rjffcCQQQQQLUxffjf&#125;+-]1\?&#x27;              </span></span><br><span class="line"><span class="string">                ,[\)[?&#125;&#125;-__[/nzXXvj)?__]&#123;??&#125;((&gt;.               </span></span><br><span class="line"><span class="string">                 .I[|(1&#123;]_+~~~&lt;~~&lt;&lt;&lt;~+_[&#125;1(1+^                 </span></span><br><span class="line"><span class="string">                    ,~&#123;|\)&#125;]_++++++-?&#125;1)1?!`                   </span></span><br><span class="line"><span class="string">                      .&quot;!_]&#123;11))1&#123;&#125;]-+i:&#x27;                      </span></span><br><span class="line"><span class="string">                          .`^&quot;,&quot;^`&#x27;.                           </span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>.decode())</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen_prime</span>(<span class="params">bit</span>):</span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        P = getPrime(bit)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">bin</span>(P)) - <span class="number">2</span> == bit:</span><br><span class="line">            <span class="keyword">return</span> P</span><br><span class="line"> </span><br><span class="line">pq_bit = <span class="number">512</span></span><br><span class="line">offset = <span class="number">16</span></span><br><span class="line"> </span><br><span class="line">P,Q = [gen_prime(pq_bit) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)]</span><br><span class="line">N = P * Q</span><br><span class="line">gift = <span class="built_in">int</span>(<span class="built_in">bin</span>(P ^ (Q &gt;&gt; offset))[<span class="number">2</span>+offset:],<span class="number">2</span>)</span><br><span class="line">pr(N)</span><br><span class="line">pr(gift)</span><br><span class="line"> </span><br><span class="line">inpP = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">if</span> inpP != P:</span><br><span class="line">    pr(<span class="string">b&quot;you lose!&quot;</span>)</span><br><span class="line">    exit()</span><br><span class="line"> </span><br><span class="line">secret = randrange(<span class="number">0</span>,P)</span><br><span class="line">bs = [randrange(<span class="number">0</span>,P) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">38</span>)]</span><br><span class="line"> </span><br><span class="line">results = [(bi * secret) % P <span class="keyword">for</span> bi <span class="keyword">in</span> bs]</span><br><span class="line">rs = [ri &amp; (<span class="number">2</span> ** offset - <span class="number">1</span>)  <span class="keyword">for</span> ri <span class="keyword">in</span> results]</span><br><span class="line"> </span><br><span class="line">pr(bs)</span><br><span class="line">pr(rs)</span><br><span class="line">inpsecret = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">if</span> inpsecret == secret:</span><br><span class="line">    pr(flag)</span><br></pre></td></tr></table></figure>
+
+<h3 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h3><p>和前两天七月赛类似的问题，比赛的时候改了深搜的写法但是没有出来结果（深搜部分+cooper；深搜+爆破gift高位，前一个2小时没出东西，后一个代码没跑完）。</p>
+<p><strong>解法一</strong>：来自学长tr0uble。在确定p的高位后通过N&#x2F;&#x2F;p求出p的高x位，然后再利用gift异或求p接下来的x位，不停重复（考虑进位x选择一个小于16的数）。不过因为这次无法直接从gift获得p的高16位，所以爆破p的高16位。这种解法显然效率比深搜高。<del>七月赛那题只复现了深搜简直是大伏笔啊啊啊啊啊啊</del></p>
+<p>以下是核心部分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">xbits=<span class="number">8</span></span><br><span class="line"><span class="keyword">for</span> p_high <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">2</span>**<span class="number">16</span>):</span><br><span class="line">    p_highbit=<span class="built_in">bin</span>(p_high)[<span class="number">2</span>:].zfill(<span class="number">16</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>((<span class="number">512</span>-<span class="number">16</span>)//xbits):</span><br><span class="line">        p0=<span class="built_in">int</span>(p_highbit.ljust(<span class="number">512</span>,<span class="string">&#x27;0&#x27;</span>),<span class="number">2</span>)</span><br><span class="line">        qbar=N//p0</span><br><span class="line">        q_highbit=<span class="built_in">bin</span>(qbar)[<span class="number">2</span>:]</span><br><span class="line">        left=i*xbits</span><br><span class="line">        right=left+xbits</span><br><span class="line">        p_xbits=<span class="built_in">bin</span>(<span class="built_in">int</span>(q_highbit[left:right],<span class="number">2</span>)^<span class="built_in">int</span>(gift[left:right], <span class="number">2</span>))[<span class="number">2</span>:].zfill(xbits)</span><br><span class="line">        p_highbit+=p_xbits</span><br><span class="line">    p=<span class="built_in">int</span>(p_highbit,<span class="number">2</span>)</span><br><span class="line">    q=N//p</span><br><span class="line">    <span class="keyword">if</span> p*q==N:</span><br><span class="line">        <span class="built_in">print</span>(p)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>x选择8还挺巧妙的，七月赛wp中有见过选择10还是5的，会导致留下几位需要爆破，8是刚刚好求出p，同理x&#x3D;4也一样.</p>
+<p><em>ljust函数用于右填充0直到512位，并且左对齐，和zfill刚好相反</em></p>
+<p><strong>解法二</strong>：来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52640415">石氏是时试</a>。思路是深搜，但搜法是爆破phigh然后从高位进行深搜。</p>
+<p>gift的条件用在了 <code>if v==&#39;0&#39;</code>,一次淘汰一半；</p>
+<p>N的条件用在了<code>if tp*tq&gt;N</code> <code>if (tp+(1&lt;&lt;(l+1)))*(tq+(1&lt;&lt;(l+17)))&lt;N</code></p>
+<p>和低位搜比可以减少一个2**15的爆破，从O(n^2)到了O（n）。所以在较短时间内出的来结果，不过代价是fac函数里面打了不少“补丁”。</p>
+<p>同样重新整合了一份核心代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fac</span>(<span class="params">allgift,tp,tq</span>):</span><br><span class="line">    <span class="keyword">global</span> p </span><br><span class="line">    <span class="keyword">if</span> p != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(allgift) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> tp*tq&gt;N:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> N%(tp+<span class="number">1</span>)==<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(tp+<span class="number">1</span>)</span><br><span class="line">        p=tp+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    prebit = allgift[<span class="number">0</span>]</span><br><span class="line">    allgift0 = allgift[<span class="number">1</span>:]</span><br><span class="line">    l = <span class="built_in">len</span>(allgift0)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (tp+(<span class="number">1</span>&lt;&lt;(l+<span class="number">1</span>)))*(tq+(<span class="number">1</span>&lt;&lt;(l+<span class="number">17</span>)))&lt;N:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> prebit == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">       fac(allgift0, tp, tq)</span><br><span class="line">       fac(allgift0, tp+(<span class="number">1</span>&lt;&lt;l), tq+(<span class="number">1</span>&lt;&lt;(l+<span class="number">16</span>)))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">       fac(allgift0, tp+(<span class="number">1</span>&lt;&lt;l), tq)</span><br><span class="line">       fac(allgift0, tp, tq+(<span class="number">1</span>&lt;&lt;(l+<span class="number">16</span>)))</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">N = <span class="number">98979914203938129582559002435937496221944524872097792710858591458834482668375238153375967732236519828009052634712155154350690793290568934757567632244582037302853487654784427703489685593524935643730962265977918060749885961377108833870686012325836049467328687008560530162352822066119244817994253171179069223963</span></span><br><span class="line">gift = <span class="number">155694596915298991572712835680119486137562835299346062724576858196467035731310426290930425057431831070744019220387957576198359284021046204571309474734</span></span><br><span class="line">offset = <span class="number">16</span></span><br><span class="line">allgift = <span class="built_in">bin</span>(gift)[<span class="number">2</span>:].zfill(<span class="number">512</span>-offset)</span><br><span class="line">p = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> phigh <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>**<span class="number">15</span>):</span><br><span class="line">    tp = (<span class="number">1</span>&lt;&lt;<span class="number">511</span>)+ (phigh&lt;&lt;<span class="number">512</span>-offset-<span class="number">1</span>)</span><br><span class="line">    tq = <span class="number">1</span>&lt;&lt;(<span class="number">511</span>)</span><br><span class="line">    fac(allgift,tp,tq)</span><br><span class="line">    <span class="keyword">if</span> p != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span> </span><br></pre></td></tr></table></figure>
+
+<p>深搜还真是深奥orz</p>
+<p><strong>解法三：</strong>官方wp。</p>
+<h3 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a><strong>第二部分</strong></h3><p>hnp，感觉很久没有接触过了，而且是改过一点的hnp</p>
+<p>硬看exp，感觉暂时还复现不出来他的格和原理，<del>前方的复现等以后再来吧</del>等我再玩会儿别的格密码再回来复现。</p>
+<p>*inverse_mod(2**16,p)*的操作应该是将数据从模p上，左移16应该是为了保证最短向量在格上吧。</p>
+<h1 id="这是官方wp中构建的矩阵：-begin-bmatrix-l-0-l-1-…l-37-secret-1-end-bmatrix-begin-bmatrix-p2-16-p2-16-…-tmpb0-tmpb1-…-1-0-tmpc0-tmpc1-…-0-2-512-end-bmatrix"><a href="#这是官方wp中构建的矩阵：-begin-bmatrix-l-0-l-1-…l-37-secret-1-end-bmatrix-begin-bmatrix-p2-16-p2-16-…-tmpb0-tmpb1-…-1-0-tmpc0-tmpc1-…-0-2-512-end-bmatrix" class="headerlink" title="这是官方wp中构建的矩阵：$$\begin{bmatrix}l_0&amp;l_1&amp;…l_{37}&amp;secret&amp;-1\end{bmatrix}*\begin{bmatrix} p2^{16} &amp;&amp;&amp;&amp;\  &amp; p2^{16}\&amp;&amp;…\tmpb0&amp;tmpb1&amp;…&amp;1&amp;0\tmpc0&amp;tmpc1&amp;…&amp;0&amp;2^{512}\ \end{bmatrix}"></a>这是官方wp中构建的矩阵：<br>$$<br>\begin{bmatrix}l_0&amp;l_1&amp;…l_{37}&amp;secret&amp;-1\end{bmatrix}*<br>\begin{bmatrix} p<em>2^{16} &amp;&amp;&amp;&amp;\  &amp; p</em>2^{16}\&amp;&amp;…\tmpb0&amp;tmpb1&amp;…&amp;1&amp;0\tmpc0&amp;tmpc1&amp;…&amp;0&amp;2^{512}\ \end{bmatrix}</h1><p>\begin{bmatrix}&amp;secret&amp;2^{512}\end{bmatrix}<br>$$<br>其中</p>
+<p><code>tmpb = [int(bi * inverse_mod(2**16,p))&lt;&lt;16 for bi in bs]</code></p>
+<p><code>tmpc = [int(ri * inverse_mod(2**16,p))&lt;&lt;16  for ri in rs]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">p =<span class="number">10969764230332992881261162444718144062756647727612160812971856344049296739044540247498083160029987967319116916935342858871329849636720421332936467966775867</span></span><br><span class="line">bs =[<span class="number">4664793972341953189666555115335155676054739422364135012411872571995930186564102426697231641089522750347753631267577298114782116987861513717620986537052382</span>, <span class="number">8507066070330166707938762588073401191263034348755921550802702338708142494087392593950644983421812308678854342602585260722136559018437765113379163788506466</span>, <span class="number">2830070399533051231241862426108094794228996610298799519014491090201418710290147407986450831938705554042739972299215014685952858768112094527710538403515273</span>, <span class="number">10194727189313653976431664639526351001458864920824510483710189296384910181001562362290153581049495784069593043934922430758141334619289747138468062524561711</span>, <span class="number">8002130030257912373743144411951592264728826923938597700747660914058965773151884644970234240281547765122307671309112351339470043451516598214092342558384807</span>, <span class="number">8992378190732605199337414271971061665013925087942269438591896597575610893291671195449984745067740479119096438873783304535686779740112967166240956658651830</span>, <span class="number">2194417234798455027372105100295659168050947868844625871282809618578334016393328975421261262363786170487647146102958385999058186297036668102844836254042935</span>, <span class="number">5738988486396739126014627767459102292848686640453848828857501973669885755799777801406300847677391396256205064430234919067768440382536174282559743786498643</span>, <span class="number">5292193226728698955003839020298284790880347842816837112431080197190414368830649460191776117857521158570481964795907413355880966321781208320157374532658657</span>, <span class="number">3236291107734666407487021845972840316833313617779456609885775156197988192409574424571139055022719462618894017997672509936540062138530910535214578662357486</span>, <span class="number">179127967987695040601487341375569827259000382574621153938672296227503032356898540939987827059206945903096525638471922252870358005104448377148791010471410</span>, <span class="number">10235776927466702695901580128283732380960185254400225584458877005766858445688315782810234196380896757555655065783559248972220115928614252936479623282268842</span>, <span class="number">8478707529628382019775580071620007506402747960864779093950966661164794978482508918378646329794612162022122728273978841418830445042213655280562981817180778</span>, <span class="number">1989435101016155388320981686069320173122445065407658884121284250080193476126715916306363926890266521441209072392125152387026448128899855816078566448516652</span>, <span class="number">10019963461510973568622651163907573447680948360641972275689060404821108145451202141240353577189542045919464484435730215665907258922424828698542345511742057</span>, <span class="number">5370428976398351047681686985989933607415188169553027644691083871688637607691711827377233049371148151270359925545957022279386923476720875352002118344163240</span>, <span class="number">1366016546135886969621987828562360884651859443016817174689540207831252024876805875502572479737347927230600821119715475408523076262208330090394633364213064</span>, <span class="number">3018686464860030850959320579594895527678223791378490625855331881041828221928114456953089092669455959824003716530545508478387537003475350584348888269292369</span>, <span class="number">3644539933029042898967564968109446749303838452399782661006846728104792057243801342774082229806290291314845028086684545474462334494107853665033798939440771</span>, <span class="number">2619522970869592364198843820787987636652414116460154648329587705336065569476014530564278964774611913921912867359563013787435872471849868503475355738459335</span>, <span class="number">2613623143894768739768975589513375383780921342863476322346819921765626254382235481620969222866254634160202624610994002055492509220377792858895863207118114</span>, <span class="number">9051535632171644060219365742667887004115119016333022143862685883337820462311682105055616600746624054641717888662721244099037589243528336132858769924293017</span>, <span class="number">6322215694815017710290130308304143067518883521417429269607649199684266970302719242998155799931358383625882532121756748894334198809061646979762067511472215</span>, <span class="number">8601015302445180232709284056899498606583133099159244438169153995339270724547697567173049539020876308665399005220945064311954614358228147113608633784938083</span>, <span class="number">1687465844002401172823960028643897861967703025865931025218471705618921725521753460808353911197929502406043974090373776332666295711898390556942027351961588</span>, <span class="number">7030054198985918505215104013792879492290315721793748371422498525384391611872908723072277255873654142484830006969158725571070189294778192659597407886384386</span>, <span class="number">4386262330628606313965233863945075887238657984219240736784075778776274331590322515410946180911743558553863235899255179291350347340705433494902325749493132</span>, <span class="number">3653765778208737104947806844287422432664948116494123204574595229423830851449033866040704413618765888121014166075018231249496033408529308450097158697674328</span>, <span class="number">7748237639358308249625022053109643017236492832482317532758649226399696974979253770749067068265509372015604701948174970380047567941345531815044529863527445</span>, <span class="number">5059530711360442307499155801023000099897309611286878255756074194619615955048552735990659714305010701125554396886322209261008087604681515049107555729814797</span>, <span class="number">416952161756373703464127120566281808845402836083839044928033115662959943341398726280575180309852205806981797882613759273255897295573603656312118811032222</span>, <span class="number">7267985132528358542117201158373245472808646160261190083474441841392290091419250735525282175845870492781460779356575696797887404564514625707601721845311425</span>, <span class="number">10224982961012896056836797103054943031484832724694713170635263822584592009561597539525842758724930559468971121154897704082055154790179051070857813034564657</span>, <span class="number">10835217921679675137610225789921492245946084819290173650012084974942027217984717415920266806435543455936192663961817306783907655536400218855307984549922331</span>, <span class="number">7863720336738919415356624911079178574847554053243106175007209508021771119197906101887387063339293212548831234772822444171416314454432999028190384727619054</span>, <span class="number">7967571593887612645315364859989332125003912261360022752028961094802906806642026065761338966772207051696192941136659677997491454214318463524532207232130187</span>, <span class="number">7457648661874125891398452417511354183455362929872187169176222358288381040359257771506625130127024839766059421516206948573447324016831448015629079185710898</span>, <span class="number">552223815763689572351359880043337487833125217831283315257566985932571862594383003112520360481258894183827848713832267150793744284381677539439632823567868</span>]</span><br><span class="line">rs=[<span class="number">7892</span>, <span class="number">27695</span>, <span class="number">17262</span>, <span class="number">9427</span>, <span class="number">35390</span>, <span class="number">55927</span>, <span class="number">53600</span>, <span class="number">54840</span>, <span class="number">26665</span>, <span class="number">59149</span>, <span class="number">44463</span>, <span class="number">59305</span>, <span class="number">31986</span>, <span class="number">34927</span>, <span class="number">898</span>, <span class="number">38303</span>, <span class="number">39933</span>, <span class="number">8932</span>, <span class="number">47956</span>, <span class="number">47060</span>, <span class="number">7248</span>, <span class="number">49771</span>, <span class="number">59443</span>, <span class="number">43817</span>, <span class="number">12310</span>, <span class="number">21118</span>, <span class="number">33391</span>, <span class="number">49267</span>, <span class="number">44481</span>, <span class="number">63643</span>, <span class="number">26526</span>, <span class="number">17947</span>, <span class="number">19244</span>, <span class="number">15097</span>, <span class="number">28377</span>, <span class="number">49845</span>, <span class="number">50966</span>, <span class="number">42773</span>]</span><br><span class="line">secret =<span class="number">8415479122041718532097461515409579012253407884312942355180419602579223271414888108864278405537835478668104071304472845440667313705781754232403951202654113</span></span><br><span class="line">cols = <span class="built_in">len</span>(rs)</span><br><span class="line">M = Matrix(ZZ,cols+<span class="number">2</span>,cols+<span class="number">2</span>)</span><br><span class="line">tmpb = [<span class="built_in">int</span>(bi * inverse_mod(<span class="number">2</span>**<span class="number">16</span>,p))&lt;&lt;<span class="number">16</span> <span class="keyword">for</span> bi <span class="keyword">in</span> bs]</span><br><span class="line">tmpc = [<span class="built_in">int</span>(ri * inverse_mod(<span class="number">2</span>**<span class="number">16</span>,p))&lt;&lt;<span class="number">16</span>  <span class="keyword">for</span> ri <span class="keyword">in</span> rs]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(cols):</span><br><span class="line">    M[i,i] = p&lt;&lt;<span class="number">16</span></span><br><span class="line"></span><br><span class="line">M[-<span class="number">2</span>] = tmpb + [<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">M[-<span class="number">1</span>] = tmpc + [<span class="number">0</span>,<span class="number">2</span>^<span class="number">512</span>]</span><br><span class="line">ML = M.LLL()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> mi <span class="keyword">in</span> ML:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">abs</span>(mi[-<span class="number">1</span>]) == <span class="number">2</span>^<span class="number">512</span>:</span><br><span class="line">        <span class="keyword">if</span> mi[-<span class="number">2</span>] % p ==secret:</span><br><span class="line">            <span class="built_in">print</span>(mi)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(mi[-<span class="number">2</span>]) % p == secret:</span><br><span class="line">            <span class="built_in">print</span>(mi)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(- mi[-<span class="number">2</span>]) % p == secret:</span><br><span class="line">            <span class="built_in">print</span>(mi)</span><br><span class="line">        <span class="keyword">if</span> - mi[-<span class="number">2</span>] % p == secret:</span><br><span class="line">            <span class="built_in">print</span>(mi)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52640415/article/details/132417185">WMCTF 2023] crypto_石氏是时试的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41626232/article/details/132418990">WMCTF2023 Crypto_无趣的浅的博客-CSDN博客</a></p>
+<p>[WMCTF 2023_OFFICAL_WRITE-UP_CN.pdf](file:&#x2F;&#x2F;&#x2F;C:&#x2F;Users&#x2F;91202&#x2F;Downloads&#x2F;WMCTF 2023_OFFICAL_WRITE-UP_CN.pdf)</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/09/06/Hello/"
+      title="Hello!"
+     >
+
+    <p class="title-text">
+      
+        Hello!
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 crumbling<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
