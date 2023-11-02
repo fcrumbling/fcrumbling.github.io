@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="false" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>2023ACTF——Crypto题目复现 | crumbling&#39;s secret room</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="EasyRSA MDH Claw crane midRSA CRCRC EasyRSA源码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879from">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023ACTF——Crypto题目复现">
+<meta property="og:url" content="http://example.com/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="crumbling&#39;s secret room">
+<meta property="og:description" content="EasyRSA MDH Claw crane midRSA CRCRC EasyRSA源码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879from">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/image-20231031105314603.png">
+<meta property="og:image" content="http://example.com/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/image-20231031110151322.png">
+<meta property="article:published_time" content="2023-11-02T09:10:34.631Z">
+<meta property="article:modified_time" content="2023-11-02T09:14:56.280Z">
+<meta property="article:author" content="crumbling">
+<meta property="article:tag" content="-Crypto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/image-20231031105314603.png">
+  
+    <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>crumbling's secret room </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜索" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">crumbling </div>
+      <div class="dot"></div>
+      <div class="subtitle">This is the subtitle </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561199334949091/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/fcrumbling" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Crypto/" rel="tag">-Crypto</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">-自我介绍</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          十月 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          九月 2023 
+          <div class="archive-count">5 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/" title="2023ACTF——Crypto题目复现" >
+            <div class="recent-link-text">
+              2023ACTF——Crypto题目复现
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/10/29/DASCTF-CBCTF-crypto%E9%83%A8%E5%88%86%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0%20/" title="DASCTF-CBCTF 2023年10月 crypto部分赛题复现" >
+            <div class="recent-link-text">
+              DASCTF-CBCTF 2023年10月 crypto部分赛题复现
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/09/20/2023WMCTF%E9%83%A8%E5%88%86%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" title="2023WMCTF——Crypto部分题目复现" >
+            <div class="recent-link-text">
+              2023WMCTF——Crypto部分题目复现
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/09/19/LFSR/" title="LFSR学习" >
+            <div class="recent-link-text">
+              LFSR学习
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/09/06/Hello/" title="Hello!" >
+            <div class="recent-link-text">
+              Hello!
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-2023ACTF-crypto部分复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        2023ACTF——Crypto题目复现
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-11-02T09:10:34.631Z" itemprop="datePublished">2023-11-02</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">-Crypto</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p><a href="#1">EasyRSA</a></p>
+<p><a href="#2">MDH</a></p>
+<p><a href="#3">Claw crane</a></p>
+<p><a href="#4">midRSA</a></p>
+<p><a href="#5">CRCRC</a></p>
+<h2 id="EasyRSA"><a href="#EasyRSA" class="headerlink" title="EasyRSA"></a><h2 id="1">EasyRSA</h2></h2><h3 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">genKey</span>(<span class="params">nbits, dbits</span>):</span><br><span class="line">    bbits = (nbits // <span class="number">2</span> - dbits) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        a = getRandomNBitInteger(dbits)</span><br><span class="line">        b = getRandomNBitInteger(bbits)</span><br><span class="line">        c = getRandomNBitInteger(bbits)</span><br><span class="line">        p1 = a * b * c + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(p1):</span><br><span class="line">            <span class="comment"># print(&quot;p1 =&quot;, p1)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        d = getRandomNBitInteger(dbits)</span><br><span class="line">        p2 = b * c * d + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(p2):</span><br><span class="line">            <span class="comment"># print(&quot;p2 =&quot;, p2)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        e = getRandomNBitInteger(bbits)</span><br><span class="line">        f = getRandomNBitInteger(bbits)</span><br><span class="line">        q1 = e * d * f + <span class="number">1</span></span><br><span class="line">        p3 = a * e * f + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(q1) <span class="keyword">and</span> isPrime(p3):</span><br><span class="line">            <span class="comment"># print(&quot;p3 =&quot;, p3)</span></span><br><span class="line">            <span class="comment"># print(&quot;q1 =&quot;, q1)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        d_ = getRandomNBitInteger(dbits)</span><br><span class="line">        <span class="keyword">if</span> GCD(a * b * c * d * e * f, d_) != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        e_ = inverse(d_, a * b * c * d * e * f)</span><br><span class="line">        k1 = (e_ * d_ - <span class="number">1</span>) // (a * b * c * d * e * f)</span><br><span class="line">        <span class="keyword">assert</span> e_ * d_ == (a * b * c * d * e * f) * k1 + <span class="number">1</span></span><br><span class="line">        q2 = k1 * e * f + <span class="number">1</span></span><br><span class="line">        q3 = k1 * b * c + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(q2) <span class="keyword">and</span> isPrime(q3):</span><br><span class="line">            <span class="comment"># print(&quot;q2 =&quot;, q2)</span></span><br><span class="line">            <span class="comment"># print(&quot;q3 =&quot;, q3)</span></span><br><span class="line">            <span class="comment"># print(&quot;e =&quot;, e_)</span></span><br><span class="line">            <span class="comment"># print(&quot;d =&quot;, d_)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    n1 = p1 * q1</span><br><span class="line">    n2 = p2 * q2</span><br><span class="line">    n3 = p3 * q3</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(<span class="built_in">pow</span>(<span class="number">0xdeadbeef</span>, e_, n1), d_, n1) == <span class="number">0xdeadbeef</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(<span class="built_in">pow</span>(<span class="number">0xdeadbeef</span>, e_, n2), d_, n2) == <span class="number">0xdeadbeef</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(<span class="built_in">pow</span>(<span class="number">0xdeadbeef</span>, e_, n3), d_, n3) == <span class="number">0xdeadbeef</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(e_, n1, n2, n3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nbits = <span class="number">0x600</span></span><br><span class="line">dbits = <span class="number">0x210</span></span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">e, n1, n2, n3 = genKey(nbits, dbits)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n1)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c =&quot;</span>, c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;e =&quot;</span>, e)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n1 =&quot;</span>, n1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n2 =&quot;</span>, n2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n3 =&quot;</span>, n3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># c = 63442255298812942222810837512019302954917822996915527697525497640413662503768308023517128481053593562877494934841788054865410798751447333551319775025362132176942795107214528962480350398519459474033659025815248579631003928932688495682277210240277909527931445899728273182691941548330126199931886748296031014210795428593631253184315074234352536885430181103986084755140024577780815130067722355861473639612699372152970688687877075365330095265612016350599320999156644</span></span><br><span class="line"><span class="comment"># e = 272785315258275494478303901715994595013215169713087273945370833673873860340153367010424559026764907254821416435761617347240970711252213646287464416524071944646705551816941437389777294159359383356817408302841561284559712640940354294840597133394851851877857751302209309529938795265777557840238332937938235024502686737802184255165075195042860413556866222562167425361146312096189555572705076252573222261842045286782816083933952875990572937346408235562417656218440227</span></span><br><span class="line"><span class="comment"># n1 = 473173031410877037287927970398347001343136400938581274026578368211539730987889738033351265663756061524526288423355193643110804217683860550767181983527932872361546531994961481442866335447011683462904976896894011884907968495626837219900141842587071512040734664898328709989285205714628355052565784162841441867556282849760230635164284802614010844226671736675222842060257156860013384955769045790763119616939897544697150710631300004180868397245728064351907334273953201</span></span><br><span class="line"><span class="comment"># n2 = 327163771871802208683424470007561712270872666244394076667663345333853591836596054597471607916850284565474732679392694515656845653581599800514388800663813830528483334021178531162556250468743461443904645773493383915711571062775922446922917130005772040139744330987272549252540089872170217864935146429898458644025927741607569303966038195226388964722300472005107075179204987774627759625183739199425329481632596633992804636690274844290983438078815836605603147141262181</span></span><br><span class="line"><span class="comment"># n3 = 442893163857502334109676162774199722362644200933618691728267162172376730137502879609506615568680508257973678725536472848428042122350184530077765734033425406055810373669798840851851090476687785235612051747082232947418290952863499263547598032467577778461061567081620676910480684540883879257518083587862219344609851852177109722186714811329766477552794034774928983660538381764930765795290189612024799300768559485810526074992569676241537503405494203262336327709010421</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解法一："><a href="#解法一：" class="headerlink" title="解法一："></a>解法一：</h3><p>自家解法，还就那个非预期，当时找到了dual RSA，发现生成方式很类似，后来队友找到个破解dual RSA的脚本，调参数梭了20分钟出来的。<a target="_blank" rel="noopener" href="https://github.com/xalanq/jarvisoj-solutions/blob/master/crypto/%5B61dctf%5Drsa.md">https://github.com/xalanq/jarvisoj-solutions/blob/master/crypto/%5B61dctf%5Drsa.md</a></p>
+<h3 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h3><p>目前看到了个格的解法(来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41626232">无趣的浅</a>，又是这位大哥)，比较像预期解。</p>
+<p>对于题目的分析:</p>
+<p>$p1 = a <em> b </em> c + 1$</p>
+<p>$p2 = b <em> c </em> d + 1$</p>
+<p>$q1 = e <em> d </em> f + 1$</p>
+<p>$p3 = a <em> e </em> f + 1$</p>
+<p>$q2 = k1 <em> e </em> f + 1$</p>
+<p>$q3 = k1 <em> b </em> c + 1$</p>
+<p>$n1 = p1 * q1$</p>
+<p>$n2 = p2 * q2$</p>
+<p>$n3 = p3 * q3$</p>
+<p>$E<em>D = (a </em> b <em> c </em> d <em> e </em> f) * k1 + 1$</p>
+<p>进一步展开$n1,n2,n3$有：</p>
+<p>$n1=a<em>b</em>c<em>d</em>e<em>f+(a</em>b<em>c+e</em>d*f+1)$</p>
+<p>$n2=b<em>c</em>d<em>e</em>f<em>k1+(b</em>c<em>d+k1</em>e*f+1)$</p>
+<p>$n3=a<em>b</em>c<em>e</em>f<em>k1+(a</em>e<em>f+k1</em>b*c+1)$</p>
+<p>再进一步构造：</p>
+<p>$E<em>D-k1</em>n1=1-k1<em>(a</em>b<em>c+e</em>d*f+1)$</p>
+<p>$E<em>D-a</em>n2=1-a<em>(b</em>c<em>d+k1</em>e*f+1)$</p>
+<p>$E<em>D-d</em>n3=1-d<em>(a</em>e<em>f+k1</em>b*c+1)$</p>
+<p>记上3式等号右结果为A,B,C，即：</p>
+<p>$E<em>D-k1</em>n1=A$</p>
+<p>$E<em>D-a</em>n2=B$</p>
+<p>$E<em>D-d</em>n3=C$</p>
+<p>分析各个数的大小有：</p>
+<p>$E$-1533bit; $n1,n2,n3$-1534bit;$a,d,k1$-528bit;$D$-528bit;</p>
+<p>$A，B，C$-1296(528+768)bit；</p>
+<p>有：</p>
+<script type="math/tex; mode=display">
+\begin{equation}%开始数学环境
+\left[                 
+  \begin{array}{ccc}
+    D & -k1 & -a & -d
+  \end{array}
+\right]
+*
+\left[                 %左括号
+  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
+    E & E & E & t\\  %第一行元素
+    n1 & 0 & 0 & 0\\ %第二行元素
+    0 & n2 & 0 & 0\\
+    0 & 0 & n3 & 0
+  \end{array}
+\right]     %右括号
+=
+\left[                 %左括号
+  \begin{array}{ccc}
+    A & B & C & D*t
+  \end{array}
+\right]
+\end{equation}</script><p>实操跑了一下t取$2^{600}-2^{800}$都可以，在此情况下，相对于1534位的格基，基本在1296位的向量确实是格上最短。</p>
+<h4 id="t下界的相关证明（队友问了L的大哥，说是用高斯启发式）："><a href="#t下界的相关证明（队友问了L的大哥，说是用高斯启发式）：" class="headerlink" title="t下界的相关证明（队友问了L的大哥，说是用高斯启发式）："></a>t下界的相关证明（队友问了L的大哥，说是用高斯启发式）：</h4><p><img src="/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/image-20231031105314603.png" alt="image-20231031105314603"></p>
+<p>忘记咋求行列式了，唐突补习：</p>
+<p><img src="/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/image-20231031110151322.png" alt="image-20231031110151322"></p>
+<p>$det L=t<em>n1</em>n2<em>n3$ 期望最短向量长度为$0.48</em>(det L)^{1/4}$,转换为比特位即：</p>
+<p>$(1534*3+tbit)/4 \ =1150+0.25tbit \ 位$</p>
+<p>|w|（目标向量长度）$&gt;1296 \ 位$</p>
+<p>可得若目标向量为格上最短向量，则tbit约$&gt;584$ 位</p>
+<p>实测为589，差别不大。</p>
+<p>t上界证明暂无。</p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">c = <span class="number">63442255298812942222810837512019302954917822996915527697525497640413662503768308023517128481053593562877494934841788054865410798751447333551319775025362132176942795107214528962480350398519459474033659025815248579631003928932688495682277210240277909527931445899728273182691941548330126199931886748296031014210795428593631253184315074234352536885430181103986084755140024577780815130067722355861473639612699372152970688687877075365330095265612016350599320999156644</span></span><br><span class="line">e = <span class="number">272785315258275494478303901715994595013215169713087273945370833673873860340153367010424559026764907254821416435761617347240970711252213646287464416524071944646705551816941437389777294159359383356817408302841561284559712640940354294840597133394851851877857751302209309529938795265777557840238332937938235024502686737802184255165075195042860413556866222562167425361146312096189555572705076252573222261842045286782816083933952875990572937346408235562417656218440227</span></span><br><span class="line">n1 = <span class="number">473173031410877037287927970398347001343136400938581274026578368211539730987889738033351265663756061524526288423355193643110804217683860550767181983527932872361546531994961481442866335447011683462904976896894011884907968495626837219900141842587071512040734664898328709989285205714628355052565784162841441867556282849760230635164284802614010844226671736675222842060257156860013384955769045790763119616939897544697150710631300004180868397245728064351907334273953201</span></span><br><span class="line">n2 = <span class="number">327163771871802208683424470007561712270872666244394076667663345333853591836596054597471607916850284565474732679392694515656845653581599800514388800663813830528483334021178531162556250468743461443904645773493383915711571062775922446922917130005772040139744330987272549252540089872170217864935146429898458644025927741607569303966038195226388964722300472005107075179204987774627759625183739199425329481632596633992804636690274844290983438078815836605603147141262181</span></span><br><span class="line">n3 = <span class="number">442893163857502334109676162774199722362644200933618691728267162172376730137502879609506615568680508257973678725536472848428042122350184530077765734033425406055810373669798840851851090476687785235612051747082232947418290952863499263547598032467577778461061567081620676910480684540883879257518083587862219344609851852177109722186714811329766477552794034774928983660538381764930765795290189612024799300768559485810526074992569676241537503405494203262336327709010421</span></span><br><span class="line">M = Matrix(ZZ,[[e,e,e,<span class="number">2</span>^<span class="number">768</span>],</span><br><span class="line">               [n1,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">               [<span class="number">0</span>,n2,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">               [<span class="number">0</span>,<span class="number">0</span>,n3,<span class="number">0</span>]])</span><br><span class="line">d=<span class="built_in">abs</span>(M.LLL()[<span class="number">0</span>][<span class="number">3</span>]//<span class="number">2</span>^<span class="number">768</span>)</span><br><span class="line">long_to_bytes(ZZ(<span class="built_in">pow</span>(c,d,n1)))</span><br></pre></td></tr></table></figure>
+<h2 id="MDH"><a href="#MDH" class="headerlink" title="MDH"></a><h2 id="2">MDH</h2></h2><p>我自己看的时候感觉涉及矩阵交换律的验证的事情，因为太久没用过线性代数甚至都忘记怎么证明了。</p>
+<p>总之队友贴了验证跑的代码，有pk_alice.T * pk_bob == sharded。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">r = <span class="number">128</span></span><br><span class="line">c = <span class="number">96</span></span><br><span class="line">p = <span class="number">308955606868885551120230861462612873078105583047156930179459717798715109629</span></span><br><span class="line">Fp = GF(p)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    ct = Integer(f.readline())</span><br><span class="line">    pk_alice_data = f.readline().strip()</span><br><span class="line">    pk_bob_data = f.readline().strip()</span><br><span class="line">ct = <span class="built_in">int</span>(ct)</span><br><span class="line">pk_alice = Matrix(Fp,r,r,<span class="built_in">eval</span>(pk_alice_data))</span><br><span class="line">pk_bob = Matrix(Fp,r,r,<span class="built_in">eval</span>(pk_bob_data))</span><br><span class="line">shared=(pk_alice.T * pk_bob).trace()</span><br><span class="line">flag = <span class="built_in">int</span>(sha256(<span class="built_in">str</span>(<span class="built_in">int</span>(shared)).encode()).hexdigest(), <span class="number">16</span>) ^^ ct</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(flag))</span><br></pre></td></tr></table></figure>
+<h2 id="Claw-crane"><a href="#Claw-crane" class="headerlink" title="Claw crane"></a><h2 id="3"><strong>Claw crane</strong></h2></h2><p>伪随机生成了一个 128bit 的整数 r, 并根据我们的两个小于64bit 的输入 p, q 计算 <code>delta = abs(r\*q - p\*pow(2,BITS))</code>delta中0占比越低，越容易抓到娃娃，一共256次要求222次成功。</p>
+<h3 id="解法一：-1"><a href="#解法一：-1" class="headerlink" title="解法一："></a>解法一：</h3><p>当时没有细推导，简单尝试了几次之后因为过于非酋分数较低就淘汰掉了，没想到在wp中看到了，十分后悔。</p>
+<p>令q=2**63, p为r的高63位。这样最终的 delta 高 63 位和低 63 位均为 0，剩下的 66位有一半为 0，即 0 所占比例 82.8%，比222/256略低，但也差不太多，运气好就行。</p>
+<p>记录里翻出来的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">problem = remote(<span class="string">&#x27;120.46.65.156&#x27;</span>, <span class="number">19991</span>)</span><br><span class="line">BITS = <span class="number">128</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    problem.recvuntil(<span class="string">b&#x27;[&#x27;</span>)</span><br><span class="line">    col = <span class="built_in">int</span>(problem.recvuntil(<span class="string">b&#x27;,&#x27;</span>)[:-<span class="number">1</span>])</span><br><span class="line">    row = <span class="built_in">int</span>(problem.recvuntil(<span class="string">b&#x27;]&#x27;</span>)[:-<span class="number">1</span>])</span><br><span class="line">    move = <span class="string">b&#x27;D&#x27;</span> * col + <span class="string">b&#x27;W&#x27;</span> * row</span><br><span class="line">    problem.sendlineafter(<span class="string">b&#x27;Your moves: &#x27;</span>, move)</span><br><span class="line">    problem.recvuntil(<span class="string">b&#x27;choas: &#x27;</span>)</span><br><span class="line">    choas = <span class="built_in">int</span>(problem.recvline()[:-<span class="number">1</span>])</span><br><span class="line">    q=<span class="number">2</span>**<span class="number">63</span></span><br><span class="line">    p=choas//(<span class="number">2</span>**<span class="number">65</span>)</span><br><span class="line">    <span class="comment">#t=abs(q*choas-p*2**BITS)</span></span><br><span class="line">    p=<span class="built_in">str</span>(p).encode()</span><br><span class="line">    q=<span class="built_in">str</span>(q).encode()</span><br><span class="line">    problem.sendlineafter(<span class="string">b&quot;give me your claw using p,q and p,q in [0, 18446744073709551615] (e.g.: 1,1): &quot;</span>,q+<span class="string">b&#x27;,&#x27;</span>+p)</span><br><span class="line"></span><br><span class="line">problem.recvline()</span><br><span class="line">problem.recvline()</span><br><span class="line">problem.interactive()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解法二：-1"><a href="#解法二：-1" class="headerlink" title="解法二："></a>解法二：</h3><p>构造</p>
+<script type="math/tex; mode=display">
+\begin{equation}%开始数学环境
+\left[                 
+  \begin{array}{ccc}
+    p & -q
+  \end{array}
+\right]
+*
+\left[                 %左括号
+  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
+    2^{128} & 1\\  %第一行元素
+    choas & 0
+  \end{array}
+\right]     %右括号
+=
+\left[                 %左括号
+  \begin{array}{ccc}
+    t & p
+  \end{array}
+\right]
+\end{equation}</script><p>LLL算法求出最短向量后解XA=B</p>
+<p>核心代码（参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/shshss64/article/details/134169323）：">https://blog.csdn.net/shshss64/article/details/134169323）：</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve_pq</span>(<span class="params">chaos</span>):</span><br><span class="line">    K = matrix(ZZ, [[<span class="number">2</span> ^ <span class="number">128</span>, <span class="number">0</span>], [chaos, <span class="number">1</span>]])</span><br><span class="line">    KK = K.LLL()</span><br><span class="line">    v = K.solve_left(KK[<span class="number">0</span>])</span><br><span class="line">    p, q = v[<span class="number">0</span>], v[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(p), <span class="built_in">abs</span>(q)</span><br></pre></td></tr></table></figure>
+<h2 id="midRSA"><a href="#midRSA" class="headerlink" title="midRSA"></a><h2 id="4">midRSA</h2></h2><h3 id="源码：-1"><a href="#源码：-1" class="headerlink" title="源码："></a><strong>源码：</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">genKey</span>(<span class="params">nbits, dbits</span>):</span><br><span class="line">    bbits = (nbits // <span class="number">2</span> - dbits) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        a = getRandomNBitInteger(dbits)</span><br><span class="line">        b = getRandomNBitInteger(bbits)</span><br><span class="line">        c = getRandomNBitInteger(bbits)</span><br><span class="line">        p1 = a * b * c + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(p1):</span><br><span class="line">            <span class="comment"># print(&quot;p1 =&quot;, p1)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        d = getRandomNBitInteger(dbits)</span><br><span class="line">        p2 = b * c * d + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(p2):</span><br><span class="line">            <span class="comment"># print(&quot;p2 =&quot;, p2)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        e = getRandomNBitInteger(bbits)</span><br><span class="line">        f = getRandomNBitInteger(bbits)</span><br><span class="line">        q1 = e * d * f + <span class="number">1</span></span><br><span class="line">        p3 = a * e * f + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(q1) <span class="keyword">and</span> isPrime(p3):</span><br><span class="line">            <span class="comment"># print(&quot;p3 =&quot;, p3)</span></span><br><span class="line">            <span class="comment"># print(&quot;q1 =&quot;, q1)</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        d_ = getRandomNBitInteger(dbits)</span><br><span class="line">        <span class="keyword">if</span> GCD(a * b * c * d * e * f, d_) != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        e_ = inverse(d_, a * b * c * d * e * f)</span><br><span class="line">        k1 = (e_ * d_ - <span class="number">1</span>) // (a * b * c * d * e * f)</span><br><span class="line">        <span class="keyword">assert</span> e_ * d_ == (a * b * c * d * e * f) * k1 + <span class="number">1</span></span><br><span class="line">        q2 = k1 * e * f + <span class="number">1</span></span><br><span class="line">        q3 = k1 * b * c + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> isPrime(q2) <span class="keyword">and</span> isPrime(q3):</span><br><span class="line">            <span class="comment"># print(&quot;q2 =&quot;, q2)</span></span><br><span class="line">            <span class="comment"># print(&quot;q3 =&quot;, q3)</span></span><br><span class="line">            <span class="comment"># print(&quot;e =&quot;, e_)</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;d =&quot;</span>, d_)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    n1 = p1 * q1</span><br><span class="line">    n2 = p2 * q2</span><br><span class="line">    n3 = p3 * q3</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(<span class="built_in">pow</span>(<span class="number">0xdeadbeef</span>, e_, n1), d_, n1) == <span class="number">0xdeadbeef</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(<span class="built_in">pow</span>(<span class="number">0xdeadbeef</span>, e_, n2), d_, n2) == <span class="number">0xdeadbeef</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">pow</span>(<span class="built_in">pow</span>(<span class="number">0xdeadbeef</span>, e_, n3), d_, n3) == <span class="number">0xdeadbeef</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(e_, n1, n2, n3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nbits = <span class="number">0x600</span></span><br><span class="line">dbits = <span class="number">0x240</span></span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">e, n1, n2, n3 = genKey(nbits, dbits)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n1)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c =&quot;</span>, c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;e =&quot;</span>, e)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n1 =&quot;</span>, n1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n2 =&quot;</span>, n2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n3 =&quot;</span>, n3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># c = 598823083137858565473505718525815255620672892612784824187302545127574115000325539999824374357957135208478070797113625659118825530731575573239221853507638809719397849963861367352055486212696958923800593172417262351719477530809870735637329898331854130533160020420263724619225174940214193740379571953951059401685115164634005411478583529751890781498407518739069969017597521632392997743956791839564573371955246955738575593780508817401390102856295102225132502636316844</span></span><br><span class="line"><span class="comment"># e = 334726528702628887205076146544909357751287869200972341824248480332256143541098971600873722567713812425364296038771650383962046800505086167635487091757206238206029361844181642521606953049529231154613145553220809927001722518303114599682529196697410089598230645579658906203453435640824934159645602447676974027474924465177723434855318446073578465621382859962701578350462059764095163424218813852195709023435581237538699769359084386399099644884006684995755938605201771</span></span><br><span class="line"><span class="comment"># n1 = 621786427956510577894657745225233425730501124908354697121702414978035232119311662357181409283130180887720760732555757426221953950475736078765267856308595870951635246720750862259255389006679454647170476427262240270915881126875224574474706572728931213060252787326765271752969318854360970801540289807965575654629288558728966771231501959974533484678236051025940684114262451777094234017210230731492336480895879764397821363102224085859281971513276968559080593778873231</span></span><br><span class="line"><span class="comment"># n2 = 335133378611627373902246132362791381335635839627660359611198202073307340179794138179041524058800936207811546752188713855950891460382258433727589232119735602364790267515558352318957355100518427499530387075144776790492766973547088838586041648900788325902589777445641895775357091753360428198189998860317775077739054298868885308909495601041757108114540069950359802851809227248145281594107487276003206931533768902437356652676341735882783415106786497390475670647453821</span></span><br><span class="line"><span class="comment"># n3 = 220290953009399899705676642623181513318918775662713704923101352853965768389363281894663344270979715555659079125651553079702318700200824118622766698792556506368153467944348604006011828780474050012010677204862020009069971864222175380878120025727369117819196954091417740367068284457817961773989542151049465711430065838517386380261817772422927774945414543880659243592749932727798690742051285364898081188510009069286094647222933710799481899960520270189522155672272451</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>分析：</p>
+<p>调整<code>dbits = 0x240</code>，使得原本easyRSA的脚本无论如何调整t的大小都无法获得结果。</p>
+<p>同样的等式</p>
+<p>$E<em>D-k1</em>n1=A$</p>
+<p>$E<em>D-a</em>n2=B$</p>
+<p>$E<em>D-d</em>n3=C$</p>
+<p>各个数的大小有</p>
+<p>$E$-1534bit; $n1,n2,n3$-1534bit;$a,d,k1$-576bit;$D$-576bit;</p>
+<p>$A，B，C$-1344(576+768)bit；</p>
+<p>复现的时候对于卡了t的界的问题自己提了个比较粗浅地推导：</p>
+<script type="math/tex; mode=display">
+\begin{equation}%开始数学环境
+\left[                 
+  \begin{array}{ccc}
+    D & -k1 & -a & -d
+  \end{array}
+\right]
+*
+\left[                 %左括号
+  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
+    E & E & E & t\\  %第一行元素
+    n1 & 0 & 0 & 0\\ %第二行元素
+    0 & n2 & 0 & 0\\
+    0 & 0 & n3 & 0
+  \end{array}
+\right]     %右括号
+=
+\left[                 %左括号
+  \begin{array}{ccc}
+    A & B & C & D*t
+  \end{array}
+\right]
+\end{equation}</script><p>对于easyRSA里的这个格，同样利用高斯启发式考虑。</p>
+<p>$det L=t<em>n1</em>n2<em>n3$ 期望最短向量长度为$0.48</em>(det L)^{1/4}$,转换为比特位即：</p>
+<p>$(1534*3+tbit)/4 \ =1150+0.25tbit \ 位$</p>
+<p>|w|$&gt;1344 \ 位$</p>
+<p>为满足需求有$tbit&gt;776 位$</p>
+<p>但此时再次计算目标向量中的D*t，可以发现其位数为$576+776=1352&gt;1344$，即此时目标向量长度改变，tbit不再能满足需求，也就推出矛盾了。</p>
+<p>时间线稍后，队友复盘提到了<a target="_blank" rel="noopener" href="https://tover.xyz/p/LLL-attack-equation/#配平">格攻击之小未知数方程求解入门——原理与例子 | Tover’ Blog</a>，里面提到了配平技巧。</p>
+<p>文章的大致意思指，一般情况下先配平，再去考虑高斯启发式，否则格可能会无法满足需求，配平即使目标向量中各个数的大小平衡。</p>
+<p>对于midRSA这个题而言，就是令tbit=768，有|w|=1344</p>
+<p>此时可求得α(L)=1342.5&lt;1344不满足要求，这样就可以看到所谓的卡界了。</p>
+<p>总而言之，以上是对于卡界的解释，接下来是解题部分。</p>
+<h3 id="解法一：-2"><a href="#解法一：-2" class="headerlink" title="解法一："></a>解法一：</h3><p>通过爆破部分位并构造新格来解决问题。</p>
+<p>$E<em>(h_d+D_0)-k1</em>n1=A$</p>
+<p>$E<em>(h_d+D_0)-a</em>n2=B$</p>
+<p>$E<em>(h_d+D_0)-d</em>n3=C$</p>
+<p>当我们只爆破$h_d$时，构造</p>
+<script type="math/tex; mode=display">
+\begin{equation}%开始数学环境
+\left[                 
+  \begin{array}{ccc}
+    D_0 & -k1 & -a & -d & 1
+  \end{array}
+\right]
+*
+\left[                 %左括号
+  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
+    E & E & E & t & 0\\  %第一行元素
+    n1 & 0 & 0 & 0 & 0\\ %第二行元素
+    0 & n2 & 0 & 0 & 0\\
+    0 & 0 & n3 & 0 & 0\\
+    h_d*E & h_d*E & h_d*E & 0 &t_1\\
+
+
+  \end{array}
+\right]     %右括号
+=
+\left[                 %左括号
+  \begin{array}{ccc}
+    A & B & C & D_0*t &t_1
+  \end{array}
+\right]
+\end{equation}</script><p>令$t1=2^{1344},t=2^{768}$</p>
+<p>则α(L)=1342.8变化不大，而|w|≈1345，依旧不满足条件。</p>
+<p><strong>//队友提醒上面格应该可以</strong></p>
+<p>这里重新推导，在令的部分应$t=2^{768+h_dbit}$</p>
+<p>此时重新计算$α(L)=1342.8+h_dbit/5$</p>
+<p>得为满足需求应有$h_dbit&gt;11$</p>
+<p>因为算的比较粗略，$h_dbit$需求可能要更大才能爆破出来，比如一起复现的队友算出来要爆破16位。</p>
+<p>实测结果是10位</p>
+<p>然后爆高位和低位没有影响，无非爆高位可以少爆一位</p>
+<p>这里贴个改自队友爆高位的脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line">c = <span class="number">598823083137858565473505718525815255620672892612784824187302545127574115000325539999824374357957135208478070797113625659118825530731575573239221853507638809719397849963861367352055486212696958923800593172417262351719477530809870735637329898331854130533160020420263724619225174940214193740379571953951059401685115164634005411478583529751890781498407518739069969017597521632392997743956791839564573371955246955738575593780508817401390102856295102225132502636316844</span></span><br><span class="line">e = <span class="number">334726528702628887205076146544909357751287869200972341824248480332256143541098971600873722567713812425364296038771650383962046800505086167635487091757206238206029361844181642521606953049529231154613145553220809927001722518303114599682529196697410089598230645579658906203453435640824934159645602447676974027474924465177723434855318446073578465621382859962701578350462059764095163424218813852195709023435581237538699769359084386399099644884006684995755938605201771</span></span><br><span class="line">n1 = <span class="number">621786427956510577894657745225233425730501124908354697121702414978035232119311662357181409283130180887720760732555757426221953950475736078765267856308595870951635246720750862259255389006679454647170476427262240270915881126875224574474706572728931213060252787326765271752969318854360970801540289807965575654629288558728966771231501959974533484678236051025940684114262451777094234017210230731492336480895879764397821363102224085859281971513276968559080593778873231</span></span><br><span class="line">n2 = <span class="number">335133378611627373902246132362791381335635839627660359611198202073307340179794138179041524058800936207811546752188713855950891460382258433727589232119735602364790267515558352318957355100518427499530387075144776790492766973547088838586041648900788325902589777445641895775357091753360428198189998860317775077739054298868885308909495601041757108114540069950359802851809227248145281594107487276003206931533768902437356652676341735882783415106786497390475670647453821</span></span><br><span class="line">n3 = <span class="number">220290953009399899705676642623181513318918775662713704923101352853965768389363281894663344270979715555659079125651553079702318700200824118622766698792556506368153467944348604006011828780474050012010677204862020009069971864222175380878120025727369117819196954091417740367068284457817961773989542151049465711430065838517386380261817772422927774945414543880659243592749932727798690742051285364898081188510009069286094647222933710799481899960520270189522155672272451</span></span><br><span class="line">dbit=<span class="number">9</span></span><br><span class="line">tbit=<span class="number">1344</span>-<span class="number">576</span>+dbit+<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> Dh <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="number">2</span>^dbit)):</span><br><span class="line">    Dh = <span class="built_in">int</span>(<span class="string">&#x27;1&#x27;</span> + <span class="built_in">bin</span>(Dh)[<span class="number">2</span>:].zfill(dbit), <span class="number">2</span>) &lt;&lt; (<span class="number">576</span>-dbit-<span class="number">1</span>)</span><br><span class="line">    M = Matrix(ZZ,[[e, e, e, <span class="number">2</span>^tbit, <span class="number">0</span>],</span><br><span class="line">                [n1, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                [<span class="number">0</span>, n2, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                [<span class="number">0</span>, <span class="number">0</span>, n3, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                [e*Dh, e*Dh, e*Dh, <span class="number">0</span>, <span class="number">2</span>^<span class="number">1344</span>]</span><br><span class="line">                ])</span><br><span class="line">    res = M.LLL()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> res:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(i[-<span class="number">1</span>])==<span class="number">2</span>^<span class="number">1344</span>:</span><br><span class="line">            d = <span class="built_in">int</span>(i[<span class="number">3</span>]//<span class="number">2</span>^tbit) + Dh</span><br><span class="line">            flag = long_to_bytes(<span class="built_in">int</span>(<span class="built_in">pow</span>(c,d,n1)))</span><br><span class="line">            <span class="keyword">if</span> <span class="string">b&#x27;ACTF&#123;&#x27;</span> <span class="keyword">in</span> flag:</span><br><span class="line">                <span class="built_in">print</span>(flag)</span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h3 id="解法二：-2"><a href="#解法二：-2" class="headerlink" title="解法二："></a>解法二：</h3><p>在解法一的错误计算中产生的想法（虽然不知道原博主是不是这样）</p>
+<p>总之，为减小|w|，进而想到爆破ABC的部分位.</p>
+<p>8维格</p>
+<p>$E<em>(h_d+D_0)-k1</em>n1=h_a+A_0$</p>
+<p>$E<em>(h_d+D_0)-a</em>n2=h_b+B_0$</p>
+<p>$E<em>(h_d+D_0)-d</em>n3=h_c+C_0$</p>
+<script type="math/tex; mode=display">
+\begin{equation}%开始数学环境
+\left[                 
+  \begin{array}{ccc}
+    D_0 & -k1 & -a & -d & 1 & -1 & -1 & -1
+  \end{array}
+\right]
+*
+\left[                 %左括号
+  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
+    E & E & E & t & 0 & 0 & 0 & 0\\  %第一行元素
+    n1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ %第二行元素
+    0 & n2 & 0 & 0 & 0 & 0 & 0 & 0\\
+    0 & 0 & n3 & 0 & 0 & 0 & 0 & 0\\
+    h_d*E & h_d*E & h_d*E & 0 &t_1 & 0 & 0 & 0\\
+    h_a & 0 & 0 & 0 & 0 & t_1 & 0 & 0\\
+    0 & h_b & 0 & 0 & 0 & 0 & t_1 & 0\\
+    0 & 0 & h_c & 0 & 0 & 0 & 0 & t_1
+
+  \end{array}
+\right]     %右括号
+=
+\left[                 %左括号
+  \begin{array}{ccc}
+    A_0 & B_0 & C_0 & D_0*t &t_1 & -t_1 & -t_1 & -t_1
+  \end{array}
+\right]
+\end{equation}</script><p>有$α(L)=(1534<em>3+tbit+t_1bit</em>4)/8$</p>
+<p>$|w|=1344-h_a bit$</p>
+<p>此时通过调整$h_a,h_b,h_c，h_d$来调整$,t,t_1$</p>
+<p>令$h_abit=6$，$h_dbit=4$</p>
+<p>则有$t_1=2^{1338}$,$t=2^{766}$</p>
+<p>则$α(L)=1339.5$</p>
+<p>$|w|=1338&lt;1339.5$满足需求</p>
+<p>因为计算比较粗略，具体取值需要结合实际调试一下，不过这么算出来和博主（见参考资料第一条）的结果似乎是一样的，非常好。</p>
+<p>博主写了个爆破高位的，优势是$h_d$可以少爆一位，具体代码就不贴了。</p>
+<p>接下来是个队友要求的优雅点的爆破低位代码。</p>
+<h2 id="CRCRC"><a href="#CRCRC" class="headerlink" title="CRCRC"></a><h2 id="5">CRCRC</h2></h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41626232/article/details/134124395">ACTF2023 Cypto-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkyNTYwNDgwMw==&amp;mid=2247483716&amp;idx=1&amp;sn=f7496da505c7043248c1632faf34a05b&amp;chksm=c1c54fe8f6b2c6fe1f6272577a41c16828ad8303a4520b4522ca5cf11e47c420b307707291dc&amp;mpshare=1&amp;scene=23&amp;srcid=10311We1Jpkp0EzxchznrcZ6&amp;sharer_shareinfo=899d2b0ed9d815b766606e0f6c671faf&amp;sharer_shareinfo_first=899d2b0ed9d815b766606e0f6c671faf#rd">2023 ACTF SU Write Up (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4MjcxMTAwMQ==&amp;mid=2247487654&amp;idx=1&amp;sn=d02ba234aa0f3050658c577c8a9c5fd5&amp;chksm=cf53d010f82459066708ccdb963b6ea0c7b434963ecd2754b8f8d6b02ee18373bb9801a27eb1&amp;mpshare=1&amp;scene=23&amp;srcid=1031OwqH4FyZr4gSe7i1HOEp&amp;sharer_shareinfo=00f5776f487fdbd92138c6e82e90727c&amp;sharer_shareinfo_first=00f5776f487fdbd92138c6e82e90727c#rd">微信公众平台 (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzk0NjM5OTc1NQ==&amp;mid=2247483873&amp;idx=1&amp;sn=3b771293296edae5cf913c2bc85ba1a8&amp;chksm=c307fe85f4707793149c2aeebe76c086e375f9f666c143b68556e5fa358fa62694533cc630e8&amp;mpshare=1&amp;scene=23&amp;srcid=1031qwZiyuYMwrBJTuFy9yHI&amp;sharer_shareinfo=23718f0510c11144c57affa95c59c486&amp;sharer_shareinfo_first=23718f0510c11144c57affa95c59c486#rd">ACTF 2023 Writeup By 0RAYS (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://tover.xyz/p/LLL-attack-equation/#配平">格攻击之小未知数方程求解入门——原理与例子 | Tover’ Blog</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shshss64/article/details/134169323">[ACTF2023]复现-CSDN博客</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/10/29/DASCTF-CBCTF-crypto%E9%83%A8%E5%88%86%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0%20/"
+      title="DASCTF-CBCTF 2023年10月 crypto部分赛题复现"
+     >
+
+    <p class="title-text">
+      
+        DASCTF-CBCTF 2023年10月 crypto部分赛题复现
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 crumbling<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
