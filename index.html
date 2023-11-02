@@ -669,7 +669,7 @@ signin&lt;/h2&gt;源码：
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            905 词 
+            794 词 
           </div>
         </div>
         
@@ -693,7 +693,13 @@ LFSRLFSR是FSR（反馈移位寄存器）的一种，另外还有NFSR（非线�
 反馈函数：
 这里看到两种，一种是ctfwiki的加法型
 ，其中 均在某个有限域 中，序列为最后的输出序列。
-$\begin{align} &amp;\left[ a_{i+1},a_{i+2},a_{i+3}, …,a_{i+n} \right]\\=&amp;\left[ a_{i},a_{i+1},a_{i+2}, …,a_{i+n-1} \right]\left[  \right]\\=&amp;\left[ a_{0},a_{1},a_{2}, …,a_{n-1} \right]\...  
+
+另一种是博客以及见过的题里出现的异或型。
+即求和改成求异或，取值为0,1，递推式不同，其余相同。
+一点概念：对于一个n级LFSR来讲，其最大周期为，再后面的输出序列即为前位的循环
+画外音：写了2节课的内容因为没保存丢失了，现在处于一个暴躁重写状态
+解题思路：通过输出序列和反馈函数求解初始状态，而对反馈函数的理解是解题的核心。
+以2018 CISCN 线上赛 oldstreamgam...  
           </div>
         
       </div>
