@@ -280,7 +280,7 @@ mjx-container[display="true"] + br {
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
@@ -309,9 +309,15 @@ mjx-container[display="true"] + br {
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
-          <a class="recent-link" href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF/" title="关于创新实践的个人博客系统后端" >
+          <a class="recent-link" href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%90%8E%E5%8F%B0)/" title="关于创新实践的个人博客系统后端（后台部分）" >
             <div class="recent-link-text">
-              关于创新实践的个人博客系统后端
+              关于创新实践的个人博客系统后端（后台部分）
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%89%8D%E5%8F%B0)/" title="关于创新实践的个人博客系统后端（前台部分）" >
+            <div class="recent-link-text">
+              关于创新实践的个人博客系统后端（前台部分）
             </div>
           </a>
         
@@ -330,12 +336,6 @@ mjx-container[display="true"] + br {
           <a class="recent-link" href="/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/" title="2023ACTF——Crypto题目复现" >
             <div class="recent-link-text">
               2023ACTF——Crypto题目复现
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2023/10/29/DASCTF-CBCTF-crypto%E9%83%A8%E5%88%86%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/" title="DASCTF-CBCTF-crypto部分赛题复现" >
-            <div class="recent-link-text">
-              DASCTF-CBCTF-crypto部分赛题复现
             </div>
           </a>
         
@@ -430,7 +430,7 @@ Clannad——我的入坑之作
 
    
 
-<article id="post-关于创新实践1做的个人博客后端" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-关于创新实践1做的个人博客后端(后台)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
     <div class="article-main">
@@ -441,7 +441,90 @@ Clannad——我的入坑之作
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF/">关于创新实践的个人博客系统后端</a>
+        <a class="p-name article-title" href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%90%8E%E5%8F%B0)/">关于创新实践的个人博客系统后端（后台部分）</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-12T11:35:47.504Z" itemprop="datePublished">2023-12-12</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            291 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            目录
+
+前言
+前台系统
+后台模块准备
+
+
+
+
+前言一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。
+临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。
+项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现
+后端两个系统的代码复用性较高，所以后端创建的是多模块(3个模块)项目，把后端两个系统(两个子模块)都会用到的代码写到一个公共模块(第3个模块)
+3个子模块在父模块里面，父模块叫Hduf4Blog
+3个子模块分别是framework(公共模块)、blog(博客前台模块)、admin(博客后台模块)
+参考：myblog (yuque.com)、BV1hq4y1F7zk
+后台系统后台模块准备主要是进行一个测试，没有实际用途
+  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%90%8E%E5%8F%B0)/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-关于创新实践1做的个人博客后端(前台)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%89%8D%E5%8F%B0)/">关于创新实践的个人博客系统后端（前台部分）</a>
       </h1>
     
   
@@ -460,7 +543,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.1k 词 
+            6.7k 词 
           </div>
         </div>
         
@@ -479,17 +562,23 @@ Clannad——我的入坑之作
 分类查询列表
 文章详情
 登录
+异常处理
+退出登录
+个人信息
+注册
+浏览数
 
 
 
 前言一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。
+临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。
 项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现
 后端两个系统的代码复用性较高，所以后端创建的是多模块(3个模块)项目，把后端两个系统(两个子模块)都会用到的代码写到一个公共模块(第3个模块)
 3个子模块在父模块里面，父模块叫Hduf4Blog
 3个子模块分别是framework(公共模块)、blog(博客前台模块)、admin(博客后台模块)
 参考：myblog (yuque.com)、BV1hq4y1F7zk
 前台系统lombok依赖的@data注解可以省略get、set的构造，可以使代码看起来更加简洁也写起来更方便
-首页热门文章列表文章表的字段123456789101112131415161718CREATE TABLE `hduf4_article` (  `id` bigint(200) NOT NULL AUTO_INC...  
+首页热门文章列表文章表的字段123456789101112131415161718CR...  
           </div>
         
       </div>
@@ -500,7 +589,7 @@ Clannad——我的入坑之作
      
     <a class="right-panel  non-pic  "
       
-      href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF/" 
+      href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%89%8D%E5%8F%B0)/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
@@ -1056,83 +1145,19 @@ badprime源码：
 
  
 
-   
 
-<article id="post-2023DSACTF-Crypto题目复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/09/06/2023DSACTF-Crypto%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/">2023DSACTF——Crypto题目复现</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-09-06T10:15:27.396Z" itemprop="datePublished">2023-09-06</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.1k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gb%E5%9F%BA/" rel="tag">gb基</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9B%B8%E5%85%B3%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/" rel="tag">相关明文攻击</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            目录
-
-7月赛 ezAlgebra
-
-7月赛 ezRSA
-
-
-7月赛 ezAlgebra2023DASCTF&amp;0X401 WriteUp (qq.com)涉及到groebner_basis 一个没怎么见过的东西，打算来复现一下
- (18条消息) Gröbner基的简单介绍与一些参考文献_grobner基_RayLee23333的博客-CSDN博客里面还有提到一篇论文——Gr¨obner Bases: a Tutorial。
-[DASCTF 2023 &amp; 0X401七月暑期挑战赛] crypto_石氏是时试的博客-CSDN博客还参考了这个
-源码：
-123456789101112131415161718192021222324252627282930from Crypto.Util.number import getPrime, bytes_to_longdef YiJiuJiuQiNian(Wo, Xue, Hui, Le, Kai):    Qi = 1997    Che = Wo+Hui if Le==1 else Wo*Hui    while(Xue): ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/09/06/2023DSACTF-Crypto%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
+  <nav id="page-nav">
+    <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
+    <a id="prev-btn" class="page-nav-btn disabled" href=" /  ">
+      <span class="material-symbols-rounded">navigate_before</span>
     </a>
-     
-  </div>
-  
-</article>
-
- 
-
+    <div id="num-bar">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a>  
+    </div>
+    <a id="next-btn" class="page-nav-btn " href="/page/2/">
+      <span class="material-symbols-rounded">navigate_next</span>
+    </a>
+  </nav>
 
 
     </div>

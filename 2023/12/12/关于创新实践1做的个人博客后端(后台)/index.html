@@ -14,19 +14,24 @@
   
 
   
-  <title>标签: 相关明文攻击 | crumbling&#39;s secret room</title>
+  <title>关于创新实践的个人博客系统后端（后台部分） | crumbling&#39;s secret room</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="crumbling&#39;s secret room">
-<meta property="og:url" content="http://example.com/tags/%E7%9B%B8%E5%85%B3%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/index.html">
+  <meta name="description" content="目录  前言 前台系统 后台模块准备     前言一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。 临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。 项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现 后端两个系统的代码复用性较高，所以后端创建的是多模块(3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于创新实践的个人博客系统后端（后台部分）">
+<meta property="og:url" content="http://example.com/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%90%8E%E5%8F%B0)/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
+<meta property="og:description" content="目录  前言 前台系统 后台模块准备     前言一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。 临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。 项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现 后端两个系统的代码复用性较高，所以后端创建的是多模块(3">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-12T11:35:47.504Z">
+<meta property="article:modified_time" content="2023-12-12T11:53:44.210Z">
 <meta property="article:author" content="crumbling">
+<meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
@@ -238,44 +243,103 @@
     <div id="content-body">
        
 
-<div class="archive-main-card">
-    <div class="archive-top">
-      <div class="main-title-bar">
-        <div class="main-title-dot"></div>
-        <h1 class="article-title">归档</h1>
-      </div>    
+<article id="post-关于创新实践1做的个人博客后端(后台)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        关于创新实践的个人博客系统后端（后台部分）
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-12T11:35:47.504Z" itemprop="datePublished">2023-12-12</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            291 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p><a href="#0">目录</a></p>
+<ul>
+<li><a href="#1">前言</a></li>
+<li><a href="#2">前台系统</a><ul>
+<li><a href="#2.1">后台模块准备</a></li>
+<li><a href="#2.2"></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><h2 id="1">前言</h2></h2><p>一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。</p>
+<p>临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。</p>
+<p>项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现</p>
+<p>后端两个系统的代码复用性较高，所以后端创建的是多模块(3个模块)项目，把后端两个系统(两个子模块)都会用到的代码写到一个公共模块(第3个模块)</p>
+<p>3个子模块在父模块里面，父模块叫Hduf4Blog</p>
+<p>3个子模块分别是framework(公共模块)、blog(博客前台模块)、admin(博客后台模块)</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.yuque.com/huanfqc/my-blog/myblog#UoAWn">myblog (yuque.com)</a>、BV1hq4y1F7zk</p>
+<h2 id="后台系统"><a href="#后台系统" class="headerlink" title="后台系统"></a><h2 id="2">后台系统</h2></h2><h3 id="后台模块准备"><a href="#后台模块准备" class="headerlink" title="后台模块准备"></a><h3 id="2.1">后台模块准备</h3></h3><p>主要是进行一个测试，没有实际用途</p>
+
+        
+      </div>
+
+         
     </div>
     
-    
-      
-      
-        
-        <div class="year-line">
-            <div class="year-num">2023</div>
-            <div class="dot-wrapper">
-                <div class="dot"></div>
-            </div>
-            <div class="article-count">1 篇文章</div>
-        </div>
-      
-      <a class="archive-article-link" href="/2023/09/06/2023DSACTF-Crypto%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" title="2023DSACTF——Crypto题目复现">
-        <div class="date">09-06</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    2023DSACTF——Crypto题目复现
-                
-            </div>
-        </div>
-        <div class="tags">
-            #Crypto #gb基 #相关明文攻击
-        </div>
-      </a>
-    
+     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF(%E5%89%8D%E5%8F%B0)/"
+      title="关于创新实践的个人博客系统后端（前台部分）"
+     >
+
+    <p class="title-text">
+      
+        关于创新实践的个人博客系统后端（前台部分）
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
