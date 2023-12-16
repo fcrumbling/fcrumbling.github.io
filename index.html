@@ -460,7 +460,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            291 词 
+            2.1k 词 
           </div>
         </div>
         
@@ -475,6 +475,14 @@ Clannad——我的入坑之作
 前言
 前台系统
 后台模块准备
+登录
+导航栏
+退出登录
+查询标签列表
+新增标签
+删除标签
+修改标签
+发布文章
 
 
 
@@ -487,7 +495,19 @@ Clannad——我的入坑之作
 3个子模块分别是framework(公共模块)、blog(博客前台模块)、admin(博客后台模块)
 参考：myblog (yuque.com)、BV1hq4y1F7zk
 后台系统后台模块准备主要是进行一个测试，没有实际用途
-  
+登录接口分析 后台所有功能都必须登录才能使用。
+
+
+
+
+POST
+/user/login
+
+
+
+
+请求体
+{    “userName”:”用户名”,...  
           </div>
         
       </div>
