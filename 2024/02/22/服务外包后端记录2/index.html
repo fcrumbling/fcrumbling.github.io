@@ -21,15 +21,15 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="目录  展商模块  展商模块">
+  <meta name="description" content="版本： mybatis-plus 3.5.3 java 17 springboot 3.1.5 sql server 2014 目录  展商模块 成果模块 功能实现总结  展商模块主要是两个功能，一个是展商列表，一个是展商详情。 成果模块一个成果列表。 功能实现总结记录一下通用的一些基本功能的基本写法。 查找类xx详情通过id查询某一文章&#x2F;展商等的具体内容。 实体类没什么可说的，直接数据库对应过来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务外包后端记录2-业务开发篇">
 <meta property="og:url" content="http://example.com/2024/02/22/%E6%9C%8D%E5%8A%A1%E5%A4%96%E5%8C%85%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%952/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="目录  展商模块  展商模块">
+<meta property="og:description" content="版本： mybatis-plus 3.5.3 java 17 springboot 3.1.5 sql server 2014 目录  展商模块 成果模块 功能实现总结  展商模块主要是两个功能，一个是展商列表，一个是展商详情。 成果模块一个成果列表。 功能实现总结记录一下通用的一些基本功能的基本写法。 查找类xx详情通过id查询某一文章&#x2F;展商等的具体内容。 实体类没什么可说的，直接数据库对应过来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-21T16:50:49.476Z">
-<meta property="article:modified_time" content="2024-02-21T16:52:13.272Z">
+<meta property="article:modified_time" content="2024-02-22T11:07:27.239Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
@@ -285,7 +285,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            14 词 
+            157 词 
           </div>
         </div>
         
@@ -294,11 +294,24 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p><a href="#0">目录</a></p>
+          <p>版本：</p>
+<p>mybatis-plus 3.5.3</p>
+<p>java 17</p>
+<p>springboot 3.1.5</p>
+<p>sql server 2014</p>
+<p><a href="#0">目录</a></p>
 <ul>
 <li><a href="#1">展商模块</a></li>
+<li><a href="#2">成果模块</a></li>
+<li><a href="#s">功能实现总结</a></li>
 </ul>
-<h2 id="展商模块"><a href="#展商模块" class="headerlink" title="展商模块"></a><h2 id="1">展商模块</h2></h2>
+<h2 id="展商模块"><a href="#展商模块" class="headerlink" title="展商模块"></a><h2 id="1">展商模块</h2></h2><p>主要是两个功能，一个是展商列表，一个是展商详情。</p>
+<h2 id="成果模块"><a href="#成果模块" class="headerlink" title="成果模块"></a><h2 id="2">成果模块</h2></h2><p>一个成果列表。</p>
+<h2 id="功能实现总结"><a href="#功能实现总结" class="headerlink" title="功能实现总结"></a><h2 id="s">功能实现总结</h2></h2><p>记录一下通用的一些基本功能的基本写法。</p>
+<h3 id="查找类"><a href="#查找类" class="headerlink" title="查找类"></a>查找类</h3><h4 id="xx详情"><a href="#xx详情" class="headerlink" title="xx详情"></a>xx详情</h4><p>通过id查询某一文章/展商等的具体内容。</p>
+<h5 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h5><p>没什么可说的，直接数据库对应过来就行，无非是加几个注解</p>
+<p>lombok的<code>@Data @AllArgsConstructor @NoArgsConstructor</code>，mybatisplus的</p>
+
         
       </div>
 
