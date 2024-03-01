@@ -290,12 +290,12 @@ mjx-container[display="true"] + br {
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">1 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
           十一月 2023 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/10 ">
@@ -343,9 +343,9 @@ mjx-container[display="true"] + br {
             </div>
           </a>
         
-          <a class="recent-link" href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF%E5%90%8E%E5%8F%B0/" title="关于创新实践的个人博客系统后端（后台部分）" >
+          <a class="recent-link" href="/2023/11/12/%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%89%8B%E8%AE%B01/" title="开发学习随手记（一）" >
             <div class="recent-link-text">
-              关于创新实践的个人博客系统后端（后台部分）
+              开发学习随手记（一）
             </div>
           </a>
         
@@ -471,7 +471,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            157 词 
+            2.1k 词 
           </div>
         </div>
         
@@ -481,24 +481,38 @@ Clannad——我的入坑之作
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            版本：
+            题外话：为了完成度，大概会东搬西凑一些自己也不懂的东西，评价是代码能跑起来就不算有问题。
+版本：
 mybatis-plus 3.5.3
 java 17
-springboot 3.1.5
+springboot 2.5.0（写的demo是2.5.0，所以从3.1.5改过来了）
 sql server 2014
+相关代码并未出现在项目中，为根据源代码改编，故可能存在一点小错误
 目录
 
 展商模块
 成果模块
+活动信息展示模块
+媒体中心
+登录注册
+个人信息
 功能实现总结
+报错处理总结
+填坑系列
 
-展商模块主要是两个功能，一个是展商列表，一个是展商详情。
-成果模块一个成果列表。
-功能实现总结记录一下通用的一些基本功能的基本写法。
-查找类xx详情通过id查询某一文章/展商等的具体内容。
-实体类没什么可说的，直接数据库对应过来就行，无非是加几个注解
-lombok的@Data @AllArgsConstructor @NoArgsConstructor，mybatisplus的
-  
+待完成：
+
+图片等内容的储存（OSS相关内容）
+时间格式的转换，有的需要年月日，有的需要到分钟
+所有列表功能如果涉及了时间，需要增加排序
+
+展商模块完成：展商列表，展商详情。
+成果模块完成：成果列表。
+活动信息展示模块完成：活动分类列表
+待完成：活动详情。
+问题：应该需要去再建个活动type对应活动名字的表格，然后关联，总之最后返回的里面type不应该是数字而是对应的string。
+媒体中心模块完成：分类列表，详情
+问题：应该需要去再建个活动type对应名字的表格，然后关联，总之最后返回的里面type不应该是数字而是对应的string...  
           </div>
         
       </div>
@@ -554,7 +568,7 @@ lombok的@Data @AllArgsConstructor @NoArgsConstructor，mybatisplus的
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2k 词 
+            1.9k 词 
           </div>
         </div>
         
@@ -569,7 +583,7 @@ lombok的@Data @AllArgsConstructor @NoArgsConstructor，mybatisplus的
 版本记录：
 mybatis-plus 3.5.3
 java 17
-springboot 3.1.5
+springboot 2.5.0
 sql server 2014
 目录
 
@@ -752,283 +766,6 @@ sage:
 
    
 
-<article id="post-关于创新实践1做的个人博客后端后台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF%E5%90%8E%E5%8F%B0/">关于创新实践的个人博客系统后端（后台部分）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-12T11:35:47.504Z" itemprop="datePublished">2023-12-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3.8k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            目录
-
-前言
-后台系统
-后台模块准备
-登录
-导航栏
-退出登录
-查询标签列表
-新增标签
-删除标签
-修改标签
-发布文章
-文章列表（查改删）
-用户列表（增删改查）
-
-
-
-前言一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。
-临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。
-项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现
-后端两个系统的代码复用性较高，所以后端创建的是多模块(3个模块)项目，把后端两个系统(两个子模块)都会用到的代码写到一个公共模块(第3个模块)
-3个子模块在父模块里面，父模块叫Hduf4Blog
-3个子模块分别是framework(公共模块)、blog(博客前台模块)、admin(博客后台模块)
-参考：myblog (yuque.com)、BV1hq4y1F7zk
-后台系统后台模块准备主要是进行一个测试，没有实际用途
-登录接口分析 后台所有功能都必须登录才能使用。
-
-
-
-
-POST
-/user/login
-
-
-
-
-请求体
-{ ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF%E5%90%8E%E5%8F%B0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-关于创新实践1做的个人博客后端前台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF%E5%89%8D%E5%8F%B0/">关于创新实践的个人博客系统后端（前台部分）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-03T15:56:32.878Z" itemprop="datePublished">2023-12-03</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            6.7k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            目录
-
-前言
-前台系统
-首页热门文章列表
-分类列表
-分类查询列表
-文章详情
-登录
-异常处理
-退出登录
-个人信息
-注册
-浏览数
-
-
-
-前言一个边做边学的项目，参考的项目和写的需求分析略有不同，打算边抄边改。
-临近期末课程略多时间紧张，做的稀碎，之后应该会再正式做个新的项目当做首个开发项目。
-项目介绍: 个人博客系统，前端有两个系统，分别是博客页面(前台系统)、管理页面(后台系统)。后端也有两个系统，分别是前端两个系统的具体实现
-后端两个系统的代码复用性较高，所以后端创建的是多模块(3个模块)项目，把后端两个系统(两个子模块)都会用到的代码写到一个公共模块(第3个模块)
-3个子模块在父模块里面，父模块叫Hduf4Blog
-3个子模块分别是framework(公共模块)、blog(博客前台模块)、admin(博客后台模块)
-参考：myblog (yuque.com)、BV1hq4y1F7zk
-前台系统lombok依赖的@data注解可以省略get、set的构造，可以使代码看起来更加简洁也写起来更方便
-首页热门文章列表文章表的字段123456789101112131415161718CR...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/03/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF%E5%89%8D%E5%8F%B0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-开发学习随手记2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/11/17/%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%89%8B%E8%AE%B02/">开发学习随手记（二）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-11-17T06:33:48.735Z" itemprop="datePublished">2023-11-17</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            534 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            java-web-springboot
-
-自动配置
-
-java-web-springboot环境
-IDEA-2023.2.4
-jdk-17
-springboot-3.1.5
-自动配置condition条件判断功能，可以实现选择性创建Bean
-
-Bean指代任何被Spring加载生成出来的对象；前面写的一堆开头为@的东西，一类是使用Bean，从xml文件中拿配置好的Bean，一类是注册Bean，把实例化对象转化为一个Bean。 虽然但是感觉还是有点模糊
-
-主要是一些步骤，实现了判断导入Jedis坐标后创建Bean，以及利用自定义（其实jar包中有不少常用条件注解condition onxxx用于动态判断）的conditionalonclass动态实现判断（即选择判断其它指定内容），
-切换内置的web服务器4种，默认为tomcat
-org.springframework.bootspring-boot-autoconfiguret-&gt;web-&gt;embedded可以看到4个服务器和一个自动配置的类
-
-可以在自动配置的类中看到，导入相应内置服务器坐标可以切换相应服务器（利用前...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/11/17/%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%89%8B%E8%AE%B02/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
 <article id="post-开发学习随手记1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
@@ -1063,8 +800,6 @@ org.springframework.bootspring-boot-autoconfiguret-&gt;web-&gt;embedded可以看
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
-
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
@@ -1179,6 +914,235 @@ EasyRSA源码：1234567891011121314151617181920212223242526272829303132333435363
     <a class="right-panel  non-pic  "
       
       href="/2023/11/02/2023ACTF-crypto%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-DASCTF-CBCTF-crypto部分赛题复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/10/29/DASCTF-CBCTF-crypto%E9%83%A8%E5%88%86%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/">DASCTF-CBCTF-crypto部分赛题复现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-10-29T09:42:46.671Z" itemprop="datePublished">2023-10-29</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.5k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%85%E5%85%8B%E6%AF%94%E7%AC%A6%E5%8F%B7/" rel="tag">雅克比符号</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            好忙TvT，做密码和学web两难全啊。
+EzRSA
+CB backpack
+EzRSA源码：
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061from Crypto.Util.number import *import randomfrom gmpy2 import *from libnum import *from flag import flagdef padding(f):    random_chars = bytes([random.randint(0, 255) for _ in range(32)])    f = f + random_chars    return fdef guess_p(p):    e = 65537        P = p    n1 = getPrime(512)*getPrime(512)    with open('enc.txt', 'w+') as f...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/10/29/DASCTF-CBCTF-crypto%E9%83%A8%E5%88%86%E8%B5%9B%E9%A2%98%E5%A4%8D%E7%8E%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-2023WMCTF部分题目复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/09/20/2023WMCTF%E9%83%A8%E5%88%86%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/">2023WMCTF——Crypto部分题目复现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-09-20T03:08:20.904Z" itemprop="datePublished">2023-09-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hnp/" rel="tag">hnp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2/" rel="tag">深度搜索</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            总感觉先贴参考有点乱，这次我把参考的博客啥的都扔最后面。
+badprime涉及了一个漏洞 干脆单独拿出来了。
+目录
+
+signin
+
+signin&lt;/h2&gt;源码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263from Crypto.Util.number import *from random import randrangefrom secret import flag def pr(msg):    print(msg) pr(br"""                        ....''''''....                                             .`",:;;II;II;;;;:,"^'.                                      '"IlllI;;;;;;;;;;;;;Il!!l;^.  ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/09/20/2023WMCTF%E9%83%A8%E5%88%86%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-LFSR" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/09/19/LFSR/">LFSR学习</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-09-19T11:19:42.329Z" itemprop="datePublished">2023-09-19</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            ——————施工中——————
+遇到过，没有深入研究过，看到一篇博客深入分析CTF中的LFSR类题目（一）-安全客 - 安全资讯平台 (anquanke.com)，所以又来开了个新坑。
+流密码流密码一般逐字节或者逐比特处理信息。
+一般来说
+
+流密码的密钥长度会与明文的长度相同。
+流密码的密钥派生自一个较短的密钥，派生算法通常为一个伪随机数生成算法。
+
+LFSRLFSR是FSR（反馈移位寄存器）的一种，另外还有NFSR（非线性反馈移位寄存器），可以用于为流密码生成密钥流。
+原理部分：
+初始状态：
+反馈函数：
+这里看到两种，一种是ctfwiki的加法型
+，其中 均在某个有限域 中，序列为最后的输出序列。
+
+另一种是博客以及见过的题里出现的异或型。
+即求和改成求异或，取值为0,1，递推式不同，其余相同。
+一点概念：对于一个n级LFSR来讲，其最大周期为，再后面的输出序列即为前位的循环
+画外音：写了2节课的内容因为没保存丢失了，现在处于一个暴躁重写状态
+解题思路：通过输出序列和反馈函数求解初始状态，而对反馈函数的理解是解题的核心。
+以2018 CISCN 线上赛 oldstreamgam...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/09/19/LFSR/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

@@ -21,18 +21,20 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="版本： mybatis-plus 3.5.3 java 17 springboot 3.1.5 sql server 2014 目录  展商模块 成果模块 功能实现总结  展商模块主要是两个功能，一个是展商列表，一个是展商详情。 成果模块一个成果列表。 功能实现总结记录一下通用的一些基本功能的基本写法。 查找类xx详情通过id查询某一文章&#x2F;展商等的具体内容。 实体类没什么可说的，直接数据库对应过来">
+  <meta name="description" content="题外话：为了完成度，大概会东搬西凑一些自己也不懂的东西，评价是代码能跑起来就不算有问题。 版本： mybatis-plus 3.5.3 java 17 springboot 2.5.0（写的demo是2.5.0，所以从3.1.5改过来了） sql server 2014 相关代码并未出现在项目中，为根据源代码改编，故可能存在一点小错误 目录  展商模块 成果模块 活动信息展示模块 媒体中心 登录注">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务外包后端记录2-业务开发篇">
 <meta property="og:url" content="http://example.com/2024/02/22/%E6%9C%8D%E5%8A%A1%E5%A4%96%E5%8C%85%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%952/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="版本： mybatis-plus 3.5.3 java 17 springboot 3.1.5 sql server 2014 目录  展商模块 成果模块 功能实现总结  展商模块主要是两个功能，一个是展商列表，一个是展商详情。 成果模块一个成果列表。 功能实现总结记录一下通用的一些基本功能的基本写法。 查找类xx详情通过id查询某一文章&#x2F;展商等的具体内容。 实体类没什么可说的，直接数据库对应过来">
+<meta property="og:description" content="题外话：为了完成度，大概会东搬西凑一些自己也不懂的东西，评价是代码能跑起来就不算有问题。 版本： mybatis-plus 3.5.3 java 17 springboot 2.5.0（写的demo是2.5.0，所以从3.1.5改过来了） sql server 2014 相关代码并未出现在项目中，为根据源代码改编，故可能存在一点小错误 目录  展商模块 成果模块 活动信息展示模块 媒体中心 登录注">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/02/22/%E6%9C%8D%E5%8A%A1%E5%A4%96%E5%8C%85%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%952/image-20240224185845431.png">
 <meta property="article:published_time" content="2024-02-21T16:50:49.476Z">
-<meta property="article:modified_time" content="2024-02-22T11:07:27.239Z">
+<meta property="article:modified_time" content="2024-03-01T10:05:37.571Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/02/22/%E6%9C%8D%E5%8A%A1%E5%A4%96%E5%8C%85%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%952/image-20240224185845431.png">
   
     <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
   
@@ -183,12 +185,12 @@
       
         <a class="archive-link" href="/archives/2023/12 ">
           十二月 2023 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">1 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/11 ">
           十一月 2023 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/10 ">
@@ -236,9 +238,9 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2023/12/12/%E5%85%B3%E4%BA%8E%E5%88%9B%E6%96%B0%E5%AE%9E%E8%B7%B51%E5%81%9A%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%90%8E%E7%AB%AF%E5%90%8E%E5%8F%B0/" title="关于创新实践的个人博客系统后端（后台部分）" >
+          <a class="recent-link" href="/2023/11/12/%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%89%8B%E8%AE%B01/" title="开发学习随手记（一）" >
             <div class="recent-link-text">
-              关于创新实践的个人博客系统后端（后台部分）
+              开发学习随手记（一）
             </div>
           </a>
         
@@ -285,7 +287,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            157 词 
+            2.1k 词 
           </div>
         </div>
         
@@ -294,23 +296,126 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>版本：</p>
+          <p>题外话：为了完成度，大概会东搬西凑一些自己也不懂的东西，评价是代码能跑起来就不算有问题。</p>
+<p>版本：</p>
 <p>mybatis-plus 3.5.3</p>
 <p>java 17</p>
-<p>springboot 3.1.5</p>
+<p>springboot 2.5.0（写的demo是2.5.0，所以从3.1.5改过来了）</p>
 <p>sql server 2014</p>
+<p>相关代码并未出现在项目中，为根据源代码改编，故可能存在一点小错误</p>
 <p><a href="#0">目录</a></p>
 <ul>
 <li><a href="#1">展商模块</a></li>
 <li><a href="#2">成果模块</a></li>
+<li><a href="#3">活动信息展示模块</a></li>
+<li><a href="#4">媒体中心</a></li>
+<li><a href="#5">登录注册</a></li>
+<li><a href="#6">个人信息</a></li>
 <li><a href="#s">功能实现总结</a></li>
+<li><a href="#error">报错处理总结</a></li>
+<li><a href="#null">填坑系列</a></li>
 </ul>
-<h2 id="展商模块"><a href="#展商模块" class="headerlink" title="展商模块"></a><h2 id="1">展商模块</h2></h2><p>主要是两个功能，一个是展商列表，一个是展商详情。</p>
-<h2 id="成果模块"><a href="#成果模块" class="headerlink" title="成果模块"></a><h2 id="2">成果模块</h2></h2><p>一个成果列表。</p>
+<p>待完成：</p>
+<ul>
+<li>图片等内容的储存（OSS相关内容）</li>
+<li>时间格式的转换，有的需要年月日，有的需要到分钟</li>
+<li>所有列表功能如果涉及了时间，需要增加排序</li>
+</ul>
+<h2 id="展商模块"><a href="#展商模块" class="headerlink" title="展商模块"></a><h2 id="1">展商模块</h2></h2><p>完成：展商列表，展商详情。</p>
+<h2 id="成果模块"><a href="#成果模块" class="headerlink" title="成果模块"></a><h2 id="2">成果模块</h2></h2><p>完成：成果列表。</p>
+<h2 id="活动信息展示模块"><a href="#活动信息展示模块" class="headerlink" title="活动信息展示模块"></a><h2 id="3">活动信息展示模块</h2></h2><p>完成：活动分类列表</p>
+<p>待完成：活动详情。</p>
+<p>问题：应该需要去再建个活动type对应活动名字的表格，然后关联，总之最后返回的里面type不应该是数字而是对应的string。</p>
+<h2 id="媒体中心模块"><a href="#媒体中心模块" class="headerlink" title="媒体中心模块"></a><h2 id="4">媒体中心模块</h2></h2><p>完成：分类列表，详情</p>
+<p>问题：应该需要去再建个活动type对应名字的表格，然后关联，总之最后返回的里面type不应该是数字而是对应的string。</p>
+<p>问题：需不需要分多个表，分开存储视频、图片、文章，目前的想法是content里面存储不同即可。</p>
+<h2 id="登录注册模块"><a href="#登录注册模块" class="headerlink" title="登录注册模块"></a><h2 id="5">登录注册模块</h2></h2><h3 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h3><blockquote>
+<p>1、介绍<br>Spring Security是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架。</p>
+<p>如果项目中需要进行权限管理，具有多个角色和多种权限，我们可以使用Spring Security。</p>
+<p>采用的是责任链的设计模式，是一堆过滤器链的组合，它有一条很长的过滤器链。</p>
+<p>2、功能<br>Authentication (认证)，就是用户登录<br>Authorization (授权)，判断用户拥有什么权限，可以访问什么资源<br>安全防护，跨站脚本攻击，session攻击等</p>
+</blockquote>
+<p>导入依赖后，security已经自动生效，写个测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.crumbling.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/test&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityTestController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;one test&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问一下：</p>
+<p><img src="/2024/02/22/%E6%9C%8D%E5%8A%A1%E5%A4%96%E5%8C%85%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%952/image-20240224185845431.png" alt="image-20240224185845431"></p>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><p>用户登录认证：</p>
+<blockquote>
+<p>Spring Security 6.x 的认证实现流程如下：</p>
+<ol>
+<li><p>用户提交登录请求</p>
+</li>
+<li><p>Spring Security 将请求交给 UsernamePasswordAuthenticationFilter 过滤器处理。</p>
+</li>
+<li>UsernamePasswordAuthenticationFilter 获取请求中的用户名和密码，并生成一个 AuthenticationToken 对象，将其交给 AuthenticationManager 进行认证。</li>
+<li>AuthenticationManager 通过 UserDetailsService 获取用户信息，然后使用 PasswordEncoder 对用户密码进行校验。</li>
+<li>如果密码正确，AuthenticationManager 会生成一个认证通过的 Authentication 对象，并返回给 UsernamePasswordAuthenticationFilter 过滤器。如果密码不正确，则 AuthenticationManager 抛出一个 AuthenticationException 异常。</li>
+<li>UsernamePasswordAuthenticationFilter 将 Authentication 对象交给 SecurityContextHolder 进行管理，并调用 AuthenticationSuccessHandler 处理认证成功的情况。</li>
+<li>如果认证失败，UsernamePasswordAuthenticationFilter 会调用 AuthenticationFailureHandler 处理认证失败的情况。</li>
+</ol>
+</blockquote>
+<p>————————————————————分割线——————————————————————————</p>
+<h3 id="实战部分"><a href="#实战部分" class="headerlink" title="实战部分"></a>实战部分</h3><p>参考之前三更草堂博客先写一个不涉及第三方软件的先。</p>
+<p>403错误，暂未解决。</p>
+<p>解决了，大概是保留字的问题，表名User有问题,改了个Users。</p>
+<h3 id="统一异常处理"><a href="#统一异常处理" class="headerlink" title="统一异常处理"></a>统一异常处理</h3><h2 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a><h2 id="6">个人信息</h2></h2><p>一个查询，一个更新，更新需要在impl获取一下当前id，不然updateById没用（应该是这样）</p>
 <h2 id="功能实现总结"><a href="#功能实现总结" class="headerlink" title="功能实现总结"></a><h2 id="s">功能实现总结</h2></h2><p>记录一下通用的一些基本功能的基本写法。</p>
-<h3 id="查找类"><a href="#查找类" class="headerlink" title="查找类"></a>查找类</h3><h4 id="xx详情"><a href="#xx详情" class="headerlink" title="xx详情"></a>xx详情</h4><p>通过id查询某一文章/展商等的具体内容。</p>
+<h3 id="查找类"><a href="#查找类" class="headerlink" title="查找类"></a>查找类</h3><h4 id="User详情查询"><a href="#User详情查询" class="headerlink" title="User详情查询"></a>User详情查询</h4><p>通过id查询某一文章/展商等的具体内容。</p>
 <h5 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h5><p>没什么可说的，直接数据库对应过来就行，无非是加几个注解</p>
-<p>lombok的<code>@Data @AllArgsConstructor @NoArgsConstructor</code>，mybatisplus的</p>
+<p>lombok的<code>@Data @AllArgsConstructor @NoArgsConstructor</code></p>
+<p>mybatisplus的<code>@TableName @TableId</code></p>
+<h5 id="Vo类"><a href="#Vo类" class="headerlink" title="Vo类"></a>Vo类</h5><p>不需要mybatisplus相关注解，因为主要是作为一个中间体，方便修改和限制响应体内容等</p>
+<h5 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h5><p><code>@RestController</code>注解，表示该类方法将返回json格式的相应</p>
+<p><code>@RequestMapping</code>注解，指定控制器处理的请求路径前缀</p>
+<p><code>@Autowired</code>注解，注入service对象，使控制器可以使用里面的方法</p>
+<p><code>@GetMapping</code>注解，指定处理GET方法，并指定路径</p>
+<p><code>@PathVariable(&quot;id&quot;)</code>注解，指示Spring将从请求的URL路径中提取名为”id”的变量，并将其值传递给方法的参数id</p>
+<p>具体如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/User&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseResult&lt;User&gt; <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userService.getUserById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>ResponseResult&lt;User&gt;</code> 表示 <code>ResponseResult</code> 类的实例中封装了一个或多个 <code>User</code> 对象，其实可以直接返回ResponseResult，但是通过指定泛型类型，可以确保返回的数据是正确的类型，减少了类型转换的可能性。</p>
+</blockquote>
+<h5 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h5><p>持久层接口，继承指定泛型类型的接口即可，mybatis-plus中是<code>BaseMapper&lt;T&gt;</code>,用于定义基本的数据库操作方法，如插入、更新、删除和查询等。一般由mybatis-plus自动生成。</p>
+<p>无需自定义sql。</p>
+<h5 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h5><p>服务层接口，在mybatis-plus中继承的是服务接口<code>IService&lt;T&gt;</code>，接口提供了对实体对象的常见 CRUD（增删改查）操作，包括插入、更新、删除、查询等。</p>
+<p>然后声明方法。</p>
+<p>这边提前写好了ResponseResult类，方法直接返回ResponseResult类即可。</p>
+<p>如下：<code>ResponseResult getUserById(Long id);</code></p>
+<h5 id="ServiceImpl"><a href="#ServiceImpl" class="headerlink" title="ServiceImpl"></a>ServiceImpl</h5><p><code>@Service</code> 注解，标记该类是一个服务类，交由 Spring 管理。</p>
+<p><code>ServiceImpl</code> 是 MyBatis-Plus 框架提供的一个基础服务实现类，它已经实现了常用的数据库操作方法，例如插入、更新、删除、查询等。</p>
+<p>需要实现对应的Service接口，和继承 <code>ServiceImpl&lt;M,T&gt;</code> .</p>
+<blockquote>
+<p>解读：通过将 <code>UserMapper</code> 和 <code>User</code> 作为泛型参数传递给 <code>ServiceImpl</code> 类，<code>UserServiceImpl</code> 类就继承了 <code>ServiceImpl</code> 类的功能，并且指定了 <code>UserMapper</code> 类来操作 <code>User</code> 实体对象。</p>
+</blockquote>
+<p>具体方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">getUserById</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span>getById(id);</span><br><span class="line">    <span class="type">UserDetailVo</span> <span class="variable">userDetailVo</span> <span class="operator">=</span> BeanCopyUtils.copyBean(user,UserDetailVo.class);</span><br><span class="line">    <span class="keyword">return</span> ResponseResult.okResult(userDetailVo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重写接口中的方法，利用自带的方法，通过传入的id获得user数据，然后进行vo封装，最后封装为响应体。</p>
+<h4 id="User列表查询"><a href="#User列表查询" class="headerlink" title="User列表查询"></a>User列表查询</h4><p>重复部分不再赘述，以分页</p>
+<h5 id="Controller-1"><a href="#Controller-1" class="headerlink" title="Controller"></a>Controller</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/list&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">UserList</span><span class="params">(Long PageNum,Long PageSize,Long type)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> UserService.UserList(type);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>和详情查询没有太大区别，主要关注可选参数<code>pageNum，PageSize，type</code></p>
+<p><code>pageNum，PageSize</code>用于分页，表示当前页码和每页数据条数，这里也可以写个Constans类将具体的数值固定下来直接调用。</p>
+<p><code>type</code>用于分类</p>
+<h5 id="ServiceImpl-1"><a href="#ServiceImpl-1" class="headerlink" title="ServiceImpl"></a>ServiceImpl</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">UserList</span><span class="params">(Long PageNum,Long PageSize,Long type)</span> &#123;</span><br><span class="line">    LambdaQueryWrapper&lt;User&gt; wrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">    wrapper.eq(Objects.nonNull(type)&amp;&amp;type&gt;<span class="number">0</span>,User::getType,type);</span><br><span class="line">    Page&lt;User&gt; page = <span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;(pageNum,PageSize);</span><br><span class="line">    page(page,wrapper);</span><br><span class="line">    List&lt;User&gt; users = page.getRecords();</span><br><span class="line">    List&lt;UserListVo&gt; userListVos = BeanCopyUtils.copyBeanList(users, UserListVo.class);</span><br><span class="line">    <span class="keyword">return</span> ResponseResult.okResult(userListVos);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>步骤解读：</p>
+<ol>
+<li>因为没有相关集成（应该吧），所以这里要新建一个LambdaQueryWrapper对象，用于构建查询条件</li>
+<li>判断是否传入了type参数（这里设计时默认未传入时表示全部输出），如果有，则添加查询条件</li>
+<li>创建Page对象，表示分页查询的信息</li>
+<li>调用page方法，执行分页查询，得到符合条件的分页结果</li>
+<li>getRecords方法，获得列表</li>
+<li>封装</li>
+</ol>
+<h2 id="报错处理总结"><a href="#报错处理总结" class="headerlink" title="报错处理总结"></a><h2 id="error">报错处理总结</h2></h2><h3 id="Timestamp-format-must-be-yyyy-mm-dd-hh-mm-ss-fffffffff"><a href="#Timestamp-format-must-be-yyyy-mm-dd-hh-mm-ss-fffffffff" class="headerlink" title="Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]"></a>Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]</h3><p>格式问题（其实是类型问题，有个时间的类型设为varchar了，改个datetime就好）</p>
+<h3 id="save无法存null进id的错误"><a href="#save无法存null进id的错误" class="headerlink" title="save无法存null进id的错误"></a>save无法存null进id的错误</h3><p>简单来说就是主键自增没设置好</p>
+<p>表示类设置自增</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableId(type = IdType.AUTO)</span></span><br></pre></td></tr></table></figure>
+<p>sqlserver设置主键自增</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> fwwb_schema.Event <span class="keyword">add</span> id <span class="type">int</span> <span class="keyword">identity</span>(<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="填坑系列"><a href="#填坑系列" class="headerlink" title="填坑系列"></a><h2 id="null">填坑系列</h2></h2><p>经验不足，不少内容参考了开源项目，这里有一些想做完后自己重新实现的内容。（之后大概会放在记录3或4里）</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hq4y1F7zk/?spm_id_from=333.337.search-card.all.click">B站最通俗易懂手把手SpringBoot+Vue项目实战-前后端分离博客项目-Java项目_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/2301_78646673/article/details/134801772">springboot3整合SpringSecurity实现登录校验与权限认证（万字超详细讲解）_java springboot springsecurity 登录和鉴权-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1277849">SpringBoot3整合SpringSecurity，实现自定义接口权限过滤（一）-阿里云开发者社区 (aliyun.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://springboot.io/t/topic/4696">Spring Security与JWT实现权限管控以及登录认证指南 - 优质转载 - Spring Boot中文社区</a></p>
 
         
       </div>
