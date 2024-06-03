@@ -469,7 +469,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            36 词 
+            42 词 
           </div>
         </div>
         
@@ -481,7 +481,7 @@ Clannad——我的入坑之作
           <div class="truncate-text">
             主要记录对phith0n的Java 基础 · 攻击Java Web应用-[Java Web安全] (javasec.org)的阅读
 Java基础
-Java基础  
+Java基础ClassLoader（类加载机制）  
           </div>
         
       </div>
@@ -553,6 +553,7 @@ Cross-site scripting
 CSRF
 Clickjacking
 CORS
+SSRF
 参考
 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞
 根据描述找到注入点，和目标——以administrator登录
@@ -561,7 +562,7 @@ PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允�
 猜测可能得检验语句为：
 SELECT * FROM users WHERE username = &#39;aaa&#39; AND password = &#39;bbb&#39;
 尝试通过注释将密码的筛选过滤掉，这样就能在不知道密码的情况下通过检验
-SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND passwor...  
+SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...  
           </div>
         
       </div>
@@ -617,7 +618,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND passwor...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.3k 词 
+            6.2k 词 
           </div>
         </div>
         
@@ -629,17 +630,28 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND passwor...
           <div class="truncate-text">
             学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。
 总之沉淀一下吧，可能会两边都一起准备。
-计算机网络与协议部分
+目录
+
 OWASP
 SQL注入
+
 XSS
+
 SSRF
+
 PHP
+
 Clickjacking
+
 CORS
+HTTP
+Python
+Js
+Linux
+Git
 Other
 参考
-计算机网络与协议部分大概算是复习，不是重点，到Http协议，先看后面
+
 OWASPOWASP Top10 阅读首頁 - OWASP Top 10:2021
 SQL注入属于A03:2021-注入式攻击
 SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数据库的查询结果
@@ -650,7 +662,7 @@ SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数�
 主要是通过if(expression,if_true,if_false)+正则匹配+枚举爆破的方式来找出数据
 
 if(DATABASE() rlike ‘^{exp}’,1,0) # 获取数据库名
-if((SELECT GROUP_CONCAT(table_...  
+if((SELECT GROUP_CONCAT(table_name, ‘:’, ...  
           </div>
         
       </div>

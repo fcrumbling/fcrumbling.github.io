@@ -21,12 +21,12 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="Portswigger记录 SQL injection Cross-site scripting CSRF Clickjacking CORS 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrator登录 接">
+  <meta name="description" content="Portswigger记录 SQL injection Cross-site scripting CSRF Clickjacking CORS SSRF 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrato">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PortSwigger靶场记录">
 <meta property="og:url" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="Portswigger记录 SQL injection Cross-site scripting CSRF Clickjacking CORS 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrator登录 接">
+<meta property="og:description" content="Portswigger记录 SQL injection Cross-site scripting CSRF Clickjacking CORS SSRF 参考 PortSwiggerSQL injection1.SQL injection vulnerability allowing login bypass允许绕过登录的 SQL 注入漏洞 根据描述找到注入点，和目标——以administrato">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240527141834598.png">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240527144458137.png">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529183418131.png">
 <meta property="og:image" content="http://example.com/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/image-20240529183434006.png">
 <meta property="article:published_time" content="2024-05-27T09:49:53.132Z">
-<meta property="article:modified_time" content="2024-05-29T11:05:16.298Z">
+<meta property="article:modified_time" content="2024-06-01T08:24:47.072Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -316,6 +316,7 @@
 <p><a href="#csrf">CSRF</a></p>
 <p><a href="#clickjacking">Clickjacking</a></p>
 <p><a href="#cors">CORS</a></p>
+<p><a href="#ssrf">SSRF</a></p>
 <p><a href="#0">参考</a></p>
 <h1 id="PortSwigger"><a href="#PortSwigger" class="headerlink" title="PortSwigger"></a>PortSwigger</h1><h2 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a><h2 id="sqli">SQL injection</h2></h2><h3 id="1-SQL-injection-vulnerability-allowing-login-bypass"><a href="#1-SQL-injection-vulnerability-allowing-login-bypass" class="headerlink" title="1.SQL injection vulnerability allowing login bypass"></a>1.SQL injection vulnerability allowing login bypass</h3><p>允许绕过登录的 <a target="_blank" rel="noopener" href="https://portswigger.net/web-security/sql-injection">SQL 注入</a>漏洞</p>
 <p>根据描述找到注入点，和目标——以administrator登录</p>
@@ -466,7 +467,7 @@
 <h3 id="2-CORS-vulnerability-with-trusted-null-origin"><a href="#2-CORS-vulnerability-with-trusted-null-origin" class="headerlink" title="2.CORS vulnerability with trusted null origin"></a>2.CORS vulnerability with trusted null origin</h3><p>信任源为null导致的漏洞</p>
 <p>利用iframe</p>
 <p>（感觉有点瓶颈了</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a><h1 id="0">参考</h1></h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yii-ling">跛一一 - 博客园 (cnblogs.com)</a></p>
+<h2 id="Server-side-request-forgery"><a href="#Server-side-request-forgery" class="headerlink" title="Server-side request forgery"></a><h1 id="ssrf">Server-side request forgery</h1></h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a><h1 id="0">参考</h1></h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yii-ling">跛一一 - 博客园 (cnblogs.com)</a></p>
 
         
       </div>
