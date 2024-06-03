@@ -29,11 +29,11 @@
 <meta property="og:description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQL注入  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python Js Linux Git Other 参考">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ct_htmltree.gif">
-<meta property="og:image" content="http://example.com/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240529152554853.png">
-<meta property="og:image" content="http://example.com/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240530000803306.png">
-<meta property="og:image" content="http://example.com/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/relatation.png">
+<meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240529152554853.png">
+<meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240530000803306.png">
+<meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/relatation.png">
 <meta property="article:published_time" content="2024-05-24T06:54:40.652Z">
-<meta property="article:modified_time" content="2024-06-03T14:06:56.415Z">
+<meta property="article:modified_time" content="2024-06-03T15:56:42.244Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -407,7 +407,7 @@
 <p><code>&lt;img src=http://www.bank.com/Transfer.php?toName=Hacker&amp;money=100000&gt;</code></p>
 <p>一般来说都是受害者登录受信任站点A，并在本地生成Cookie（放在浏览器中）。在不登出A的情况下，访问危急站点B。</p>
 <p>那么，账户里就会少100000块钱。</p>
-<p>常使用HTML中<image>、<iframe>、<script>等带“src”属性的标签</p>
+<p>常使用HTML中<code>&lt;image&gt;、&lt;iframe&gt;、&lt;script&gt;</code>等带“src”属性的标签</p>
 <h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h3><p>如果不对请求方法进行限制，那么依然可以通过构造GET请求完成CSRF,但如果已经区分，那么最简单的方法就是提前构造好一个表单，利用js自动提交表单</p>
 <p>攻击者的这个页面可以隐藏在一个不可见的iframe窗口中，让用户发现不了</p>
 <h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><h4 id="1-检测"><a href="#1-检测" class="headerlink" title="1.检测"></a>1.检测</h4><p>验证请求的来源地址。可以通过检查请求头部中的Referer字段来判断请求的来源，如果请求的来源地址与目标地址不一致，则可能存在CSRF攻击。</p>
@@ -417,7 +417,7 @@
 <li><strong>二次验证。</strong>在关键操作之前，要求用户提供当前密码或验证码进行验证。这种方法虽然会对用户体验产生影响，但对于高敏感度的操作来说，却是非常有效的防护手段。</li>
 <li><strong>配置HTTP头部信息。</strong>例如，设置合适的Content-Security-Policy头部可以限制浏览器加载资源的来源，从而降低CSRF攻击的风险。</li>
 </ul>
-<h1 id="Clickjacking"><a href="#Clickjacking" class="headerlink" title="Clickjacking"></a><h1 id ="clickjacking">Clickjacking</h1></h1><p>点击劫持</p>
+<h1 id="Clickjacking"><a href="#Clickjacking" class="headerlink" title="Clickjacking"></a><h1 id="clickjacking">Clickjacking</h1></h1><p>点击劫持</p>
 <p>属于<strong>A06:2021 - Vulnerable and Outdated Components</strong>（<strong>危险或过旧的组件</strong>）下的一种威胁，与UI相关的安全问题密切相关</p>
 <h2 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h2><p>攻击者通过使用一个透明的iframe，覆盖在一个网页上，然后诱使用户在该页面上进行操作，通过调整iframe页面的位置，可以使得伪造的页面恰好和iframe里受害页面里一些功能重合（比如说按钮、超链接）。</p>
 <p>Clickjacking是仅此于XSS和CSRF的前端漏洞。</p>
@@ -444,7 +444,7 @@
 <h2 id="啥是CORS"><a href="#啥是CORS" class="headerlink" title="啥是CORS"></a>啥是CORS</h2><p>个人理解，出于安全浏览器根据同源安全策略（SOP）限制跨域HTTP请求，但也带来了不便，在此情况下CORS可以绕过SOP使得跨源/跨域访问可以成功</p>
 <p><strong>关于同源安全策略</strong></p>
 <blockquote>
-<p><img src="/Web安全学习笔记/image-20240529152554853.png" alt="image-20240529152554853"></p>
+<p><img src="/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240529152554853.png" alt="image-20240529152554853"></p>
 </blockquote>
 <p><strong>两种请求</strong></p>
 <p>浏览器将CORS请求分为简单请求和非简单请求。</p>
@@ -500,14 +500,14 @@
 <h2 id="XFF"><a href="#XFF" class="headerlink" title="XFF"></a>XFF</h2><p>X-Forwarded-For（XFF）客户端的IP地址</p>
 <h2 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h2><p>告诉服务器是从哪个页面链接过来的</p>
 <h2 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h2><p>文件上传漏洞中可能遇到类型不对的情况，比如.user.ini后门文件不是jpg可能会被服务端拒绝上传，可能就是检测了此字段，修改即可</p>
-<p><img src="/Web安全学习笔记/image-20240530000803306.png" alt="image-20240530000803306"></p>
+<p><img src="/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240530000803306.png" alt="image-20240530000803306"></p>
 <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a><h1 id="python">Python</h1></h1><h2 id="Python模板注入（SSTI）"><a href="#Python模板注入（SSTI）" class="headerlink" title="Python模板注入（SSTI）"></a>Python模板注入（SSTI）</h2><h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><p>Flask是python的一个轻量级Web应用开发框架，适合开发中小应用</p>
 <p>Python模板注入简单来说就是python的xss（也许比较狭义）</p>
 <h4 id="检测是否存在SSTI"><a href="#检测是否存在SSTI" class="headerlink" title="检测是否存在SSTI"></a>检测是否存在SSTI</h4><blockquote>
 <p>在Jinja2模板引擎中，<code>&#123;&#123;&#125;&#125;</code>是变量包裹标识符。<code>&#123;&#123;&#125;&#125;</code>并不仅仅可以传递变量，还可以执行一些简单的表达式。</p>
 </blockquote>
 <p>那么，传个<code>&#123;&#123;1+1&#125;&#125;</code>如果会返回2，那就表明存在漏洞</p>
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p><del>通过查看flask中的全局变量，找到父类<type ‘object’>–&gt;寻找子类–&gt;找关于命令执行或者文件操作的模块。（没看懂）</del></p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p><del>通过查看flask中的全局变量，找到父类<type ‘object’>–&gt;寻找子类–&gt;找关于命令执行或者文件操作的模块。（没看懂）</type></del></p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/column/187845.html">从零学习flask模板注入 - FreeBuf网络安全行业门户</a></p>
 <p>总之可以用这个来查看全部模块<code>/&#123;&#123;[].__class__.__base__.__subclasses__()&#125;&#125;</code>，然后找到<code>warnings.catch_warnings</code>模块，在里面找到<code>linecache</code>函数，这其中包含os，然后就用<code>import os</code>去xss注入一手了</p>
 <p>或者是用<code>&lt;class ‘site._Printer’&gt;</code>进行命令执行<code>&#123;&#123;''.__class__.__mro__[2].__subclasses__()[71].__init__.__globals__['os'].listdir('.')&#125;&#125;</code>可以查看有哪些文件</p>
@@ -532,7 +532,7 @@
 <li>一个对象的<code>__proto__</code>属性，指向这个对象所在的类的prototype属性</li>
 </ul>
 <p>借图</p>
-<p><img src="/Web安全学习笔记/relatation.png" alt="img"></p>
+<p><img src="/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/relatation.png" alt="img"></p>
 <h3 id="原型链污染原理"><a href="#原型链污染原理" class="headerlink" title="原型链污染原理"></a>原型链污染原理</h3><p>实例化的对象的 <code>.__proto__</code> 指向类的 <code>prototype</code></p>
 <p>修改实例化的对象的 <code>.__proto__</code> 的内容, 类的 <code>prototype</code> 的内容会随之发生变化</p>
 <p>这就是原型链污染的原理与利用方法。</p>
@@ -545,7 +545,7 @@
 <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a><h1 id="git">Git</h1></h1><h2 id="git源码泄露"><a href="#git源码泄露" class="headerlink" title=".git源码泄露"></a>.git源码泄露</h2><h3 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h3><p>/.git进去看看就知道了</p>
 <h3 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h3><p>利用githack可以将整个.git的备份获取</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/lijiejie/GitHack">lijiejie/GitHack: A <code>.git</code> folder disclosure exploit (github.com)</a></p>
-<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a><h1 id='other'>Other</h1></h1><h2 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h2><blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a><h1 id="other">Other</h1></h1><h2 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h2><blockquote>
 <p>robots.txt是一种文本文件，<strong>用于告知搜索引擎爬虫哪些页面可以被抓取、哪些页面不应被抓取</strong>。通常，网站管理员会在网站的根目录下放置一个名为robots.txt的文件，并使用该文件指定他们希望搜索引擎索引和不索引的页面。</p>
 </blockquote>
 <p>通过此文件，有时候可以观察到目录结构，进而发现flag的位置</p>
@@ -564,7 +564,7 @@
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1516375">点击劫持（ClickJacking）漏洞挖掘及实战案例全汇总-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">浏览器的同源策略 - Web 安全 | MDN (mozilla.org)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/javascript-prototype-pollution-attack.html">深入理解 JavaScript Prototype 污染攻击 | 离别歌 (leavesongs.com)</a></p>
-</script></iframe></image></p>
+
         
       </div>
 
