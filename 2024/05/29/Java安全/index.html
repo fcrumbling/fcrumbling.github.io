@@ -21,15 +21,15 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="主要记录对phith0n的Java 基础 · 攻击Java Web应用-[Java Web安全] (javasec.org)的阅读 Java基础 Java基础ClassLoader（类加载机制）">
+  <meta name="description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java安全">
 <meta property="og:url" content="http://example.com/2024/05/29/Java%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="主要记录对phith0n的Java 基础 · 攻击Java Web应用-[Java Web安全] (javasec.org)的阅读 Java基础 Java基础ClassLoader（类加载机制）">
+<meta property="og:description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-29T11:31:11.485Z">
-<meta property="article:modified_time" content="2024-06-01T09:33:09.706Z">
+<meta property="article:modified_time" content="2024-06-05T15:11:19.525Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -280,7 +280,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            42 词 
+            348 词 
           </div>
         </div>
         
@@ -289,9 +289,25 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>主要记录对phith0n的<a target="_blank" rel="noopener" href="https://javasec.org/javase/">Java 基础 · 攻击Java Web应用-[Java Web安全] (javasec.org)</a>的阅读</p>
-<p><a href="#java基础">Java基础</a></p>
-<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a><h1 id="java基础">Java基础</h1></h1><h2 id="ClassLoader（类加载机制）"><a href="#ClassLoader（类加载机制）" class="headerlink" title="ClassLoader（类加载机制）"></a>ClassLoader（类加载机制）</h2>
+          <p>看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全</p>
+<p>[Java Web安全] (javasec.org)](<a target="_blank" rel="noopener" href="https://www.javasec.org/">https://www.javasec.org/</a>)</p>
+<p>感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题</p>
+<p><a href="#">目录</a></p>
+<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="ClassLoader（类加载机制）"><a href="#ClassLoader（类加载机制）" class="headerlink" title="ClassLoader（类加载机制）"></a>ClassLoader（类加载机制）</h2><p>Java类都需要经过JVM加载才能运行，ClassLoader的主要作用就是Java类文件的加载</p>
+<blockquote>
+<p><code>ClassLoader</code>类有如下核心方法：</p>
+<ol>
+<li><code>loadClass</code>（加载指定的Java类）</li>
+<li><code>findClass</code>（查找指定的Java类）</li>
+<li><code>findLoadedClass</code>（查找JVM已经加载过的类）</li>
+<li><code>defineClass</code>（定义一个Java类）</li>
+<li><code>resolveClass</code>（链接指定的Java类）</li>
+</ol>
+</blockquote>
+<h3 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h3><p><code>URLClassLoader</code>继承了<code>ClassLoader</code>，且提供了加载远程资源的能力，在写漏洞利用的<code>payload</code>或者<code>webshell</code>的时候可以加载远程的jar来实现远程的类方法调用</p>
+<p>加个应用实例（要是下次见到了）</p>
+<h3 id="涉及漏洞"><a href="#涉及漏洞" class="headerlink" title="涉及漏洞"></a>涉及漏洞</h3><h4 id="jsp自定义类加载后门"><a href="#jsp自定义类加载后门" class="headerlink" title="jsp自定义类加载后门"></a>jsp自定义类加载后门</h4><h4 id="BCEL-ClassLoader"><a href="#BCEL-ClassLoader" class="headerlink" title="BCEL ClassLoader"></a>BCEL ClassLoader</h4><p>BCEL是一个用于分析、创建和操纵Java类文件的工具库，其类加载器在解析类名时会对ClassName中有$$$BCEL$$$标识的类做特殊处理，这一特性可以被用于Payload编写。影响于BCEL&lt;6.0</p>
+<h4 id="BCEL-FastJson攻击链分析"><a href="#BCEL-FastJson攻击链分析" class="headerlink" title="BCEL FastJson攻击链分析"></a>BCEL FastJson攻击链分析</h4><h4 id="Xalan"><a href="#Xalan" class="headerlink" title="Xalan"></a>Xalan</h4><h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1>
         
       </div>
 

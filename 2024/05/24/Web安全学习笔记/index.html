@@ -21,19 +21,18 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQL注入  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python Js Linux Git Other 参考">
+  <meta name="description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python JavaScript Linux Git 安">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web安全学习笔记">
 <meta property="og:url" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQL注入  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python Js Linux Git Other 参考">
+<meta property="og:description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python JavaScript Linux Git 安">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ct_htmltree.gif">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240529152554853.png">
-<meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240530000803306.png">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/relatation.png">
 <meta property="article:published_time" content="2024-05-24T06:54:40.652Z">
-<meta property="article:modified_time" content="2024-06-03T15:59:32.148Z">
+<meta property="article:modified_time" content="2024-06-06T11:06:52.667Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -285,7 +284,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.2k 词 
+            7.4k 词 
           </div>
         </div>
         
@@ -299,7 +298,7 @@
 <p><strong>目录</strong></p>
 <ul>
 <li><a href="#2">OWASP</a></li>
-<li><p><a href="#sql">SQL注入</a></p>
+<li><p><a href="#sql">SQLi</a></p>
 </li>
 <li><p><a href="#xss">XSS</a></p>
 </li>
@@ -312,14 +311,15 @@
 <li><a href="#cors">CORS</a></li>
 <li><a href="#http">HTTP</a></li>
 <li><a href="#python">Python</a></li>
-<li><a href="#js">Js</a></li>
+<li><a href="#js">JavaScript</a></li>
 <li><a href="#linux">Linux</a></li>
 <li><a href="#git">Git</a></li>
+<li><a href="#aqsb">安全设备</a></li>
 <li><a href="#Other">Other</a></li>
 <li><a href="#">参考</a></li>
 </ul>
 <h1 id="OWASP"><a href="#OWASP" class="headerlink" title="OWASP"></a><h1 id="2">OWASP</h1></h1><p>OWASP Top10 阅读<a target="_blank" rel="noopener" href="https://owasp.org/Top10/zh_CN/">首頁 - OWASP Top 10:2021</a></p>
-<h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a><h1 id="sql">SQL注入</h1></h1><p>属于<strong>A03:2021-注入式攻击</strong></p>
+<h1 id="SQLi"><a href="#SQLi" class="headerlink" title="SQLi"></a><h1 id="sql">SQLi</h1></h1><p>属于<strong>A03:2021-注入式攻击</strong></p>
 <h2 id="SQL注入方法"><a href="#SQL注入方法" class="headerlink" title="SQL注入方法"></a>SQL注入方法</h2><h3 id="有回显的SQL注入"><a href="#有回显的SQL注入" class="headerlink" title="有回显的SQL注入"></a>有回显的SQL注入</h3><p>可以在应用程序的输出中看到数据库的查询结果</p>
 <blockquote>
 <p>通过sql注入，利用mysql自带得到库去获得敏感信息，然后获得更多的数据</p>
@@ -344,7 +344,7 @@
 <h3 id="字符串表名"><a href="#字符串表名" class="headerlink" title="字符串表名"></a>字符串表名</h3><p>加个反引号</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;;show columns from `1919810931114514`;#</span></span><br></pre></td></tr></table></figure>
 <h3 id="突出union内容"><a href="#突出union内容" class="headerlink" title="突出union内容"></a>突出union内容</h3><p>and 1=2让原本的内容查不出来</p>
-<h3 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h3><p>在确定哪些列被返回的基础上，可以将返回显示的改为特定方法，以返回一些数据</p>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>在确定哪些列被返回的基础上，可以将返回显示的改为特定方法，以返回一些数据</p>
 <p><code>datebase()</code>返回数据库名</p>
 <p><code>&#39; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#39;news&#39;;&#39;</code>      返回数据库下的数据表名</p>
 <p><code>1&#39; union select 1, group_concat(column_name), 3 from information_schema.columns where table_name=&quot;secret_table&quot; ;&#39;</code>返回数据库的字段名</p>
@@ -352,6 +352,8 @@
 <p><code>1,group_concat(no,username,passwd,data),3,4 fromusers</code>查询字段值</p>
 <h3 id="SQL-注入常见的过滤绕过方式"><a href="#SQL-注入常见的过滤绕过方式" class="headerlink" title="SQL 注入常见的过滤绕过方式"></a>SQL 注入常见的过滤绕过方式</h3><p>很显然过滤是为了防止sql注入，那也就意味着只要通过合适的方法绕过过滤，就可以正常进行注入了。</p>
 <h4 id="select等关键字被过滤"><a href="#select等关键字被过滤" class="headerlink" title="select等关键字被过滤"></a>select等关键字被过滤</h4><p><code>1&#39;; show datebase();#</code> 可能只过滤了那一段sql，堆叠注入可能就不被过滤了</p>
+<h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>比如说<code>select</code>被过滤为空，可以用<code>selecselectt</code>替代</p>
+<p>如：<code>filename=&quot;a&#39;+(CONV(substr(hex((selselectect i_am_flag frfromom hello_flag_is_here)),1,12),16,10))+&#39;.jpg</code></p>
 <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a><h1 id="xss">XSS</h1></h1><p>跨站脚本（Cross-site scripting）</p>
 <p>属于<strong>A03:2021-注入式攻击</strong></p>
 <blockquote>
@@ -388,9 +390,47 @@
 </ul>
 <h3 id="通用型XSS"><a href="#通用型XSS" class="headerlink" title="通用型XSS"></a>通用型XSS</h3><h3 id="突变型XSS"><a href="#突变型XSS" class="headerlink" title="突变型XSS"></a>突变型XSS</h3><h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a><h1 id="ssrf">SSRF</h1></h1><h2 id="什么是SSRF"><a href="#什么是SSRF" class="headerlink" title="什么是SSRF"></a>什么是SSRF</h2><blockquote>
 <p>SSRF(服务器端请求伪造)是种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下SSRF攻击的目标是从外网无法访问的内部系统，比如说无法直接从外网访问的flag.php文件，访问内网的MySQL数据库等</p>
+<p>成因大都是服务端提供了从其他服务器应用获取数据的功能，并且没有对目标地址进行过滤限制，如从指定url获取网页文本内容，加载指定地址的图片，下载等</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/miruier/p/13907150.html">SSRF漏洞（原理、挖掘点、漏洞利用、修复建议） - Saint_Michael - 博客园 (cnblogs.com)</a></p>
-<h2 id="常见协议"><a href="#常见协议" class="headerlink" title="常见协议"></a>常见协议</h2><h3 id="gopher"><a href="#gopher" class="headerlink" title="gopher"></a>gopher</h3><h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><h1 id="csrf">CSRF</h1></h1><p>跨站请求伪造，是OWASP（Open Web Application Security Project）2021年<strong>A01：失效的[访问控制]</strong>中常见的CWE之一</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>（为可能出现的场景，因为如果做好了过滤和限制，也是不会出现的）</p>
+<ul>
+<li>分享功能（获取超链接url的标题等并展示）</li>
+<li>在线翻译（给url翻译对应网页的内容）</li>
+<li>从远程服务器请求资源</li>
+</ul>
+<h2 id="判断是否存在ssrf"><a href="#判断是否存在ssrf" class="headerlink" title="判断是否存在ssrf"></a>判断是否存在ssrf</h2><ul>
+<li><p>查看是否是在本地进行了资源地址类型为 <code>http://www.xxx.com/a.php?image=URL</code>等URL参数为其他服务器地址的请求，就可能存在SSRF漏洞</p>
+<blockquote>
+<p>可以通过<code>127.0.0.1</code>或通过伪协议进行内网资源的访问</p>
+</blockquote>
+</li>
+<li><p>自动化工具进行测试</p>
+</li>
+<li><p>其他</p>
+</li>
+</ul>
+<h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><ol>
+<li>利用ssrf对内网进行端口扫描或目录扫描（比如说访问<code>127.0.0.1:target</code>）target为爆破参数，这点完全可以通过burpsuite实现</li>
+<li>利用ssrf进行sql注入，思路是一样的，注入点在url参数的位置，需要注意将空格进行两次url编码</li>
+<li>利用gopher协议发送get/post请求<code>gopher://&lt;host&gt;:&lt;port&gt;/&lt;gopher-path&gt;_&lt;TCP数据流&gt;</code>，或攻击内网应用如Redis</li>
+<li>file协议读取本地文件</li>
+</ol>
+<h2 id="防御-绕过"><a href="#防御-绕过" class="headerlink" title="防御/绕过"></a>防御/绕过</h2><ul>
+<li><strong>限制IP</strong>，可以考虑进制转换改写成其他进制、进制混用，或者合并后2-3位</li>
+<li><strong>解析到内网的域名</strong>，简单来说就是没有先解析，而是先过滤再解析，那么<code>localhost</code>等就会解析到内网ip进行攻击，另外<code>xip.io</code>的子域名会解析到对应的IP，<code>192.168.0.1.xip.io</code>解析后即为<code>192.168.0.1</code></li>
+<li><strong>@绕过</strong>，<code>http://www.baidu.com@10.10.10.10</code>与<code>http://10.10.10.10</code>是相同的</li>
+<li><strong>302跳转，307跳转</strong></li>
+<li><strong>非HTTP协议</strong>，常见如gopher</li>
+<li><strong>DNS重绑定</strong>，常见的防御是对于用户请求的参数先进行DNS解析，再对从DNS服务器返回的ip进行判断，如果在黑名单中则禁止请求。DNS Rebinding利用的是两次去DNS服务请求解析域名的时间差。<ul>
+<li>服务器端获得URL参数，进行第一次DNS解析（该域名的解析需要指定到攻击者可控的DNS Server），获得了一个非内网的IP</li>
+<li>对于获得的IP进行判断，发现为非黑名单IP，通过验证</li>
+<li>服务器端对URL访问，由于DNS服务器（攻击者可控的）设置的TTL为0，于是再次进行DNS解析，这一次返回内网地址。</li>
+<li>由于验证已经通过，所以服务器端访问内网资源并返回结果。</li>
+</ul>
+</li>
+<li><strong>其他</strong></li>
+</ul>
+<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><h1 id="csrf">CSRF</h1></h1><p>跨站请求伪造，是OWASP（Open Web Application Security Project）2021年<strong>A01：失效的[访问控制]</strong>中常见的CWE之一</p>
 <blockquote>
 <p>CSRF攻击是一种网络攻击方式，攻击者通过伪造用户身份，在用户毫不知情的情况下，以用户的名义发送恶意请求给受攻击站点。这些请求在权限保护之下执行，对用户和网站造成严重的危害。</p>
 </blockquote>
@@ -475,7 +515,8 @@
 <p><strong>/</strong>可以用<code>$(printf$&#123;IFS&#125;&quot;\57&quot;)</code>内敛执行输出“/”到字符串中</p>
 <p><strong>strstr()</strong>区分大小写，<strong>stristr()</strong>不区分</p>
 <p><code>preg_match(&#39;/[oc]:\d+:/i&#39;, $var)</code>, 不允许o:number,c:number出现，用o:+number即可</p>
-<p>后缀<code>php</code>的绕过可以用<code>php4</code></p>
+<p>后缀<code>php</code>的绕过可以用参考此正则绕过<code>/.+\.ph(p[3457]?|t|tml)$/</code>这是apache的正则会自动选择对应的解析器</p>
+<p>有些过滤只过滤最后一个<code>.</code>后的php后缀，可以考虑用<code>a.php/.</code>绕过</p>
 <h2 id="Thinkphp-v5-x"><a href="#Thinkphp-v5-x" class="headerlink" title="Thinkphp v5.x"></a>Thinkphp v5.x</h2><p>框架的漏洞</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/SkyBlueEternal/thinkphp-RCE-POC-Collection">SkyBlueEternal/thinkphp-RCE-POC-Collection: thinkphp v5.x 远程代码执行漏洞-POC集合 (github.com)</a></p>
 <h2 id="assert-函数"><a href="#assert-函数" class="headerlink" title="assert()函数"></a>assert()函数</h2><p>这个函数在php语言中是用来判断一个表达式是否成立。返回true or false;</p>
@@ -496,11 +537,11 @@
 <p>使用数组提供 post 数据时，CURL 组件大概是为了兼容 @filename 这种上传文件的写法，默认把 content_type 设为了 multipart/form-data。</p>
 </blockquote>
 <p>呃，不懂，大概就是需要使用@filename去发送（用原本的表单框放filename发送不到结果）</p>
-<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a><h1 id="http">HTTP</h1></h1><p>一点HTTP有关的知识和技巧</p>
+<h2 id="PHP-CGI"><a href="#PHP-CGI" class="headerlink" title="PHP-CGI"></a>PHP-CGI</h2><h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a><h1 id="http">HTTP</h1></h1><p>一点HTTP有关的知识和技巧</p>
 <h2 id="XFF"><a href="#XFF" class="headerlink" title="XFF"></a>XFF</h2><p>X-Forwarded-For（XFF）客户端的IP地址</p>
+<p>有些不通过XFF来判断，可以考虑X-Real-IP（Nginx 反向代理服务器会添加这个请求头，用来传递客户端的真实 IP 地址。）</p>
 <h2 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h2><p>告诉服务器是从哪个页面链接过来的</p>
 <h2 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h2><p>文件上传漏洞中可能遇到类型不对的情况，比如.user.ini后门文件不是jpg可能会被服务端拒绝上传，可能就是检测了此字段，修改即可</p>
-<p><img src="/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240530000803306.png" alt="image-20240530000803306"></p>
 <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a><h1 id="python">Python</h1></h1><h2 id="Python模板注入（SSTI）"><a href="#Python模板注入（SSTI）" class="headerlink" title="Python模板注入（SSTI）"></a>Python模板注入（SSTI）</h2><h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><p>Flask是python的一个轻量级Web应用开发框架，适合开发中小应用</p>
 <p>Python模板注入简单来说就是python的xss（也许比较狭义）</p>
 <h4 id="检测是否存在SSTI"><a href="#检测是否存在SSTI" class="headerlink" title="检测是否存在SSTI"></a>检测是否存在SSTI</h4><blockquote>
@@ -527,7 +568,7 @@
 <h2 id="python沙箱逃逸"><a href="#python沙箱逃逸" class="headerlink" title="python沙箱逃逸"></a>python沙箱逃逸</h2><h2 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h2><h2 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h2><p>到时候扔个仓库吧，如果爬了啥扔个源码过去。</p>
 <h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><h3 id="伪造session"><a href="#伪造session" class="headerlink" title="伪造session"></a>伪造session</h3><p><a target="_blank" rel="noopener" href="https://github.com/noraj/flask-session-cookie-manager?spm=a2c6h.12873639.article-detail.8.682492b9E3KdF9">noraj/flask-session-cookie-manager: :cookie: Flask Session Cookie Decoder/Encoder (github.com)</a></p>
 <p><code>python flask_session_cookie_manager3.py decode -s “secret_key” -c “session”</code><br><code>python flask_session_cookie_manager3.py encode -s “secret_key” -t “data”</code></p>
-<h1 id="Js"><a href="#Js" class="headerlink" title="Js"></a><h1 id="js">Js</h1></h1><h2 id="JavaScript-原型链污染"><a href="#JavaScript-原型链污染" class="headerlink" title="JavaScript 原型链污染"></a>JavaScript 原型链污染</h2><h3 id="什么是原型（JavaScript-原型链继承）"><a href="#什么是原型（JavaScript-原型链继承）" class="headerlink" title="什么是原型（JavaScript 原型链继承）"></a>什么是原型（JavaScript 原型链继承）</h3><ul>
+<h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a><h1 id="js">JavaScript</h1></h1><h2 id="JavaScript-原型链污染"><a href="#JavaScript-原型链污染" class="headerlink" title="JavaScript 原型链污染"></a>JavaScript 原型链污染</h2><h3 id="什么是原型（JavaScript-原型链继承）"><a href="#什么是原型（JavaScript-原型链继承）" class="headerlink" title="什么是原型（JavaScript 原型链继承）"></a>什么是原型（JavaScript 原型链继承）</h3><ul>
 <li><code>prototype</code>是一个类的属性，所有类对象在实例化的时候将会拥有prototype中的属性和方法</li>
 <li>一个对象的<code>__proto__</code>属性，指向这个对象所在的类的prototype属性</li>
 </ul>
@@ -543,8 +584,27 @@
 </blockquote>
 <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a><h1 id="linux">Linux</h1></h1><p><code>/proc/self/cmdline</code>，用于获取当前启动进程的完整命令。</p>
 <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a><h1 id="git">Git</h1></h1><h2 id="git源码泄露"><a href="#git源码泄露" class="headerlink" title=".git源码泄露"></a>.git源码泄露</h2><h3 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h3><p>/.git进去看看就知道了</p>
-<h3 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h3><p>利用githack可以将整个.git的备份获取</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/lijiejie/GitHack">lijiejie/GitHack: A <code>.git</code> folder disclosure exploit (github.com)</a></p>
+<h3 id="利用-1"><a href="#利用-1" class="headerlink" title="利用"></a>利用</h3><p>利用githack可以将整个.git的备份获取</p>
+<h1 id="安全设备"><a href="#安全设备" class="headerlink" title="安全设备"></a><h1 id="aqsb">安全设备</h1></h1><h2 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h2><p>WAF（Web Application Firewall，Web应用防火墙）,主要是利用针对HTTP和HTTPS的安全策略来加固应用</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p><strong>云WAF</strong>，DNS技术，用户的请求会先经过云端节点进行检测。如阿里云盾等。</p>
+<p><strong>硬件WAF</strong>,部署在Web服务器前，过滤全部外部访问流量并解析，如绿盟Web应用防火墙</p>
+<p><strong>软件WAF</strong>，安装在被防护的服务器上，通过监听端口等方式，如安全狗</p>
+<p>大致结构：请求-&gt;云WAF-&gt;硬件WAF-&gt;软件WAF(服务器区)/用户区</p>
+<h3 id="保护方式"><a href="#保护方式" class="headerlink" title="保护方式"></a>保护方式</h3><p>常用的方法有关键字检测、正则表达式检测、语法分析、行为分析、声誉分析、机器学习等。</p>
+<ul>
+<li><strong>正则表达式检测</strong>，简单，常见</li>
+<li><strong>语法分析</strong>，快且准确，原理是将payload转化成符号组，在里面寻找危险关键字</li>
+<li><strong>行为分析</strong>，主要是针对攻击者的端口扫描、目录爆破、参数测试等行为的检测</li>
+<li><strong>声誉分析</strong>，主要是对来源的过滤，如匿名代理、僵尸网络节点的IP等</li>
+<li><strong>黑白名单</strong>，黑名单主要针对已知问题，白名单针对比较稳定的Web应用</li>
+</ul>
+<h3 id="绕过方式"><a href="#绕过方式" class="headerlink" title="绕过方式"></a>绕过方式</h3><ul>
+<li><strong>基于资源</strong>，通过数据较大的资源去耗尽WAF的计算资源，让WAF无法检测全部数据以逃逸攻击内容</li>
+<li><strong>基于架构</strong></li>
+<li><strong>基于规则</strong></li>
+<li><strong>基于解析</strong></li>
+<li><strong>各种特性</strong></li>
+</ul>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a><h1 id="other">Other</h1></h1><h2 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h2><blockquote>
 <p>robots.txt是一种文本文件，<strong>用于告知搜索引擎爬虫哪些页面可以被抓取、哪些页面不应被抓取</strong>。通常，网站管理员会在网站的根目录下放置一个名为robots.txt的文件，并使用该文件指定他们希望搜索引擎索引和不索引的页面。</p>
 </blockquote>
@@ -556,7 +616,8 @@
 <p><a target="_blank" rel="noopener" href="https://www.yuque.com/antswordproject/antsword">AntSword 文档 (yuque.com)</a></p>
 <h2 id="任意文件读取漏洞"><a href="#任意文件读取漏洞" class="headerlink" title="任意文件读取漏洞"></a>任意文件读取漏洞</h2><h3 id="检测-1"><a href="#检测-1" class="headerlink" title="检测"></a>检测</h3><p>Linux下都有的文件/etc/passwd</p>
 <p><code>http://61.147.171.105:56426/info?file=../../etc/passwd</code></p>
-<h2 id="Fuzz-模糊测试"><a href="#Fuzz-模糊测试" class="headerlink" title="Fuzz(模糊测试)"></a>Fuzz(模糊测试)</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a><h1 id="0">参考</h1></h1><p>可能会漏掉一些参考((</p>
+<h2 id="Fuzz-模糊测试"><a href="#Fuzz-模糊测试" class="headerlink" title="Fuzz(模糊测试)"></a>Fuzz(模糊测试)</h2><h2 id="Mysql的弱类型？"><a href="#Mysql的弱类型？" class="headerlink" title="Mysql的弱类型？"></a>Mysql的弱类型？</h2><p>简单来说就是where id = ‘1a9’和where id = ‘1’是一个结果。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a><h1 id="0">参考</h1></h1><p>可能会漏掉一些参考((</p>
 <p>先私密马赛为敬</p>
 <p><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/chinese/news/what-is-cross-site-request-forgery/#:~:text=跨站点请求伪造（Cross Site Request,Forgery）又被称作 CSRF，是恶意站点或程序通过已认证用户的浏览器在受信任站点上执行非正常操作。 可进行的恶意操作局限于已在网站通过身份验证的用户的功能。">跨站请求伪造——什么是 CSRF 攻击以及如何预防它 (freecodecamp.org)</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43378996/article/details/123910614">CSRF漏洞原理攻击与防御（非常细）-CSDN博客</a></p>
@@ -564,6 +625,8 @@
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1516375">点击劫持（ClickJacking）漏洞挖掘及实战案例全汇总-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">浏览器的同源策略 - Web 安全 | MDN (mozilla.org)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/javascript-prototype-pollution-attack.html">深入理解 JavaScript Prototype 污染攻击 | 离别歌 (leavesongs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/282240.html">web安全 | 浅谈安全设备 - FreeBuf网络安全行业门户</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/336869.html">【深蓝实验室天魁战队】WAF的识别、检测、绕过原理与实战案例 - FreeBuf网络安全行业门户</a></p>
 
         
       </div>

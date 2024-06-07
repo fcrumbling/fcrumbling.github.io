@@ -469,7 +469,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            42 词 
+            348 词 
           </div>
         </div>
         
@@ -479,9 +479,23 @@ Clannad——我的入坑之作
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            主要记录对phith0n的Java 基础 · 攻击Java Web应用-[Java Web安全] (javasec.org)的阅读
-Java基础
-Java基础ClassLoader（类加载机制）  
+            看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全
+[Java Web安全] (javasec.org)](https://www.javasec.org/)
+感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题
+目录
+Java基础ClassLoader（类加载机制）Java类都需要经过JVM加载才能运行，ClassLoader的主要作用就是Java类文件的加载
+
+ClassLoader类有如下核心方法：
+
+loadClass（加载指定的Java类）
+findClass（查找指定的Java类）
+findLoadedClass（查找JVM已经加载过的类）
+defineClass（定义一个Java类）
+resolveClass（链接指定的Java类）
+
+
+URLClassLoaderURLClassLoader继承了ClassLoader，且提供了加载远程资源的能力，在写漏洞利用的payload或者webshell的时候可以加载远程的jar来实现远程的类方法调用
+加个应用实例（...  
           </div>
         
       </div>
@@ -618,7 +632,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            6.2k 词 
+            7.4k 词 
           </div>
         </div>
         
@@ -633,7 +647,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...
 目录
 
 OWASP
-SQL注入
+SQLi
 
 XSS
 
@@ -646,14 +660,15 @@ Clickjacking
 CORS
 HTTP
 Python
-Js
+JavaScript
 Linux
 Git
+安全设备
 Other
 参考
 
 OWASPOWASP Top10 阅读首頁 - OWASP Top 10:2021
-SQL注入属于A03:2021-注入式攻击
+SQLi属于A03:2021-注入式攻击
 SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数据库的查询结果
 
 通过sql注入，利用mysql自带得到库去获得敏感信息，然后获得更多的数据
@@ -662,7 +677,7 @@ SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数�
 主要是通过if(expression,if_true,if_false)+正则匹配+枚举爆破的方式来找出数据
 
 if(DATABASE() rlike ‘^{exp}’,1,0) # 获取数据库名
-if((SELECT GROUP_CONCAT(table_name, ‘:’, ...  
+if((SELECT GROUP_CONCAT(table_...  
           </div>
         
       </div>
