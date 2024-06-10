@@ -29,7 +29,7 @@
 <meta property="og:description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-29T11:31:11.485Z">
-<meta property="article:modified_time" content="2024-06-05T15:11:19.525Z">
+<meta property="article:modified_time" content="2024-06-08T08:24:29.364Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -280,7 +280,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            348 词 
+            1.1k 词 
           </div>
         </div>
         
@@ -305,9 +305,36 @@
 </ol>
 </blockquote>
 <h3 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h3><p><code>URLClassLoader</code>继承了<code>ClassLoader</code>，且提供了加载远程资源的能力，在写漏洞利用的<code>payload</code>或者<code>webshell</code>的时候可以加载远程的jar来实现远程的类方法调用</p>
-<p>加个应用实例（要是下次见到了）</p>
 <h3 id="涉及漏洞"><a href="#涉及漏洞" class="headerlink" title="涉及漏洞"></a>涉及漏洞</h3><h4 id="jsp自定义类加载后门"><a href="#jsp自定义类加载后门" class="headerlink" title="jsp自定义类加载后门"></a>jsp自定义类加载后门</h4><h4 id="BCEL-ClassLoader"><a href="#BCEL-ClassLoader" class="headerlink" title="BCEL ClassLoader"></a>BCEL ClassLoader</h4><p>BCEL是一个用于分析、创建和操纵Java类文件的工具库，其类加载器在解析类名时会对ClassName中有$$$BCEL$$$标识的类做特殊处理，这一特性可以被用于Payload编写。影响于BCEL&lt;6.0</p>
-<h4 id="BCEL-FastJson攻击链分析"><a href="#BCEL-FastJson攻击链分析" class="headerlink" title="BCEL FastJson攻击链分析"></a>BCEL FastJson攻击链分析</h4><h4 id="Xalan"><a href="#Xalan" class="headerlink" title="Xalan"></a>Xalan</h4><h1 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h1>
+<h4 id="BCEL-FastJson攻击链分析"><a href="#BCEL-FastJson攻击链分析" class="headerlink" title="BCEL FastJson攻击链分析"></a>BCEL FastJson攻击链分析</h4><h4 id="Xalan"><a href="#Xalan" class="headerlink" title="Xalan"></a>Xalan</h4><h2 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h2><p>反射机制是Java非常重要的动态特性，可以获取类的成员方法(<code>Methods</code>)、成员变量(<code>Fields</code>)、构造方法(<code>Constructors</code>)等信息，还可以动态创建Java类实例、调用类方法、修改类成员变量值等。</p>
+<h3 id="获取Class对象"><a href="#获取Class对象" class="headerlink" title="获取Class对象"></a>获取Class对象</h3><p>没有Class对象Java就没有地方操作反射，所以需要先获取Class对象</p>
+<ol>
+<li><code>className.class</code></li>
+<li><code>Class.forName(className)</code>。</li>
+<li><code>classLoader.loadClass(className);</code></li>
+</ol>
+<p>数组类型和Runtime类稍有不同</p>
+<h3 id="反射Runtime"><a href="#反射Runtime" class="headerlink" title="反射Runtime"></a>反射Runtime</h3><p>java.lang.Runtime中有个可以执行本地命令的exec方法，在payload中可以用于执行本地系统命令，而Runtime的构造方法往往是私有的，无法直接<code>Runtime rt = new Runtime();</code>,但反射可以做到在此情况下调用构造方法，即通过反射去修改方法的访问权限(<code>constructor.setAccessible(true)</code>)。</p>
+<p>此外，关于构造方法的获得，<code>runtimeClass1.getDeclaredConstructor</code>和<code>runtimeClass1.getConstructor</code>都可以获取到构造方法，区别在于后者无法获取到私有方法，所以前者使用居多。</p>
+<p>获得对象后，可以进一步调用其中的方法和成员，和构造方法类似，带<code>Declared</code>可以拿到更多，不带的拿到更少。</p>
+<p>方法调用使用<code>method.invoke</code></p>
+<p>没有修改成员变量的权限时可以使用: <code>field.setAccessible(true)</code>;而final修饰的成员变量的修改需要先修改方法（感觉这里怪怪的，大致意思是要先把final去掉？）</p>
+<h2 id="sun-misc-Unsafe"><a href="#sun-misc-Unsafe" class="headerlink" title="sun.misc.Unsafe"></a>sun.misc.Unsafe</h2><p><code>sun.misc.Unsafe</code>是Java底层API(<code>仅限Java内部使用</code><strong>反射可调用</strong>)提供的Java类，提供了底层的<code>内存、CAS、线程调度、类、对象</code>等操作、提供的几乎所有的方法都是不安全的</p>
+<h3 id="allocateInstance"><a href="#allocateInstance" class="headerlink" title="allocateInstance"></a>allocateInstance</h3><p>大概就是无法直接通过反射区创建某个类的实例，那么可以考虑用这个Unsafe下的方法去绕过限制</p>
+<h3 id="defineClass"><a href="#defineClass" class="headerlink" title="defineClass"></a>defineClass</h3><p>ClassLoader可以在JVM中注册一个类,Unsafe的defineClass方法也有同样的功能</p>
+<h2 id="Java文件系统安全"><a href="#Java文件系统安全" class="headerlink" title="Java文件系统安全"></a>Java文件系统安全</h2><p>Java SE中内置了两类文件系统：<code>java.io</code>（基于阻塞模式的IO的文件系统）和<code>java.nio</code>（JDK7+基于NIO.2的文件系统。）</p>
+<h3 id="Java-IO-文件系统"><a href="#Java-IO-文件系统" class="headerlink" title="Java IO 文件系统"></a>Java IO 文件系统</h3><p>Java有个抽象类<code>java.io.FileSystem</code>，抽象了对文件的操作，不同的操作系统有不一样<code>FileSystem</code>,例如 <code>java.io.UnixFileSystem</code>、<code>java.io.WinNTFileSystem</code>。</p>
+<p>其底层会调用动态链接库中c实现的java Native方法</p>
+<p>不是所有的文件操作都在<code>java.io.FileSystem</code>中定义</p>
+<h3 id="Java-NIO-2-文件系统"><a href="#Java-NIO-2-文件系统" class="headerlink" title="Java NIO.2 文件系统"></a>Java NIO.2 文件系统</h3><p>和Java IO是完全独立的，关于文件封装等倒是和IO那边一样，比较显而易见的是有些WAF/RASP只防御了IO，那显然可以通过NIO.2搞点事情</p>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
+<li>FileInputStream（读文件）</li>
+<li>FileOutputStream（写文件）</li>
+<li>RandomAccessFile（可以读写文件，类中readxxx方法均在最终调用read0或readBytes方法）</li>
+<li>FileSystemProvider（nio文件系统下的，可以读写）</li>
+<li>其余大部分api都是源自上面几个的封装</li>
+</ul>
+
         
       </div>
 

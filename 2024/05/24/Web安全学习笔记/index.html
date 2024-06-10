@@ -21,18 +21,18 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python JavaScript Linux Git 安">
+  <meta name="description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python JavaScript Go Linux Gi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web安全学习笔记">
 <meta property="og:url" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python JavaScript Linux Git 安">
+<meta property="og:description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS HTTP Python JavaScript Go Linux Gi">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ct_htmltree.gif">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240529152554853.png">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/relatation.png">
 <meta property="article:published_time" content="2024-05-24T06:54:40.652Z">
-<meta property="article:modified_time" content="2024-06-06T11:06:52.667Z">
+<meta property="article:modified_time" content="2024-06-10T10:28:43.066Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -284,7 +284,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7.4k 词 
+            7.6k 词 
           </div>
         </div>
         
@@ -312,6 +312,7 @@
 <li><a href="#http">HTTP</a></li>
 <li><a href="#python">Python</a></li>
 <li><a href="#js">JavaScript</a></li>
+<li><a href="#go">Go</a></li>
 <li><a href="#linux">Linux</a></li>
 <li><a href="#git">Git</a></li>
 <li><a href="#aqsb">安全设备</a></li>
@@ -582,6 +583,12 @@
 <blockquote>
 <p>Object.assign({}, a,b)，可以合并a、b到{}中</p>
 </blockquote>
+<h1 id="Go"><a href="#Go" class="headerlink" title="Go"></a><h1 id="go">Go</h1></h1><h2 id="text-template-SSTI"><a href="#text-template-SSTI" class="headerlink" title="text/template (SSTI)"></a>text/template (SSTI)</h2><p><code>text/template</code>存在SSTI（但go的ssti并不能直接rce和读文件），对 XSS 或任何类型的 HTML 编码都没有保护</p>
+<p><code>tmpl.Execute(c.Writer, c);</code>这是一句对tmpl的执行并生成响应，存在模板注入</p>
+<p>测试payload如下</p>
+<p><code>&#123;&#123;println 0B10101&#125;&#125;</code>回显为21，表明存在SSTI</p>
+<h3 id="技巧-2"><a href="#技巧-2" class="headerlink" title="技巧"></a>技巧</h3><p>通过调用Query函数拼接的方式绕过对一些关键字的限制</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;.Query <span class="string">`crumbling`</span>&#125;&#125;&amp;crumbling=&lt;script&gt;alert(<span class="string">&#x27;114514&#x27;</span>)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a><h1 id="linux">Linux</h1></h1><p><code>/proc/self/cmdline</code>，用于获取当前启动进程的完整命令。</p>
 <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a><h1 id="git">Git</h1></h1><h2 id="git源码泄露"><a href="#git源码泄露" class="headerlink" title=".git源码泄露"></a>.git源码泄露</h2><h3 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h3><p>/.git进去看看就知道了</p>
 <h3 id="利用-1"><a href="#利用-1" class="headerlink" title="利用"></a>利用</h3><p>利用githack可以将整个.git的备份获取</p>
@@ -605,6 +612,7 @@
 <li><strong>基于解析</strong></li>
 <li><strong>各种特性</strong></li>
 </ul>
+<h2 id="RASP"><a href="#RASP" class="headerlink" title="RASP"></a>RASP</h2><p>看java安全那个看到的一个东西，先记下之后看看是啥。</p>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a><h1 id="other">Other</h1></h1><h2 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h2><blockquote>
 <p>robots.txt是一种文本文件，<strong>用于告知搜索引擎爬虫哪些页面可以被抓取、哪些页面不应被抓取</strong>。通常，网站管理员会在网站的根目录下放置一个名为robots.txt的文件，并使用该文件指定他们希望搜索引擎索引和不索引的页面。</p>
 </blockquote>
