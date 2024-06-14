@@ -632,7 +632,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            7.6k 词 
+            9.2k 词 
           </div>
         </div>
         
@@ -658,9 +658,11 @@ PHP
 Clickjacking
 
 CORS
+XXE
 HTTP
 Python
 JavaScript
+Java
 Go
 Linux
 Git
@@ -668,7 +670,6 @@ Git
 Other
 参考
 
-OWASPOWASP Top10 阅读首頁 - OWASP Top 10:2021
 SQLi属于A03:2021-注入式攻击
 SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数据库的查询结果
 
@@ -678,7 +679,7 @@ SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数�
 主要是通过if(expression,if_true,if_false)+正则匹配+枚举爆破的方式来找出数据
 
 if(DATABASE() rlike ‘^{exp}’,1,0) # 获取数据库名
-if((SELECT GROUP_CONCAT(tab...  
+if((SELECT GROUP_CONCAT(table_name, ‘:’, column_name) FROM i...  
           </div>
         
       </div>
