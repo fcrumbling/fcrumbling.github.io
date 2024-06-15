@@ -14,24 +14,19 @@
   
 
   
-  <title>Java安全 | crumbling&#39;s secret room</title>
+  <title>归档: 2024/6 | crumbling&#39;s secret room</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java安全">
-<meta property="og:url" content="http://example.com/2024/05/29/Java%E5%AE%89%E5%85%A8/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="crumbling&#39;s secret room">
+<meta property="og:url" content="http://example.com/archives/2024/06/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全 [Java Web安全] (javasec.org)](https:&#x2F;&#x2F;www.javasec.org&#x2F;) 感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题 目录 Java基础ClassLoader（类加载机制）Java类都需要经过JV">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-29T11:31:11.485Z">
-<meta property="article:modified_time" content="2024-06-08T08:24:29.364Z">
 <meta property="article:author" content="crumbling">
-<meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
@@ -253,136 +248,44 @@
     <div id="content-body">
        
 
-<article id="post-Java安全" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-    
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 class="p-name article-title" itemprop="headline name">
-        Java安全
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-29T11:31:11.485Z" itemprop="datePublished">2024-05-29</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    未分类 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <p>看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全</p>
-<p>[Java Web安全] (javasec.org)](<a target="_blank" rel="noopener" href="https://www.javasec.org/">https://www.javasec.org/</a>)</p>
-<p>感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题</p>
-<p><a href="#">目录</a></p>
-<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="ClassLoader（类加载机制）"><a href="#ClassLoader（类加载机制）" class="headerlink" title="ClassLoader（类加载机制）"></a>ClassLoader（类加载机制）</h2><p>Java类都需要经过JVM加载才能运行，ClassLoader的主要作用就是Java类文件的加载</p>
-<blockquote>
-<p><code>ClassLoader</code>类有如下核心方法：</p>
-<ol>
-<li><code>loadClass</code>（加载指定的Java类）</li>
-<li><code>findClass</code>（查找指定的Java类）</li>
-<li><code>findLoadedClass</code>（查找JVM已经加载过的类）</li>
-<li><code>defineClass</code>（定义一个Java类）</li>
-<li><code>resolveClass</code>（链接指定的Java类）</li>
-</ol>
-</blockquote>
-<h3 id="URLClassLoader"><a href="#URLClassLoader" class="headerlink" title="URLClassLoader"></a>URLClassLoader</h3><p><code>URLClassLoader</code>继承了<code>ClassLoader</code>，且提供了加载远程资源的能力，在写漏洞利用的<code>payload</code>或者<code>webshell</code>的时候可以加载远程的jar来实现远程的类方法调用</p>
-<h3 id="涉及漏洞"><a href="#涉及漏洞" class="headerlink" title="涉及漏洞"></a>涉及漏洞</h3><h4 id="jsp自定义类加载后门"><a href="#jsp自定义类加载后门" class="headerlink" title="jsp自定义类加载后门"></a>jsp自定义类加载后门</h4><h4 id="BCEL-ClassLoader"><a href="#BCEL-ClassLoader" class="headerlink" title="BCEL ClassLoader"></a>BCEL ClassLoader</h4><p>BCEL是一个用于分析、创建和操纵Java类文件的工具库，其类加载器在解析类名时会对ClassName中有$$$BCEL$$$标识的类做特殊处理，这一特性可以被用于Payload编写。影响于BCEL&lt;6.0</p>
-<h4 id="BCEL-FastJson攻击链分析"><a href="#BCEL-FastJson攻击链分析" class="headerlink" title="BCEL FastJson攻击链分析"></a>BCEL FastJson攻击链分析</h4><h4 id="Xalan"><a href="#Xalan" class="headerlink" title="Xalan"></a>Xalan</h4><h2 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h2><p>反射机制是Java非常重要的动态特性，可以获取类的成员方法(<code>Methods</code>)、成员变量(<code>Fields</code>)、构造方法(<code>Constructors</code>)等信息，还可以动态创建Java类实例、调用类方法、修改类成员变量值等。</p>
-<h3 id="获取Class对象"><a href="#获取Class对象" class="headerlink" title="获取Class对象"></a>获取Class对象</h3><p>没有Class对象Java就没有地方操作反射，所以需要先获取Class对象</p>
-<ol>
-<li><code>className.class</code></li>
-<li><code>Class.forName(className)</code>。</li>
-<li><code>classLoader.loadClass(className);</code></li>
-</ol>
-<p>数组类型和Runtime类稍有不同</p>
-<h3 id="反射Runtime"><a href="#反射Runtime" class="headerlink" title="反射Runtime"></a>反射Runtime</h3><p>java.lang.Runtime中有个可以执行本地命令的exec方法，在payload中可以用于执行本地系统命令，而Runtime的构造方法往往是私有的，无法直接<code>Runtime rt = new Runtime();</code>,但反射可以做到在此情况下调用构造方法，即通过反射去修改方法的访问权限(<code>constructor.setAccessible(true)</code>)。</p>
-<p>此外，关于构造方法的获得，<code>runtimeClass1.getDeclaredConstructor</code>和<code>runtimeClass1.getConstructor</code>都可以获取到构造方法，区别在于后者无法获取到私有方法，所以前者使用居多。</p>
-<p>获得对象后，可以进一步调用其中的方法和成员，和构造方法类似，带<code>Declared</code>可以拿到更多，不带的拿到更少。</p>
-<p>方法调用使用<code>method.invoke</code></p>
-<p>没有修改成员变量的权限时可以使用: <code>field.setAccessible(true)</code>;而final修饰的成员变量的修改需要先修改方法（感觉这里怪怪的，大致意思是要先把final去掉？）</p>
-<h2 id="sun-misc-Unsafe"><a href="#sun-misc-Unsafe" class="headerlink" title="sun.misc.Unsafe"></a>sun.misc.Unsafe</h2><p><code>sun.misc.Unsafe</code>是Java底层API(<code>仅限Java内部使用</code><strong>反射可调用</strong>)提供的Java类，提供了底层的<code>内存、CAS、线程调度、类、对象</code>等操作、提供的几乎所有的方法都是不安全的</p>
-<h3 id="allocateInstance"><a href="#allocateInstance" class="headerlink" title="allocateInstance"></a>allocateInstance</h3><p>大概就是无法直接通过反射区创建某个类的实例，那么可以考虑用这个Unsafe下的方法去绕过限制</p>
-<h3 id="defineClass"><a href="#defineClass" class="headerlink" title="defineClass"></a>defineClass</h3><p>ClassLoader可以在JVM中注册一个类,Unsafe的defineClass方法也有同样的功能</p>
-<h2 id="Java文件系统安全"><a href="#Java文件系统安全" class="headerlink" title="Java文件系统安全"></a>Java文件系统安全</h2><p>Java SE中内置了两类文件系统：<code>java.io</code>（基于阻塞模式的IO的文件系统）和<code>java.nio</code>（JDK7+基于NIO.2的文件系统。）</p>
-<h3 id="Java-IO-文件系统"><a href="#Java-IO-文件系统" class="headerlink" title="Java IO 文件系统"></a>Java IO 文件系统</h3><p>Java有个抽象类<code>java.io.FileSystem</code>，抽象了对文件的操作，不同的操作系统有不一样<code>FileSystem</code>,例如 <code>java.io.UnixFileSystem</code>、<code>java.io.WinNTFileSystem</code>。</p>
-<p>其底层会调用动态链接库中c实现的java Native方法</p>
-<p>不是所有的文件操作都在<code>java.io.FileSystem</code>中定义</p>
-<h3 id="Java-NIO-2-文件系统"><a href="#Java-NIO-2-文件系统" class="headerlink" title="Java NIO.2 文件系统"></a>Java NIO.2 文件系统</h3><p>和Java IO是完全独立的，关于文件封装等倒是和IO那边一样，比较显而易见的是有些WAF/RASP只防御了IO，那显然可以通过NIO.2搞点事情</p>
-<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
-<li>FileInputStream（读文件）</li>
-<li>FileOutputStream（写文件）</li>
-<li>RandomAccessFile（可以读写文件，类中readxxx方法均在最终调用read0或readBytes方法）</li>
-<li>FileSystemProvider（nio文件系统下的，可以读写）</li>
-<li>其余大部分api都是源自上面几个的封装</li>
-</ul>
-
-        
-      </div>
-
-         
+<div class="archive-main-card">
+    <div class="archive-top">
+      <div class="main-title-bar">
+        <div class="main-title-dot"></div>
+        <h1 class="article-title">归档</h1>
+      </div>    
     </div>
     
-     
+    
+      
+      
+        
+        <div class="year-line">
+            <div class="year-num">2024</div>
+            <div class="dot-wrapper">
+                <div class="dot"></div>
+            </div>
+            <div class="article-count">1 篇文章</div>
+        </div>
+      
+      <a class="archive-article-link" href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" title="漏洞复现">
+        <div class="date">06-15</div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="title">
+            <div class="title-inner">
+                
+                    漏洞复现
+                
+            </div>
+        </div>
+        <div class="tags">
+            #复现 #漏洞
+        </div>
+      </a>
+    
   </div>
-  
-    
-<nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
-      title="漏洞复现"
-     >
-    <i class="fa-solid fa-angle-left"></i>
-    <p class="title-text">
-      
-        漏洞复现
-        
-    </p>
-  </a>
-  <a class="article-nav-btn right "
-    
-      href="/2024/05/27/Portswigger%E9%9D%B6%E5%9C%BA%E8%AE%B0%E5%BD%95/"
-      title="PortSwigger靶场记录"
-     >
-
-    <p class="title-text">
-      
-        PortSwigger靶场记录
-        
-    </p>
-    <i class="fa-solid fa-angle-right"></i>
-  </a>
-</nav>
-
-
-  
-</article>
-
- 
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
