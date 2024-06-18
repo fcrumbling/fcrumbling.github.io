@@ -474,7 +474,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            945 词 
+            1.1k 词 
           </div>
         </div>
         
@@ -485,16 +485,16 @@ Clannad——我的入坑之作
         
           <div class="truncate-text">
             主要是对一些经典漏洞复现的记录，参考Vulhub
-环境kali+vulhub靶场
+环境:windows+kali+vulhub靶场
 shiro550
+log4j2
 fastjson反序列化漏洞 TODO
 Shiro 550shiro反序列化漏洞，CVE-2016-4437
 response中若有rememberMe=deleteMe，则表示使用了shiro框架
 而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞
 原理shiro框架提供了一个记住密码功能，会在cookie中添加一段包含了用户身份信息的加密数据，该加密流程为序列化+AES+base64,验证方式则为base64+AES+反序列化。
 base64和漏洞序列化其实不具备严格意义上的加密效果，加密效果主要体现在AES上，而AES安全的核心在于其密钥key不被泄露，但是shiro&lt;=1.2.4版本中的AES都是用了固定的kPH+bIxk5D2deZiIxcaaaA==作为密钥，这就导致攻击者可以自己完成cookie的生成并在其中夹杂恶意代码。
-攻击shiro_exploit.py可以自动检测shiro框架并对密钥进行爆破，这里已经获得了key，暂时不需要。
-...  
+攻击shiro_exploit.py可以自动检测shiro框架并对密钥进行爆破，这里...  
           </div>
         
       </div>

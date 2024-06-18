@@ -21,16 +21,16 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="主要是对一些经典漏洞复现的记录，参考Vulhub 环境kali+vulhub靶场 shiro550 fastjson反序列化漏洞 TODO Shiro 550shiro反序列化漏洞，CVE-2016-4437 response中若有rememberMe&#x3D;deleteMe，则表示使用了shiro框架 而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞 原理shiro框架提供了">
+  <meta name="description" content="主要是对一些经典漏洞复现的记录，参考Vulhub 环境:windows+kali+vulhub靶场 shiro550 log4j2 fastjson反序列化漏洞 TODO Shiro 550shiro反序列化漏洞，CVE-2016-4437 response中若有rememberMe&#x3D;deleteMe，则表示使用了shiro框架 而bp的插件BurpShiroPassiveScan可以进行检测并报">
 <meta property="og:type" content="article">
 <meta property="og:title" content="漏洞复现">
 <meta property="og:url" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="主要是对一些经典漏洞复现的记录，参考Vulhub 环境kali+vulhub靶场 shiro550 fastjson反序列化漏洞 TODO Shiro 550shiro反序列化漏洞，CVE-2016-4437 response中若有rememberMe&#x3D;deleteMe，则表示使用了shiro框架 而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞 原理shiro框架提供了">
+<meta property="og:description" content="主要是对一些经典漏洞复现的记录，参考Vulhub 环境:windows+kali+vulhub靶场 shiro550 log4j2 fastjson反序列化漏洞 TODO Shiro 550shiro反序列化漏洞，CVE-2016-4437 response中若有rememberMe&#x3D;deleteMe，则表示使用了shiro框架 而bp的插件BurpShiroPassiveScan可以进行检测并报">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240615135909485.png">
 <meta property="article:published_time" content="2024-06-15T02:33:02.154Z">
-<meta property="article:modified_time" content="2024-06-15T09:00:19.088Z">
+<meta property="article:modified_time" content="2024-06-16T11:48:39.702Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="复现">
 <meta property="article:tag" content="漏洞">
@@ -288,7 +288,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            945 词 
+            1.1k 词 
           </div>
         </div>
         
@@ -298,8 +298,9 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <p>主要是对一些经典漏洞复现的记录，参考<a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">Vulhub</a></p>
-<p>环境kali+vulhub靶场</p>
+<p>环境:windows+kali+vulhub靶场</p>
 <p><a href="#shiro550">shiro550</a></p>
+<p><a href="#log4j2">log4j2</a></p>
 <p><a href="#fastjson">fastjson反序列化漏洞 TODO</a></p>
 <h1 id="Shiro-550"><a href="#Shiro-550" class="headerlink" title="Shiro 550"></a><h1 id="shiro550">Shiro 550</h1></h1><p>shiro反序列化漏洞，CVE-2016-4437</p>
 <p><code>response</code>中若有<code>rememberMe=deleteMe</code>，则表示使用了shiro框架</p>
@@ -319,6 +320,10 @@
 <p>将结果写入Cookie重放应该就能在监听的终端看到被攻击的shell然后进行各种命令行操作了，不过同一台虚拟机作为攻击和被攻击似乎不太好监听，重新摸索一下可能要。不过大致内容就是以上了。</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>现实的漏洞挖掘场景，可能在key上出现问题，大致思路是字典爆破，不过更合适的应该是一些自动化的测试工具，应该要比自己人工爆破要快捷。</p>
 <p>以及用于重定向的’&gt;’’&lt;’可能被各种waf啊hids这样的设备检测，可以考虑利用<a target="_blank" rel="noopener" href="https://ares-x.com/tools/runtime-exec">Runtime.exec Payload Generater | AresX’s Blog (ares-x.com)</a>编码</p>
+<h1 id="log4j2"><a href="#log4j2" class="headerlink" title="log4j2"></a><h1 id="log4j2">log4j2</h1></h1><p>CVE-2021-44228</p>
+<p>log4j2是个开源日志库，在log4j的基础上进行了改进，支持lookup功能（查找搜索），大致用法是<code>$&#123;data:MM-dd-yyyy&#125;</code>，log4j2会对${}包裹的内容单独处理，即识别为日期查找，然后替换为日期内容输出，最关键的问题是log4j2支持JNDI协议。</p>
+<p>影响版本2.0 &lt;=log4j2 &lt;= 2.14.1</p>
+<h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>log4j2框架下的lookup查询服务提供了{}字段解析功能，传进去的值会被直接解析（感觉和SSTI比较类似的原因），如果不对lookup的返回结果进行限制，就有可能让查询指向任何服务。</p>
 <h1 id="fastjson反序列化漏洞"><a href="#fastjson反序列化漏洞" class="headerlink" title="fastjson反序列化漏洞"></a><h1 id="fastjson">fastjson反序列化漏洞</h1></h1><p>fastjson是阿里开发的开源json解析库，主要作用是json字符串反序列化到JavaBean</p>
 <p>漏洞影响＜=1.2.48fastjson</p>
 <p>复现环境为1.2.27</p>
