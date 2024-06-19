@@ -14,28 +14,30 @@
   
 
   
-  <title>漏洞复现（春秋云镜+vulhub） | crumbling&#39;s secret room</title>
+  <title>漏洞复现学习（春秋云镜+vulhub） | crumbling&#39;s secret room</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="近期没有什么比赛，比较空，所以来复现一点漏洞，主要是参考Vulhub+春秋云境.com (ichunqiu.com) 春秋云镜  CVE-2022-32991  Vulhub  shiro550 log4j2 fastjson反序列化漏洞  春秋云镜CVE-2022-32991描述：该CMS的welcome.php中存在SQL注入攻击。 根据描述，随意注册登录个账号，即可进入到&#x2F;welcome.p">
+  <meta name="description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考Vulhub+春秋云境.com (ichunqiu.com) 春秋云镜  CVE-2022-32991 CVE-2022-30887 CVE-2022-28512  Vulhub  shiro550 log4j2 fastjson反序列化漏洞  春秋云镜CVE-2022-32991描述：该CMS的welcome.php中存在SQL注入攻">
 <meta property="og:type" content="article">
-<meta property="og:title" content="漏洞复现（春秋云镜+vulhub）">
+<meta property="og:title" content="漏洞复现学习（春秋云镜+vulhub）">
 <meta property="og:url" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="近期没有什么比赛，比较空，所以来复现一点漏洞，主要是参考Vulhub+春秋云境.com (ichunqiu.com) 春秋云镜  CVE-2022-32991  Vulhub  shiro550 log4j2 fastjson反序列化漏洞  春秋云镜CVE-2022-32991描述：该CMS的welcome.php中存在SQL注入攻击。 根据描述，随意注册登录个账号，即可进入到&#x2F;welcome.p">
+<meta property="og:description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考Vulhub+春秋云境.com (ichunqiu.com) 春秋云镜  CVE-2022-32991 CVE-2022-30887 CVE-2022-28512  Vulhub  shiro550 log4j2 fastjson反序列化漏洞  春秋云镜CVE-2022-32991描述：该CMS的welcome.php中存在SQL注入攻">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240619135608001.png">
+<meta property="og:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240619141656660.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240615135909485.png">
 <meta property="article:published_time" content="2024-06-15T02:33:02.154Z">
-<meta property="article:modified_time" content="2024-06-18T13:00:54.276Z">
+<meta property="article:modified_time" content="2024-06-19T06:45:05.360Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="复现">
 <meta property="article:tag" content="漏洞">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240615135909485.png">
+<meta name="twitter:image" content="http://example.com/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240619135608001.png">
   
     <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
   
@@ -215,9 +217,9 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
-          <a class="recent-link" href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" title="漏洞复现（春秋云镜+vulhub）" >
+          <a class="recent-link" href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" title="漏洞复现学习（春秋云镜+vulhub）" >
             <div class="recent-link-text">
-              漏洞复现（春秋云镜+vulhub）
+              漏洞复现学习（春秋云镜+vulhub）
             </div>
           </a>
         
@@ -269,7 +271,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        漏洞复现（春秋云镜+vulhub）
+        漏洞复现学习（春秋云镜+vulhub）
       </h1>
     
   
@@ -288,7 +290,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 词 
+            2.2k 词 
           </div>
         </div>
         
@@ -297,10 +299,12 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>近期没有什么比赛，比较空，所以来复现一点漏洞，主要是参考<a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">Vulhub</a>+<a target="_blank" rel="noopener" href="https://yunjing.ichunqiu.com/">春秋云境.com (ichunqiu.com)</a></p>
+          <p>近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考<a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">Vulhub</a>+<a target="_blank" rel="noopener" href="https://yunjing.ichunqiu.com/">春秋云境.com (ichunqiu.com)</a></p>
 <p><a href="#1">春秋云镜</a></p>
 <ul>
 <li><a href="#CVE-2022-32991">CVE-2022-32991</a></li>
+<li><a href="#CVE-2022-30887">CVE-2022-30887</a></li>
+<li><a href="#CVE-2022-28512">CVE-2022-28512</a></li>
 </ul>
 <p><a href="#2">Vulhub</a></p>
 <ul>
@@ -322,10 +326,25 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+--------+---------------+</span><br><span class="line">| Column | Type          |</span><br><span class="line">+--------+---------------+</span><br><span class="line">| flag   | varchar(1024) |</span><br><span class="line">+--------+---------------+</span><br></pre></td></tr></table></figure>
 <p><code>--batch -D &#39;ctf&#39; -T &#39;flag&#39; -C &#39;flag&#39; --dump</code></p>
 <p>然后就能吐出flag了</p>
-<h3 id="sqlmap技巧"><a href="#sqlmap技巧" class="headerlink" title="sqlmap技巧"></a>sqlmap技巧</h3><p>wp看到的，实际上来看这个环境其实不需要，但我觉得这两个需求都很合理</p>
+<p>额外的一点sqlmap技巧</p>
+<p>wp看到的，实际上来看这个环境其实不需要，但我觉得这两个需求都很合理</p>
 <p>登录访问，使用–cookie参数使得sqlmap绕过身份验证</p>
 <p>–user-agent参数/–random-agent使sqlmap绕过客户端验证，否则可能会被识别到sqlmap。</p>
-<h1 id="Vulhub"><a href="#Vulhub" class="headerlink" title="Vulhub"></a><h1 id="2">Vulhub</h1></h1><h1 id="Shiro-550-lt-h1-gt"><a href="#Shiro-550-lt-h1-gt" class="headerlink" title="Shiro 550&lt;/h1&gt;"></a><h2 id="shiro550">Shiro 550&lt;/h1&gt;</h2></h1><p>shiro反序列化漏洞，CVE-2016-4437</p>
+<h2 id="CVE-2022-30887"><a href="#CVE-2022-30887" class="headerlink" title="CVE-2022-30887"></a><h2 id="CVE-2022-30887">CVE-2022-30887</h2></h2><p>描述：多语言药房管理系统 (MPMS) 是用 PHP 和 MySQL 开发的, 该软件的主要目的是在药房和客户之间提供一套接口，客户是该软件的主要用户。该软件有助于为药房业务创建一个综合数据库，并根据到期、产品等各种参数提供各种报告。 该CMS中php_action/editProductImage.php存在任意文件上传漏洞，进而导致任意代码执行。</p>
+<p>没账号，抓个登录的包也没看到什么东西。</p>
+<p>考验一手信息收集，只知道账号是个邮箱，是在环境里瞎点找到的，不知道有没有什么更有思路的方法。</p>
+<p><code>mayuri.infospace@gmail.com</code></p>
+<p>密码应该不含数字（手测含数字会提示格式错误）</p>
+<p>没有更多的信息，长度未知弱密码也爆不出来，这边彻底卡住了，去看了一圈思路，基本上还是靠猜，密码是<code>mayurik</code></p>
+<p>登陆之后就是一个常见的管理系统，找一下有文件上传的位置（添加药品这里）。</p>
+<p>题目有说是php所以写个php的一句话木马<code>&lt;?php @eval($_POST[&#39;cmd&#39;]); ?&gt;</code></p>
+<p><img src="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240619135608001.png" alt="image-20240619135608001"></p>
+<p>另外环境没什么过滤，所以没啥必要抓包重放。</p>
+<p>后面直接antsword（测试的时候不知道哪里弄坏了环境一直连接不上，手动执行命令也没成功，重启环境后就正常了）</p>
+<p><img src="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/image-20240619141656660.png" alt="image-20240619141656660"></p>
+<p>flag在根目录里。</p>
+<h2 id="CVE-2022-28512"><a href="#CVE-2022-28512" class="headerlink" title="CVE-2022-28512"></a><h2 id="CVE-2022-28512">CVE-2022-28512</h2></h2><p>描述：Fantastic Blog (CMS)是一个绝对出色的博客/文章网络内容管理系统。它使您可以轻松地管理您的网站或博客，它为您提供了广泛的功能来定制您的博客以满足您的需求。它具有强大的功能，您无需接触任何代码即可启动并运行您的博客。 该CMS的/single.php路径下，id参数存在一个SQL注入漏洞。</p>
+<h1 id="Vulhub"><a href="#Vulhub" class="headerlink" title="Vulhub"></a><h1 id="2">Vulhub</h1></h1><h2 id="Shiro-550-lt-h1-gt"><a href="#Shiro-550-lt-h1-gt" class="headerlink" title="Shiro 550&lt;/h1&gt;"></a><h2 id="shiro550">Shiro 550&lt;/h1&gt;</h2><p>shiro反序列化漏洞，CVE-2016-4437</p>
 <p><code>response</code>中若有<code>rememberMe=deleteMe</code>，则表示使用了shiro框架</p>
 <p>而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>shiro框架提供了一个记住密码功能，会在cookie中添加一段包含了用户身份信息的加密数据，该加密流程为序列化+AES+base64,验证方式则为base64+AES+反序列化。</p>
@@ -343,13 +362,13 @@
 <p>将结果写入Cookie重放应该就能在监听的终端看到被攻击的shell然后进行各种命令行操作了，不过同一台虚拟机作为攻击和被攻击似乎不太好监听，重新摸索一下可能要。不过大致内容就是以上了。</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>现实的漏洞挖掘场景，可能在key上出现问题，大致思路是字典爆破，不过更合适的应该是一些自动化的测试工具，应该要比自己人工爆破要快捷。</p>
 <p>以及用于重定向的’&gt;’’&lt;’可能被各种waf啊hids这样的设备检测，可以尝试利用<a target="_blank" rel="noopener" href="https://ares-x.com/tools/runtime-exec">Runtime.exec Payload Generater | AresX’s Blog (ares-x.com)</a>编码绕过一下</p>
-<h1 id="log4j2-lt-h1-gt"><a href="#log4j2-lt-h1-gt" class="headerlink" title="log4j2&lt;/h1&gt;"></a><h2 id="log4j2">log4j2&lt;/h1&gt;</h2></h1><p>CVE-2021-44228</p>
+<h2 id="log4j2-lt-h1-gt"><a href="#log4j2-lt-h1-gt" class="headerlink" title="log4j2&lt;/h1&gt;"></a><h2 id="log4j2">log4j2&lt;/h1&gt;</h2><p>CVE-2021-44228</p>
 <p>log4j2是apache下的java应用常见开源日志库.JNDI，全称为Java命名和目录接口（Java Naming and Directory Interface）允许从指定的远程服务器获取并加载对象。相当于一个用于映射的字典，使得Java应用程序可以和这些命名服务和目录服务之间进行交互。</p>
 <p>影响版本2.0 &lt;=log4j2 &lt;= 2.14.1</p>
 <h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>Log4j2提供的lookup功能下的 jndi Lookup模块的漏洞，该功能模块在输出日志信息时允许、通过相应的协议去请求远程主机上的资源。简单来说就是JNDI可以使用相应目录接口请求数据，并且可以远程下载一个恶意的class文件,然后加载该class文件并构建对象，最后导致攻击。</p>
 <p>（大致就是这个意思，看了一圈感觉没有找到特别满意的）</p>
 <h2 id="漏洞环境"><a href="#漏洞环境" class="headerlink" title="漏洞环境"></a>漏洞环境</h2><p>log4j2是个库啊，所以复现的基础可以直接在调用了库的web应用上实现。</p>
-<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><h1 id="fastjson反序列化漏洞-lt-h1-gt"><a href="#fastjson反序列化漏洞-lt-h1-gt" class="headerlink" title="fastjson反序列化漏洞&lt;/h1&gt;"></a><h2 id="fastjson">fastjson反序列化漏洞&lt;/h1&gt;</h2></h1><p>fastjson是阿里开发的开源json解析库，主要作用是json字符串反序列化到JavaBean</p>
+<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><h2 id="fastjson反序列化漏洞-lt-h1-gt"><a href="#fastjson反序列化漏洞-lt-h1-gt" class="headerlink" title="fastjson反序列化漏洞&lt;/h1&gt;"></a><h2 id="fastjson">fastjson反序列化漏洞&lt;/h1&gt;</h2><p>fastjson是阿里开发的开源json解析库，主要作用是json字符串反序列化到JavaBean</p>
 <p>漏洞影响＜=1.2.48fastjson</p>
 <p>复现环境为1.2.27</p>
 <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>主要是<code>AutoType</code>导致的，而复现环境1.2.27版本在1.2.24后，<code>AutoType</code>已经被禁用，所以需要单独开启。</p>
@@ -359,7 +378,7 @@
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13239046.html">Shiro反序列化漏洞利用汇总（Shiro-550+Shiro-721） - Bypass - 博客园 (cnblogs.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/380568.html">log4j2原理分析及漏洞复现- CVE-2021-44228 - FreeBuf网络安全行业门户</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/381092.html">java经典漏洞复现（基于vulhub） - FreeBuf网络安全行业门户</a></p>
-
+</h2></h2></h2>
         
       </div>
 
