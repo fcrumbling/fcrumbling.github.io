@@ -319,9 +319,9 @@ mjx-container[display="true"] + br {
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
-          <a class="recent-link" href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" title="漏洞复现学习（春秋云镜+vulhub）" >
+          <a class="recent-link" href="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" title="春秋云镜刷题记录" >
             <div class="recent-link-text">
-              漏洞复现学习（春秋云镜+vulhub）
+              春秋云镜刷题记录
             </div>
           </a>
         
@@ -444,7 +444,7 @@ Clannad——我的入坑之作
 
    
 
-<article id="post-漏洞复现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-春秋云镜刷题记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
     <div class="article-main">
@@ -455,7 +455,7 @@ Clannad——我的入坑之作
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现学习（春秋云镜+vulhub）</a>
+        <a class="p-name article-title" href="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">春秋云镜刷题记录</a>
       </h1>
     
   
@@ -474,7 +474,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.2k 词 
+            3.1k 词 
           </div>
         </div>
         
@@ -484,12 +484,28 @@ Clannad——我的入坑之作
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考Vulhub+春秋云境.com (ichunqiu.com)
+            近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub
+感觉春秋云镜底层原理一样的洞有点多，跳着写吧，感觉没必要按顺序写有点浪费时间。
 春秋云镜
 
+SQLI
+
 CVE-2022-32991
-CVE-2022-30887
 CVE-2022-28512
+
+
+任意文件上传
+
+CVE-2022-30887
+CVE-2022-28525
+
+
+RCE
+CVE-2022-25578
+CVE-2022-23906
+CVE-2022-24663
+
+
 
 Vulhub
 
@@ -497,12 +513,11 @@ shiro550
 log4j2
 fastjson反序列化漏洞
 
-春秋云镜CVE-2022-32991描述：该CMS的welcome.php中存在SQL注入攻击。
+春秋云镜SQLICVE-2022-32991
+描述：该CMS的welcome.php中存在SQL注入攻击。
+
 根据描述，随意注册登录个账号，即可进入到/welcome.php?q=1，这边没啥东西，sqlmap扫了一遍也没有发现问题。
-搜一下CVE，可以找到基于网络的测验系统 v1.0 被发现包含…·CVE-2022-32991 ·GitHub 咨询数据库，说是eid参数，找了一下，start点进去可以跳转过去，这里就用到了eid参数
-拿sqlmap--batch嗯扫一波
-结果也是能看到eid处有漏洞
-123456789sqlmap identified the following injection point(s) with a total of 1104 HTTP(s) reques...  
+搜一下CVE，可以找到基于网络的测验系统 v1.0 被发现包含…·CVE-2022-32991 ·GitHub 咨询数据库，说是eid参数，找了一下，start点进去可以跳转过去，这里就用到了e...  
           </div>
         
       </div>
@@ -513,7 +528,7 @@ fastjson反序列化漏洞
      
     <a class="right-panel  non-pic  "
       
-      href="/2024/06/15/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" 
+      href="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
