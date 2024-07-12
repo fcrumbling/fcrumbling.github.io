@@ -391,7 +391,7 @@ mjx-container[display="true"] + br {
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            328 词 
+            199 词 
           </div>
         </div>
         
@@ -402,11 +402,7 @@ mjx-container[display="true"] + br {
         
           <div class="truncate-text">
             我是Vidar-Team的crumbling，一个正在学习web的菜菜密码手。
-经历一年，现在是一个做过大半年java开发的web密码手(?
-(
-最近举棋不定，本来学开发是为了后面转做web安全的，后来又觉得做开发（可能会做go开发什么的）也行，但目前做java开发的感觉是后面有些无聊，主要内容都是在做业务，找工作则是背一堆八股。
-所以又跑回来钻研web安全了，个人觉得web安全还是比较有趣的，虽然门槛比较高。
-目前的规划大概是尝试找一个安服的实习吧。
+经历一年，现在应该是一个学过大半年java开发的web密码手(?
 QQ:912022538
 兴趣是
 
@@ -474,7 +470,7 @@ Clannad——我的入坑之作
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.1k 词 
+            5.6k 词 
           </div>
         </div>
         
@@ -485,27 +481,21 @@ Clannad——我的入坑之作
         
           <div class="truncate-text">
             近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub
-感觉春秋云镜底层原理一样的洞有点多，跳着写吧，感觉没必要按顺序写有点浪费时间。
-春秋云镜
+漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员）
+春秋云镜——仿真场景
+
+Initial简单
+
+春秋云镜——漏洞靶标
 
 SQLI
 
-CVE-2022-32991
-CVE-2022-28512
-
-
 任意文件上传
 
-CVE-2022-30887
-CVE-2022-28525
-
-
 RCE
-CVE-2022-25578
-CVE-2022-23906
-CVE-2022-24663
-
-
+SSRF
+任意文件读取
+其他
 
 Vulhub
 
@@ -513,11 +503,14 @@ shiro550
 log4j2
 fastjson反序列化漏洞
 
-春秋云镜SQLICVE-2022-32991
+春秋云镜——仿真场景Initial简单春秋云镜——漏洞靶标SQLICVE-2022-32991
 描述：该CMS的welcome.php中存在SQL注入攻击。
 
 根据描述，随意注册登录个账号，即可进入到/welcome.php?q=1，这边没啥东西，sqlmap扫了一遍也没有发现问题。
-搜一下CVE，可以找到基于网络的测验系统 v1.0 被发现包含…·CVE-2022-32991 ·GitHub 咨询数据库，说是eid参数，找了一下，start点进去可以跳转过去，这里就用到了e...  
+搜一下CVE，可以找到基于网络的测验系统 v1.0 被发现包含…·CVE-2022-32991 ·GitHub 咨询数据库，说是eid参数，找了一下，start点进去可以跳转过去，这里就用到了eid参数
+拿sqlmap--batch嗯扫一波
+结果也是能看到eid处有漏洞
+123456789sqlm...  
           </div>
         
       </div>
@@ -736,7 +729,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            9.2k 词 
+            9.3k 词 
           </div>
         </div>
         
@@ -771,6 +764,7 @@ Go
 Linux
 Git
 安全设备
+安全工具
 Other
 参考
 
@@ -783,7 +777,7 @@ SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数�
 主要是通过if(expression,if_true,if_false)+正则匹配+枚举爆破的方式来找出数据
 
 if(DATABASE() rlike ‘^{exp}’,1,0) # 获取数据库名
-if((SELECT GROUP_CONCAT(table_name, ‘:’, column_name) FROM i...  
+if((SELECT GROUP_CONCAT(table_name, ‘:’, column_name) F...  
           </div>
         
       </div>

