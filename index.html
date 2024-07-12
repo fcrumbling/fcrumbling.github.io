@@ -480,12 +480,7 @@ Clannad——我的入坑之作
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub
-漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员）
-春秋云镜——仿真场景
-
-Initial简单
-
+            近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，也附带之前Vulhub的一点复现
 春秋云镜——漏洞靶标
 
 SQLI
@@ -503,14 +498,14 @@ shiro550
 log4j2
 fastjson反序列化漏洞
 
-春秋云镜——仿真场景Initial简单春秋云镜——漏洞靶标SQLICVE-2022-32991
+春秋云镜——漏洞靶标SQLICVE-2022-32991
 描述：该CMS的welcome.php中存在SQL注入攻击。
 
 根据描述，随意注册登录个账号，即可进入到/welcome.php?q=1，这边没啥东西，sqlmap扫了一遍也没有发现问题。
 搜一下CVE，可以找到基于网络的测验系统 v1.0 被发现包含…·CVE-2022-32991 ·GitHub 咨询数据库，说是eid参数，找了一下，start点进去可以跳转过去，这里就用到了eid参数
 拿sqlmap--batch嗯扫一波
 结果也是能看到eid处有漏洞
-123456789sqlm...  
+123456789sqlmap identified the following injection point(s) with a total of 110...  
           </div>
         
       </div>
@@ -566,7 +561,7 @@ fastjson反序列化漏洞
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1k 词 
           </div>
         </div>
         
@@ -576,9 +571,9 @@ fastjson反序列化漏洞
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来专精一手java安全
-[Java Web安全] (javasec.org)](https://www.javasec.org/)
-感觉比较硬核，所以大致记点摘点看懂了的，随便写点感觉比较重要但是没理解全或者没看完的内容和标题
+            看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来给自己挖个坑
+Java Web安全
+大致记点看懂了的和感觉比较重要但是没理解全或者没看完的内容和标题
 目录
 Java基础ClassLoader（类加载机制）Java类都需要经过JVM加载才能运行，ClassLoader的主要作用就是Java类文件的加载
 
@@ -592,7 +587,7 @@ resolveClass（链接指定的Java类）
 
 
 URLClassLoaderURLClassLoader继承了ClassLoader，且提供了加载远程资源的能力，在写漏洞利用的payload或者webshell的时候可以加载远程的jar来实现远程的类方法调用
-涉及漏洞jsp...  
+涉及漏洞jsp自定义类加载后门BCEL ClassLoaderBCEL是一个用于分析、创建和操纵Java类文件的工具库，其类加载器在解析类...  
           </div>
         
       </div>

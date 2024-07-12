@@ -21,12 +21,12 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub 漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员） 春秋云镜——仿真场景  Initial简单  春秋云镜——漏洞靶标  SQLI  任意文件上传  RCE SSRF 任意文件读取 其他  Vulhub  shiro550 log4j2 fastjson反序列">
+  <meta name="description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，也附带之前Vulhub的一点复现 春秋云镜——漏洞靶标  SQLI  任意文件上传  RCE SSRF 任意文件读取 其他  Vulhub  shiro550 log4j2 fastjson反序列化漏洞  春秋云镜——漏洞靶标SQLICVE-2022-32991 描述：该CMS的welco">
 <meta property="og:type" content="article">
 <meta property="og:title" content="春秋云镜刷题记录">
 <meta property="og:url" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，附带一点Vulhub 漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员） 春秋云镜——仿真场景  Initial简单  春秋云镜——漏洞靶标  SQLI  任意文件上传  RCE SSRF 任意文件读取 其他  Vulhub  shiro550 log4j2 fastjson反序列">
+<meta property="og:description" content="近期没有什么比赛，比较空，所以来复现&#x2F;学习一点漏洞，主要是参考春秋云境.com (ichunqiu.com)，也附带之前Vulhub的一点复现 春秋云镜——漏洞靶标  SQLI  任意文件上传  RCE SSRF 任意文件读取 其他  Vulhub  shiro550 log4j2 fastjson反序列化漏洞  春秋云镜——漏洞靶标SQLICVE-2022-32991 描述：该CMS的welco">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623000612538.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240619135608001.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240623160257247.png">
 <meta property="og:image" content="http://example.com/2024/06/15/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20240615135909485.png">
 <meta property="article:published_time" content="2024-06-15T02:33:02.154Z">
-<meta property="article:modified_time" content="2024-07-10T09:42:20.763Z">
+<meta property="article:modified_time" content="2024-07-12T10:23:27.285Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="复现">
 <meta property="article:tag" content="漏洞">
@@ -306,12 +306,7 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考<a target="_blank" rel="noopener" href="https://yunjing.ichunqiu.com/">春秋云境.com (ichunqiu.com)</a>，附带一点Vulhub</p>
-<p>漏洞栏目过于简单，感觉学到的内容比较少（主要也没钱充会员）</p>
-<p><a href="#11">春秋云镜——仿真场景</a></p>
-<ul>
-<li><a href="#initial">Initial简单</a></li>
-</ul>
+          <p>近期没有什么比赛，比较空，所以来复现/学习一点漏洞，主要是参考<a target="_blank" rel="noopener" href="https://yunjing.ichunqiu.com/">春秋云境.com (ichunqiu.com)</a>，也附带之前Vulhub的一点复现</p>
 <p><a href="#1">春秋云镜——漏洞靶标</a></p>
 <ul>
 <li><p><a href="#sql">SQLI</a></p>
@@ -329,7 +324,7 @@
 <li><a href="#log4j2">log4j2</a></li>
 <li><a href="#fastjson">fastjson反序列化漏洞</a></li>
 </ul>
-<h1 id="春秋云镜——仿真场景"><a href="#春秋云镜——仿真场景" class="headerlink" title="春秋云镜——仿真场景"></a><h1 id="11">春秋云镜——仿真场景</h1></h1><h2 id="Initial简单"><a href="#Initial简单" class="headerlink" title="Initial简单"></a><h2 id="initial">Initial简单</h2></h2><h1 id="春秋云镜——漏洞靶标"><a href="#春秋云镜——漏洞靶标" class="headerlink" title="春秋云镜——漏洞靶标"></a><h1 id="1">春秋云镜——漏洞靶标</h1></h1><h2 id="SQLI"><a href="#SQLI" class="headerlink" title="SQLI"></a><h2 id="sql">SQLI</h2></h2><h3 id="CVE-2022-32991"><a href="#CVE-2022-32991" class="headerlink" title="CVE-2022-32991"></a><h3 id="CVE-2022-32991">CVE-2022-32991</h3></h3><blockquote>
+<h1 id="春秋云镜——漏洞靶标"><a href="#春秋云镜——漏洞靶标" class="headerlink" title="春秋云镜——漏洞靶标"></a><h1 id="1">春秋云镜——漏洞靶标</h1></h1><h2 id="SQLI"><a href="#SQLI" class="headerlink" title="SQLI"></a><h2 id="sql">SQLI</h2></h2><h3 id="CVE-2022-32991"><a href="#CVE-2022-32991" class="headerlink" title="CVE-2022-32991"></a><h3 id="CVE-2022-32991">CVE-2022-32991</h3></h3><blockquote>
 <p>描述：该CMS的welcome.php中存在SQL注入攻击。</p>
 </blockquote>
 <p>根据描述，随意注册登录个账号，即可进入到<code>/welcome.php?q=1</code>，这边没啥东西，sqlmap扫了一遍也没有发现问题。</p>
