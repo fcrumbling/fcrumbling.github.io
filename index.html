@@ -280,12 +280,12 @@ mjx-container[display="true"] + br {
       
         <a class="archive-link" href="/archives/2024/06 ">
           六月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/05 ">
           五月 2024 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/12 ">
@@ -325,9 +325,9 @@ mjx-container[display="true"] + br {
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/05/29/Java%E5%AE%89%E5%85%A8/" title="Java安全" >
+          <a class="recent-link" href="/2024/06/15/%E5%88%B7%E9%A2%98%E8%AE%B0/" title="刷题记" >
             <div class="recent-link-text">
-              Java安全
+              刷题记
             </div>
           </a>
         
@@ -474,8 +474,6 @@ Clannad——我的入坑之作
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%8D%E7%8E%B0/" rel="tag">复现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li></ul>
-
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
@@ -531,7 +529,7 @@ fastjson反序列化漏洞
 
    
 
-<article id="post-Java安全" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-刷题记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
     <div class="article-main">
@@ -542,7 +540,7 @@ fastjson反序列化漏洞
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/29/Java%E5%AE%89%E5%85%A8/">Java安全</a>
+        <a class="p-name article-title" href="/2024/06/15/%E5%88%B7%E9%A2%98%E8%AE%B0/">刷题记</a>
       </h1>
     
   
@@ -550,7 +548,7 @@ fastjson反序列化漏洞
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-29T11:31:11.485Z" itemprop="datePublished">2024-05-29</time>
+  <time class="dt-published" datetime="2024-06-15T02:33:02.154Z" itemprop="datePublished">2024-06-15</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -561,33 +559,80 @@ fastjson反序列化漏洞
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1k 词 
+            6.8k 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%8D%E7%8E%B0/" rel="tag">复现</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag">漏洞</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            看到大神还有学长都认可近几年java安全相关的内容会成为主流，之前学开发也是做的java，所以来给自己挖个坑
-Java Web安全
-大致记点看懂了的和感觉比较重要但是没理解全或者没看完的内容和标题
-目录
-Java基础ClassLoader（类加载机制）Java类都需要经过JVM加载才能运行，ClassLoader的主要作用就是Java类文件的加载
+            空闲时间的一些学习/复现/刷题
+春秋云镜-漏洞
 
-ClassLoader类有如下核心方法：
+SQLI
 
-loadClass（加载指定的Java类）
-findClass（查找指定的Java类）
-findLoadedClass（查找JVM已经加载过的类）
-defineClass（定义一个Java类）
-resolveClass（链接指定的Java类）
+任意文件上传
+
+RCE
+SSRF
+任意文件读取
+其他
+
+Vulhub-漏洞
+
+shiro550
+log4j2
+fastjson反序列化漏洞
+
+Vulnhub-渗透
+
+Raven2
+
+HTB
+
+starting point
+Machines
+
+ATT&amp;CK实战系列
+
+红队实战(一)
+
+ATT&CK实战系列红队实战(一)搭建环境虚拟机网络配置参考网上wp，主要是靶机扔一块，然后给win7配个网和kali通一下
 
 
-URLClassLoaderURLClassLoader继承了ClassLoader，且提供了加载远程资源的能力，在写漏洞利用的payload或者webshell的时候可以加载远程的jar来实现远程的类方法调用
-涉及漏洞jsp自定义类加载后门BCEL ClassLoaderBCEL是一个用于分析、创建和操纵Java类文件的工具库，其类加载器在解析类...  
+
+
+机器
+ip
+
+
+
+
+win2008
+192.168.52.138
+
+
+win2003
+192.168.52.141
+
+
+win7
+192.168.52.143/192.168.43.139
+
+
+kali
+192.168.43.16
+
+
+
+
+ping一下看看连接情况（win7-&gt;2k3/2k8/kali通，kali到win7不通【防火墙】）开启win7的phpstudy
+另外这边需要配置一下防火墙，把http和mysqld的通过权限都选上，设置如下：
+
+信息收集nmap -A 192.168.43...  
           </div>
         
       </div>
@@ -598,7 +643,7 @@ URLClassLoaderURLClassLoader继承了ClassLoader，且提供了加载远程资�
      
     <a class="right-panel  non-pic  "
       
-      href="/2024/05/29/Java%E5%AE%89%E5%85%A8/" 
+      href="/2024/06/15/%E5%88%B7%E9%A2%98%E8%AE%B0/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
@@ -724,7 +769,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            9.3k 词 
+            9.5k 词 
           </div>
         </div>
         
@@ -734,8 +779,7 @@ SELECT * FROM users WHERE username = &#39;administrator&#39;-- AND pa...
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-            学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。
-总之沉淀一下吧，可能会两边都一起准备。
+            一点偏八股的笔记和一点遇到就随便写一下的技巧
 目录
 
 OWASP
@@ -772,7 +816,7 @@ SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数�
 主要是通过if(expression,if_true,if_false)+正则匹配+枚举爆破的方式来找出数据
 
 if(DATABASE() rlike ‘^{exp}’,1,0) # 获取数据库名
-if((SELECT GROUP_CONCAT(table_name, ‘:’, column_name) F...  
+if((SELECT GROUP_CONCAT(table_name, ‘:’, column_name) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE()) rlike ‘^{exp}’,1,0) # 获取表名与字...  
           </div>
         
       </div>

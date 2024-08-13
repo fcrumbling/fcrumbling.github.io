@@ -21,18 +21,18 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
-  <meta name="description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS XXE HTTP Python JavaScript Java Go">
+  <meta name="description" content="一点偏八股的笔记和一点遇到就随便写一下的技巧 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS XXE HTTP Python JavaScript Java Go Linux Git 安全设备 安全工具 Other 参考  SQLi属于A03:2021-注入式攻击 SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数据库的查询结果  通">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web安全学习笔记">
 <meta property="og:url" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="crumbling&#39;s secret room">
-<meta property="og:description" content="学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。 总之沉淀一下吧，可能会两边都一起准备。 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS XXE HTTP Python JavaScript Java Go">
+<meta property="og:description" content="一点偏八股的笔记和一点遇到就随便写一下的技巧 目录  OWASP SQLi  XSS  SSRF  PHP  Clickjacking  CORS XXE HTTP Python JavaScript Java Go Linux Git 安全设备 安全工具 Other 参考  SQLi属于A03:2021-注入式攻击 SQL注入方法有回显的SQL注入可以在应用程序的输出中看到数据库的查询结果  通">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ct_htmltree.gif">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20240529152554853.png">
 <meta property="og:image" content="http://example.com/2024/05/24/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/relatation.png">
 <meta property="article:published_time" content="2024-05-24T06:54:40.652Z">
-<meta property="article:modified_time" content="2024-06-24T13:32:24.294Z">
+<meta property="article:modified_time" content="2024-08-02T12:03:08.717Z">
 <meta property="article:author" content="crumbling">
 <meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
@@ -177,12 +177,12 @@
       
         <a class="archive-link" href="/archives/2024/06 ">
           六月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/05 ">
           五月 2024 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/12 ">
@@ -222,9 +222,9 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/05/29/Java%E5%AE%89%E5%85%A8/" title="Java安全" >
+          <a class="recent-link" href="/2024/06/15/%E5%88%B7%E9%A2%98%E8%AE%B0/" title="刷题记" >
             <div class="recent-link-text">
-              Java安全
+              刷题记
             </div>
           </a>
         
@@ -289,7 +289,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            9.3k 词 
+            9.5k 词 
           </div>
         </div>
         
@@ -298,8 +298,7 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>学了好长一段时间开发，SpringBoot相关内容基本学完了（感觉只是正常学完的水平），想背八股找个实习做做看，但学长一说最近又有些动摇是不是可以转做web安全，毕竟开发感觉还是蛮无聊的。</p>
-<p>总之沉淀一下吧，可能会两边都一起准备。</p>
+          <p>一点偏八股的笔记和一点遇到就随便写一下的技巧</p>
 <p><strong>目录</strong></p>
 <ul>
 <li><a href="#2">OWASP</a></li>
@@ -346,7 +345,8 @@
 <h3 id="基于报错的-SQL-注入-TODO"><a href="#基于报错的-SQL-注入-TODO" class="headerlink" title="基于报错的 SQL 注入 TODO"></a>基于报错的 SQL 注入 TODO</h3><p>捕获报错信息进行sql注入，报错注入需要利用函数，以及其相应的攻击方法</p>
 <h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><p>当注入点允许一次性执行多个 SQL 语句。而且不仅限于 SELECT ， INSERT、SHOW、SET、UPDATE 等也都可以。</p>
 <h3 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h3><p>简单来说，第一层是安全的，但是第二层没有响应的检查过滤等，那么第一层如果放过的数据里有注入内容，在第二层的时候就可以重复上述或其他的注入方法进行注入</p>
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h3 id="判断注入类型和闭合方式"><a href="#判断注入类型和闭合方式" class="headerlink" title="判断注入类型和闭合方式"></a>判断注入类型和闭合方式</h3><p>使用数据 <code>1、1&#39;、1&#39; &#39;</code></p>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h3 id="判断是否存在sql注入"><a href="#判断是否存在sql注入" class="headerlink" title="判断是否存在sql注入"></a>判断是否存在sql注入</h3><p>手注的角度来看最为经典的就是通过<code>&#39;</code>闭合去进行测试，报错则存在sql注入，不报错可能是被过滤了</p>
+<h3 id="判断注入类型和闭合方式"><a href="#判断注入类型和闭合方式" class="headerlink" title="判断注入类型和闭合方式"></a>判断注入类型和闭合方式</h3><p>使用数据 <code>1、1&#39;、1&#39; &#39;</code></p>
 <h3 id="联查判断列数"><a href="#联查判断列数" class="headerlink" title="联查判断列数"></a>联查判断列数</h3><p><code>&#39; order by 1,2 ;&#39;</code> (order by 用于排序1,2表示优先按照哪些列来排，超出列数就会报错)</p>
 <h3 id="返回判断"><a href="#返回判断" class="headerlink" title="返回判断"></a>返回判断</h3><p><code>&#39; union select 1,2,3;&#39;</code>观察返回哪些数，可以看到哪些列是被返回显示的,这里有很多操作空间，比如用load_file这样的函数去读取文件等等</p>
 <h3 id="字符串表名"><a href="#字符串表名" class="headerlink" title="字符串表名"></a>字符串表名</h3><p>加个反引号</p>
@@ -362,6 +362,12 @@
 <h4 id="select等关键字被过滤"><a href="#select等关键字被过滤" class="headerlink" title="select等关键字被过滤"></a>select等关键字被过滤</h4><p><code>1&#39;; show datebase();#</code> 可能只过滤了那一段sql，堆叠注入可能就不被过滤了</p>
 <h4 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h4><p>比如说<code>select</code>被过滤为空，可以用<code>selecselectt</code>替代</p>
 <p>如：<code>filename=&quot;a&#39;+(CONV(substr(hex((selselectect i_am_flag frfromom hello_flag_is_here)),1,12),16,10))+&#39;.jpg</code></p>
+<h3 id="盲注加速"><a href="#盲注加速" class="headerlink" title="盲注加速"></a>盲注加速</h3><ul>
+<li>二分法</li>
+<li>与运算</li>
+</ul>
+<h3 id="Between注入"><a href="#Between注入" class="headerlink" title="Between注入"></a>Between注入</h3><p>主要用于盲注看页面是否有变化，原理如下，例如username的字符内容是test1，第一个字符是t，a到b搜索不了，页面不正常。 a到t就有了，页面正常</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> substr(username,<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">between</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> substr(username,<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">between</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;t&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a><h1 id="xss">XSS</h1></h1><p>跨站脚本（Cross-site scripting）</p>
 <p>属于<strong>A03:2021-注入式攻击</strong></p>
 <blockquote>
@@ -397,7 +403,7 @@
 <li>HTML类的——搜索结果直接放入img元素中返回，就可以提前闭合img并执行恶意代码。</li>
 </ul>
 <h3 id="通用型XSS"><a href="#通用型XSS" class="headerlink" title="通用型XSS"></a>通用型XSS</h3><h3 id="突变型XSS"><a href="#突变型XSS" class="headerlink" title="突变型XSS"></a>突变型XSS</h3><h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><ul>
-<li>使用<strong>HTTP Only</strong>来禁止JavaScript读取cookie</li>
+<li>使用<strong>HTTP Only</strong>来禁止JavaScript读取cookie（通过apache的cve，植入过长的cookie，让http头超过最大请求长度，返回400错误时可以获得cookie;phpinfo页面也可以拿到；Java的一些api）</li>
 <li>对输入<strong>过滤</strong>、对输出<strong>编码转义</strong></li>
 </ul>
 <h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a><h1 id="ssrf">SSRF</h1></h1><h2 id="什么是SSRF"><a href="#什么是SSRF" class="headerlink" title="什么是SSRF"></a>什么是SSRF</h2><blockquote>
@@ -510,11 +516,14 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ccess-Control-Allow-Origin<span class="punctuation">:</span> </span><br><span class="line">Access-Control-Allow-Credentials<span class="punctuation">:</span> </span><br><span class="line">Access-Control-Expose-Headers<span class="punctuation">:</span></span><br></pre></td></tr></table></figure>
 <p>其中ccess-Control-Allow-Origin:为必须，表示允许哪个域访问，如果为*则表示全部，这样就引出来了CORS相关的漏洞</p>
 <h2 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h2><h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a><h1 id="xxe">XXE</h1></h1><p>通过xml外部实体注入攻击，对敏感文件进行读取</p>
-<h2 id="防御："><a href="#防御：" class="headerlink" title="防御："></a>防御：</h2><p>xml解析库在调用时严格禁止对外部实体的解析</p>
+<h2 id="防御-3"><a href="#防御-3" class="headerlink" title="防御"></a>防御</h2><p>xml解析库在调用时严格禁止对外部实体的解析</p>
 <h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a><h1 id="php">PHP</h1></h1><h2 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h2><h3 id="伪协议读取文件"><a href="#伪协议读取文件" class="headerlink" title="伪协议读取文件"></a>伪协议读取文件</h3><p>常见伪协议： <code>php://filter</code>、<code>php://input</code>、<code>php://memory</code></p>
 <p>常见格式：<strong>filename=php://filter/read=convert.base64-encode/resource=</strong>（不知道是我见识少了还是刻板印象，这里的read似乎本来就不需要，后面写的绕过其实也是没有用到read的）</p>
 <p>相关绕过：convert.base64-encode 是对于编码格式的操作，将读取到的内容以Base64的格式加密，可以替换为<code>convert.quoted-printable-encode、convert.iconv.&lt;input-encoding&gt;.&lt;output-encoding&gt;</code></p>
 <p>如：<strong>filename=php://filter/convert.iconv.utf8.utf16/resource=</strong></p>
+<h3 id="pearcmd-php文件包含"><a href="#pearcmd-php文件包含" class="headerlink" title="pearcmd.php文件包含"></a>pearcmd.php文件包含</h3><p>默认安装路径为<code>/usr/local/lib/php/pearcmd.php</code>，如果能够访问pearcmd，可以利用<code>config-creater</code>参数创建一个文件（<code>+</code>连接）,由此可以进行文件上传漏洞的利用</p>
+<p>如写入shell文件<code>/usr/local/lib/php/pearcmd+config-create&amp;+/&lt;?=@eval($_POST[hack]);?&gt;+/var/www/html/shell.php</code></p>
+<p>靶机可见vulfocus的<code>thinkphp lang 命令执行</code>复现这个的时候直接浏览器get请求加payload蚁剑一直返回空，没有找到原因，但是bp抓包重放一次就成了，可能是部分字符被自动url编码了的原因</p>
 <h2 id="弱类型比较"><a href="#弱类型比较" class="headerlink" title="弱类型比较"></a>弱类型比较</h2><h3 id="字符串和数字"><a href="#字符串和数字" class="headerlink" title="字符串和数字"></a>字符串和数字</h3><p>’123a‘作为数字进行比较会转换成123，’a123‘，’aaaaa‘则为0</p>
 <h3 id="布尔true和任意"><a href="#布尔true和任意" class="headerlink" title="布尔true和任意"></a>布尔true和任意</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(True == <span class="number">0</span>);	<span class="comment">//bool(false)</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(True == <span class="string">&#x27;False&#x27;</span>);	<span class="comment">//bool(true)</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(True == <span class="number">2</span>);	<span class="comment">//bool(true)</span></span><br></pre></td></tr></table></figure>
 <h2 id="反序列化绕过wakeup"><a href="#反序列化绕过wakeup" class="headerlink" title="反序列化绕过wakeup"></a>反序列化绕过wakeup</h2><blockquote>
@@ -666,7 +675,7 @@
 <li><p><strong>NIDS</strong>:基于网络的入侵检测系统</p>
 </li>
 </ul>
-<h1 id="DNSlog"><a href="#DNSlog" class="headerlink" title="DNSlog"></a><h1 id="tools">DNSlog</h1></h1><ul>
+<h2 id="黑盒漏扫"><a href="#黑盒漏扫" class="headerlink" title="黑盒漏扫"></a>黑盒漏扫</h2><h2 id="TAR-NFT-IPS-TDS-防火墙"><a href="#TAR-NFT-IPS-TDS-防火墙" class="headerlink" title="TAR NFT IPS TDS 防火墙"></a>TAR NFT IPS TDS 防火墙</h2><h1 id="DNSlog"><a href="#DNSlog" class="headerlink" title="DNSlog"></a><h1 id="tools">DNSlog</h1></h1><ul>
 <li>sql布尔盲注、时间盲注，注入的效率低且线程高容易被waf拦截，又或者是目标站点没有回显可利用</li>
 <li>无回显的命令执行</li>
 <li>xss盲打</li>
